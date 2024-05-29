@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <!--Styles-->
+    <link rel="stylesheet" href="../CSS/perfil.css">
+    <!--Icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--Scripts-->
+    <script src="../js/perfil.js" defer></script>
+</head>
+
+<body>
+    <header class="cabecalho">
+        <a href="main.html"><img src="../IMG/logo.png" class="cabecalho-logo"></a>
+        <nav class="menu">
+            <ul>
+                <li><a href="main.html" class="item-menu">Home</a></li>
+                <li><a href="" class="item-menu">Produtos</a></li>
+                <li><a href="" class="item-menu">Contato</a></li>
+                <li><a href="" class="item-menu">Perfil</a>
+                    <ul>
+                        <li><a href="./perfil.html">Detalhes</a></li>
+                        <li><a href="carteira.html">Carteira</a></li>
+                        <li><a href="segurancapriv.html">Segurança e Privacidade</a></li>
+                        <li><a href="">Teste de Gosto</a></li>
+                        <li><a href="../index.html">Sair</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+    <main>
+        <div class="w-100">
+            <form class="box" id="form-form">
+                <!--Imagem-->
+                <div class="imagem-upload box">
+                    <img id="image-preview" class="w-100 h-100">
+                    <i class="bi bi-cloud-arrow-up"></i>
+                    <input id="imagem-field" type="file">
+                </div>
+                
+
+                <div class="menuvert">
+                    <a href="#" onclick="mostrarConteudo('opcao1')">Dados Pessoais</a>
+                    <a href="#" onclick="mostrarConteudo('opcao2')">Endereço</a>
+                    <a href="#" onclick="mostrarConteudo('opcao3')">Cartão</a>
+                    <a href="#" onclick="mostrarConteudo('opcao4')">Alterar Senha</a>
+                    <a href="#" id="sair">Sair</a>
+                    <!-- Adicione mais opções conforme necessário -->
+                </div>
+
+                <div class="conteudo">
+                    <div id="opcao1">
+                        <label for="name" id="nome">Nome</label>
+                        <input type="text" placeholder="Nome" id="labelnome">
+
+                        <label for="surname" id="sobrenome">Sobrenome</label>
+                        <input type="text" placeholder="Sobrenome" id="labelsobre">
+
+                        <label for="name" id="cpf">CPF</label>
+                        <input type="text" placeholder="000.000.000-00" id="labelcpf" />
+
+                        <label for="dataDeNascimento" id="data">Data de Nascimento</label>
+                        <input type="date" name="nascimento" id="labeldata">
+
+                        <button id="button1">Salvar</button>
+                    </div>
+
+                    <div id="opcao2" style="display: none;">
+                        <label for="cep" id="cep">CEP:</label>
+                        <input type="text" placeholder="79000-000" id="labelcep">
+
+                        <label for="adress" id="adress">Logradouro:</label>
+                        <input type="text" placeholder="Ex.: Rua dos advogados" id="labeladress">
+
+                        <label for="numero" id="numero">Número:</label>
+                        <input type="number" placeholder="1001" id="labelnumero">
+
+                        <label for="complemento" id="complemento">Complemento:</label>
+                        <input type="text" placeholder="Ex.: Casa 2" id="labelcomplemento">
+
+                        <label for="bairro" id="bairro">Bairro:</label>
+                        <input type="text" placeholder="Jardim Bonito" id="labelbairro">
+
+                        <label for="cidade" id="cidade">Cidade:</label>
+                        <input type="text" placeholder="Campo Grande" id="labelcidade">
+
+                        <label for="estado" id="estado">Estado:</label>
+                        <input type="text" placeholder="MS" id="labelestado">
+
+                        <button id="button2">Salvar</button>
+                    </div>
+
+                    <div id="opcao3" style="display: none;">
+                        <label for="numeroCartao" id="cartao">Número do Cartão:</label>
+                        <input type="number" id="numeroCartao" name="numeroCartao"
+                            placeholder="Digite o número do cartão" required>
+
+                        <label for="nomeTitular" id="titular">Nome do Titular:</label>
+                        <input type="text" id="nomeTitular" name="nomeTitular" placeholder="Digite o nome do titular"
+                            required>
+
+                        <label for="dataValidade" id="dataval">Data de Validade:</label>
+                        <input type="number" id="dataValidade" name="dataValidade" placeholder="MM/AA" required>
+
+                        <label for="codigoSeguranca" id="codigo">Código de Segurança:</label>
+                        <input type="number" id="codigoSeguranca" name="codigoSeguranca" placeholder="CVV" required>
+
+                        <button id="button3">Adicionar</button>
+                    </div>
+
+                    <div id="opcao4" style="display: none;">
+                        <label for="password" id="senha">Senha Atual:</label>
+                        <input type="password"placeholder="********" id="inputsenha">
+
+                        <label for="newpassword" id="novasenha">Nova Senha:</label>
+                        <input type="password" placeholder="********" id="inputnova">
+
+                        <label for="confirmpassword" id="confirme">Confirme Nova Senha:</label>
+                        <input type="password" placeholder="********" id="inputconfirme">
+
+                        <button id="button4">Salvar</button>
+                    </div>
+                    <!-- Adicione mais conteúdo conforme necessário -->
+                </div>
+                <div class="linha-vertical"></div>
+    </main>
+
+    <script src="../js/perfil.js"></script>
+    <script src="../js/sair.js"></script>
+    <script src="../js/cpfPerfil.js"></script>
+</body>
+
+</html>
