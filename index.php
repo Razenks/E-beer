@@ -18,10 +18,33 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/acessibilidade.css">
+
+  
     <script src="./js/login.js"></script>
+    <script src="./js/acessibilidade.js"></script>
 </head>
 <!---->
+
 <body>
+
+    <div id="acessibilidade">
+        <div id="fonte">
+            <div>Tamanho da fonte: </div>
+            <button class="alt-acess" onclick="diminuirFonte()">A-</button>
+            <button class="alt-acess" onclick="resetarFonte()">A</button>
+            <button class="alt-acess" onclick="aumentarFonte()">A+</button>
+        </div>
+
+        <div id="cor">
+            <div>Cor:</div>
+            <button class="alt-acess" onclick="voltarModoOriginal()"><img src="./assets/sol.png" alt=""></button>
+            <button class="alt-acess" onclick="alternarModoNoturno()"><img src="./assets/lua.png" alt=""></button>
+        </div>
+
+
+    </div>
+
     <header id="imagem-top">
         <img src="./assets/logo_ebeer.png" alt="">
     </header>
@@ -71,6 +94,10 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
         <br>
         <button id="forgot-password">Esqueceu a senha?</button>
     </main>
+
+    <div id="imgAcess">
+        <img src="./assets/acess.png" alt="" onclick="alterarAcessibilidade()">
+    </div>
 </body>
 
 </html>

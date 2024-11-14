@@ -1,0 +1,44 @@
+*{
+    transition: 1000ms;
+}
+
+#acessibilidade {
+    width: 100%;
+    text-align: end;
+    display: none;
+}
+#imgAcess{
+    position: fixed; /* Fixa a div na tela */
+    bottom: 10px; 
+    right: 10px; 
+    z-index: 1000; /* Garante que a div ficará acima de outros elementos */
+    cursor: pointer;     
+}
+
+#imgAcess img{
+    width: 50px;
+}
+
+ #fonte, #cor {
+    display: inline-flex; 
+    gap: 25px; 
+    align-items: center;
+    margin-right: 25px;
+    margin-bottom: 5px;
+}
+
+.alt-acess {
+    width:2lh;
+    height: 2lh;
+    text-align: center;
+    border: 1px solid black ;
+    padding: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.alt-acess img{
+    width: 1lh;
+    height: 1lh;
+}
+

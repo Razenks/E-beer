@@ -22,11 +22,30 @@ $msgErroCadastro = isset($_GET['msgError']) ? $_GET['msgError'] : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro Cerveja</title>
     <link rel="stylesheet" href="../css/register_beer.css">
+    <link rel="stylesheet" href="../css/acessibilidade.css">
+
     <script src="../js/main-adm.js"></script>
+    <script src="..//js/acessibilidade.js"></script>
+
 </head>
 
 <body>
+<div id="acessibilidade">
+        <div id="fonte">
+            <div>Tamanho da fonte: </div>
+            <button class="alt-acess" onclick="diminuirFonte()" >A-</button>
+            <button class="alt-acess" onclick="resetarFonte()">A</button>
+            <button class="alt-acess" onclick="aumentarFonte()">A+</button>
+        </div>
 
+        <div id="cor">
+            <div>Cor:</div>
+            <button class="alt-acess" onclick="voltarModoOriginal()"><img src="../assets/sol.png" alt=""></button>
+            <button class="alt-acess" onclick="alternarModoNoturno()"><img src="../assets/lua.png" alt=""></button>
+        </div>
+
+
+    </div>
     <div class="error-container">
         <?php
         // Verifica se uma mensagem de erro foi passada via GET e exibe na tela.
@@ -78,7 +97,7 @@ $msgErroCadastro = isset($_GET['msgError']) ? $_GET['msgError'] : '';
         <!-- Seção oculta com detalhes da conta do usuário -->
         <section id="account-details" style="display: none;">
             <!-- Ícone de fechar a seção -->
-            <img src="../assets/botaox.png" alt="" id="button-close" >
+            <img src="../assets/botaox.png" alt="" id="button-close">
 
             <!-- Input para fazer o upload de uma foto de perfil -->
             <label for="picture_input" class="picture" tabindex="0">
@@ -204,6 +223,9 @@ $msgErroCadastro = isset($_GET['msgError']) ? $_GET['msgError'] : '';
         </form>
     </main>
 
+    <div id="imgAcess">
+        <img src="../assets/acess.png" alt="" onclick="alterarAcessibilidade()">
+    </div>
     <!-- Rodapé da página -->
     <footer id="footer">
         <div id="last-section">

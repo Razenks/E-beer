@@ -1,78 +1,99 @@
-//Botao de Acessibilidade
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM totalmente carregado e analisado');
+// Define o valor inicial do aumento
+let fontSizeMultiplier = 1;
 
-    const buttonAcess = document.querySelector('#acessibilidade');
-    const item_1 = document.querySelector('#item-1');
+// Objeto para armazenar os tamanhos de fonte originais
+const originalFontSizes = {};
 
-    console.log('buttonAcess:', buttonAcess);
-    console.log('item_1:', item_1);
+// Função para armazenar os tamanhos de fonte originais
+function armazenarFontesOriginais() {
+    const elementos = document.querySelectorAll("*");
+    elementos.forEach((elemento) => {
+        const tamanhoAtual = window.getComputedStyle(elemento).fontSize;
+        originalFontSizes[elemento] = parseFloat(tamanhoAtual);
+    });
+}
 
-    if (buttonAcess && item_1) {
-        buttonAcess.addEventListener('click', function() {
-            console.log('Botão clicado');
-            if (item_1.style.display === 'block') {
-                item_1.style.display = 'none';
-            } else {
-                item_1.style.display = 'block';
-            }
-        });
+// Chamar a função ao carregar a página
+window.onload = armazenarFontesOriginais;
+
+function aumentarFonte() {
+    fontSizeMultiplier += 0.05;
+    aplicarTamanhoFonte();
+}
+
+function diminuirFonte() {
+    fontSizeMultiplier -= 0.05;
+    aplicarTamanhoFonte();
+}
+
+function aplicarTamanhoFonte() {
+
+    const elementos = document.querySelectorAll("*");
+    elementos.forEach((elemento) => {
+        const tamanhoOriginal = originalFontSizes[elemento];
+        if (tamanhoOriginal) {
+            const novoTamanho = tamanhoOriginal * fontSizeMultiplier;
+            elemento.style.fontSize = `${novoTamanho}px`;
+        }
+    });
+}
+
+function resetarFonte() {
+    fontSizeMultiplier = 1;
+    aplicarTamanhoFonte();
+}
+
+function alterarAcessibilidade() {
+    const acess = document.querySelector("#acessibilidade");
+
+    if (acess.style.display === 'block') {
+        acess.style.display = 'none'; // Exibe a div
     } else {
-        console.error('Elemento não encontrado');
+        acess.style.display = 'block'; // Esconde a div
     }
-});
+}
 
-//DarkMode
-document.addEventListener('DOMContentLoaded', function () {
-    function aplicarDarkMode() {
-        document.body.classList.add('dark-mode')
-    }
 
-    function aplicarLightMode() {
-        document.body.classList.remove('dark-mode')
-    }
+// Função para alternar entre modo claro e modo escuro
+function alternarModoNoturno() {
+    // Seleciona todos os elementos da página
+    const elementos = document.querySelectorAll('*');
 
-    const radioButtons = document.querySelectorAll('input[name="mode"]');
-    radioButtons.forEach(function (radioButton) {
-        radioButton.addEventListener('change', function () {
-            const mode = this.value;
-            if (mode === 'dark') {
-                aplicarDarkMode();
-            } else {
-                aplicarLightMode();
-            }
-        });
+    // Percorre todos os elementos
+    elementos.forEach((elemento) => {
+
+        // Modo escuro: aplicar fundo escuro e texto branco
+        elemento.style.backgroundColor = '#121212'; // Cor de fundo escura
+        elemento.style.color = 'white';  // Texto branco
+
+        const estiloBorda = window.getComputedStyle(elemento).border;
+
+        if (estiloBorda.includes('1px solid rgb(0, 0, 0)')) {
+            // Muda a borda para '1px solid white'
+            elemento.style.border = '1px solid white';
+        }
+
     });
+}
 
-});
+function voltarModoOriginal() {
+    // Seleciona todos os elementos da página
+    const elementos = document.querySelectorAll('*');
 
-//tamanho da fonte - Acessibilidade
-document.addEventListener('DOMContentLoaded', function() {
+    // Percorre todos os elementos
+    elementos.forEach((elemento) => {
+        // Restaura as cores de fundo e texto para o padrão
+        elemento.style.backgroundColor = '';
+        elemento.style.color = '';
 
-    const smallFont = document.querySelector('#small');
-    const normalFont = document.querySelector('#normal');
-    const bigFont = document.querySelector('#big');
+        const estiloBorda = window.getComputedStyle(elemento).border;
 
-    function setFontSize(fontSize) {
-        document.body.style.fontSize = fontSize;
-    }
-
-    smallFont.addEventListener('change', function() {
-        if (this.checked) {
-            setFontSize('12px');
+        if (estiloBorda.includes('1px solid rgb(255, 255, 255)')) {
+            // Muda a borda para '1px solid black'
+            elemento.style.border = '1px solid  black';
         }
     });
 
-    normalFont.addEventListener('change', function() {
-        if (this.checked) {
-            setFontSize('16px');
-        }
-    });
+}
 
-    bigFont.addEventListener('change', function() {
-        if (this.checked) {
-            setFontSize('22px');
-        }
-    });
 
-})

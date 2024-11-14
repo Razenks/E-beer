@@ -7,7 +7,7 @@
 $endereco = 'localhost';
 $banco = 'e-beer';
 $usuario = 'postgres';
-$senha = 'Rafha@123database';
+$senha = '121705';
 
 try {
     // SGBD; host; porta; dbname;

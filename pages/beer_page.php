@@ -57,11 +57,33 @@ if (!$cerveja) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cerveja</title>
     <link rel="stylesheet" href="../css/cervejateste.css">
+    <link rel="stylesheet" href="../css/acessibilidade.css">
+
     <script src="../js/main-novo.js"></script>
     <script src="../js/perfil.js"></script>
+    <script src="..//js/acessibilidade.js"></script>
+
 </head>
 
 <body>
+
+    <div id="acessibilidade">
+        <div id="fonte">
+            <div>Tamanho da fonte: </div>
+            <button class="alt-acess" onclick="diminuirFonte()">A-</button>
+            <button class="alt-acess" onclick="resetarFonte()">A</button>
+            <button class="alt-acess" onclick="aumentarFonte()">A+</button>
+        </div>
+
+        <div id="cor">
+            <div>Cor:</div>
+            <button class="alt-acess" onclick="voltarModoOriginal()"><img src="../assets/sol.png" alt=""></button>
+            <button class="alt-acess" onclick="alternarModoNoturno()"><img src="../assets/lua.png" alt=""></button>
+        </div>
+
+
+    </div>
+
     <header>
         <!-- Barra de navegação superior -->
         <nav id="navegation-bar">
@@ -142,7 +164,7 @@ if (!$cerveja) {
                     echo '<div><strong>Cor:</strong> ' . $cerveja['desc_cor'] . '</div>';
                     echo '<div><strong>Teor alcoólico:</strong> ' . $cerveja['desc_teor'] . '</div>';
                     echo '</div>'; // Fim da grid
-                
+
                     echo '</div>'; // Fim do right-side
                     echo '</div>'; // Fim do beer-container
                 } else {
@@ -154,6 +176,10 @@ if (!$cerveja) {
         </div>
 
     </main>
+
+    <div id="imgAcess">
+        <img src="../assets/acess.png" alt="" onclick="alterarAcessibilidade()">
+    </div>
 
     <!-- Rodapé da página -->
     <footer id="footer">
