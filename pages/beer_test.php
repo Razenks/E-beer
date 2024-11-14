@@ -19,11 +19,33 @@ require_once '../config/conectaBD.php';
     <title>Beer-Test</title>
     <link rel="stylesheet" href="../css/all.css">
     <link rel="stylesheet" href="../css/beer_test.css">
+    <link rel="stylesheet" href="../css/acessibilidade.css">
+
     <script src="../js/takequestions.js" type="module"></script>
     <script src="../js/main-novo.js"></script>
+    <script src="..//js/acessibilidade.js"></script>
+
 </head>
 
 <body>
+
+    <div id="acessibilidade">
+        <div id="fonte">
+            <div>Tamanho da fonte: </div>
+            <button class="alt-acess" onclick="diminuirFonte()">A-</button>
+            <button class="alt-acess" onclick="resetarFonte()">A</button>
+            <button class="alt-acess" onclick="aumentarFonte()">A+</button>
+        </div>
+
+        <div id="cor">
+            <div>Cor:</div>
+            <button class="alt-acess" onclick="voltarModoOriginal()"><img src="../assets/sol.png" alt=""></button>
+            <button class="alt-acess" onclick="alternarModoNoturno()"><img src="../assets/lua.png" alt=""></button>
+        </div>
+
+
+    </div>
+
     <header>
         <!-- Barra de navegação superior -->
         <nav id="navegation-bar">
@@ -89,6 +111,10 @@ require_once '../config/conectaBD.php';
             <button>Refazer</button>
         </div>
     </main>
+
+    <div id="imgAcess">
+        <img src="../assets/acess.png" alt="" onclick="alterarAcessibilidade()">
+    </div>
     <!-- Rodapé da página -->
     <footer id="footer">
         <div id="last-section">

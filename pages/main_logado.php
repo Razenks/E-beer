@@ -34,16 +34,42 @@ try {
     <title>E-beer</title> <!-- Título da página -->
 
     <!-- Vincula o arquivo CSS externo para estilizar a página -->
+    <link rel="stylesheet" href="../css/acessibilidade.css">
+
     <link rel="stylesheet" href="../css/main_logado.css">
 
     <!-- Vincula arquivos JavaScript externos para funcionalidades da página -->
     <script src="../js/main-novo.js"></script>
     <script src="../js/perfil.js"></script>
+    <script src="..//js/acessibilidade.js"></script>
 </head>
 
 <body>
 
+    <!-- Acessibilidade -->
+    <div id="acessibilidade">
+        <div id="fonte">
+            <div>Tamanho da fonte: </div>
+            <button class="alt-acess" onclick="diminuirFonte()" >A-</button>
+            <button class="alt-acess" onclick="resetarFonte()">A</button>
+            <button class="alt-acess" onclick="aumentarFonte()">A+</button>
+        </div>
+
+        <div id="cor">
+            <div>Cor:</div>
+            <button class="alt-acess" onclick="voltarModoOriginal()"><img src="../assets/sol.png" alt=""></button>
+            <button class="alt-acess" onclick="alternarModoNoturno()"><img src="../assets/lua.png" alt=""></button>
+        </div>
+
+
+    </div>
+
     <header>
+
+
+
+
+
         <!-- Barra de navegação superior -->
         <nav id="navegation-bar">
             <div id="logo-image">
@@ -55,11 +81,14 @@ try {
                 <img src="../assets/icons8-male-user-96.png" alt="" style="width: 50px; height: 50px;">
                 <div id="name-account">
                     <!-- Exibe o nome do usuário logado obtido da sessão -->
-                    <p>Olá, <?php echo $_SESSION['nome']; ?></p>
+                    <p>Olá,
+                        <?php echo $_SESSION['nome']; ?>
+                    </p>
                     <!-- Botão para acessar a conta do usuário -->
                     <button id="account">Conta</button>
                 </div>
             </div>
+
         </nav>
     </header>
 
@@ -79,9 +108,13 @@ try {
             </form>
 
             <!-- Exibe o nome completo do usuário da sessão -->
-            <h1><?php echo $_SESSION['nome'] . ' ' . $_SESSION['sobrenome']; ?></h1>
+            <h1>
+                <?php echo $_SESSION['nome'] . ' ' . $_SESSION['sobrenome']; ?>
+            </h1>
             <!-- Exibe o email do usuário -->
-            <p class="email-details"><?php echo $_SESSION['email']; ?></p>
+            <p class="email-details">
+                <?php echo $_SESSION['email']; ?>
+            </p>
             <!-- Exibe um telefone de exemplo (pode ser substituído por dados reais) -->
             <p class="phone-details">+55(67)98411-3344</p>
             <!-- Botão para alterar os dados do usuário -->
@@ -143,6 +176,10 @@ try {
                 paladar. Basta algumas respostas para encontrar a cerveja ideal para o seu gosto</p>
         </section>
     </main>
+
+    <div id="imgAcess" >
+        <img src="../assets/acess.png" alt="" onclick="alterarAcessibilidade()">
+    </div>
 
     <!-- Rodapé da página -->
     <footer id="footer">

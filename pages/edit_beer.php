@@ -63,11 +63,30 @@ if (!$cerveja) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Cerveja</title>
     <link rel="stylesheet" href="../css/register_beer.css">
+    <link rel="stylesheet" href="../css/acessibilidade.css">
+
     <script src="../js/main-adm.js"></script>
+    <script src="..//js/acessibilidade.js"></script>
+
 </head>
 
 <body>
+<div id="acessibilidade">
+        <div id="fonte">
+            <div>Tamanho da fonte: </div>
+            <button class="alt-acess" onclick="diminuirFonte()" >A-</button>
+            <button class="alt-acess" onclick="resetarFonte()">A</button>
+            <button class="alt-acess" onclick="aumentarFonte()">A+</button>
+        </div>
 
+        <div id="cor">
+            <div>Cor:</div>
+            <button class="alt-acess" onclick="voltarModoOriginal()"><img src="../assets/sol.png" alt=""></button>
+            <button class="alt-acess" onclick="alternarModoNoturno()"><img src="../assets/lua.png" alt=""></button>
+        </div>
+
+
+    </div>
     <div class="error-container">
         <?php
         // Verifica se uma mensagem de erro foi passada via GET e exibe na tela.
@@ -151,7 +170,7 @@ if (!$cerveja) {
                 <h1>Editar Cerveja</h1>
                 <form action="../config/atualiza_cerveja.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id_cerveja" value="<?php echo $cervejaId ?>">
-                    
+
                     <label for="">Nome cerveja</label>
                     <input type="text" name="nome" value="<?php echo $cerveja['nome']; ?>" required>
                     <label for="">Descrição</label>
@@ -289,6 +308,10 @@ if (!$cerveja) {
 
         </form>
     </main>
+
+    <div id="imgAcess">
+        <img src="../assets/acess.png" alt="" onclick="alterarAcessibilidade()">
+    </div>
 
     <!-- Rodapé da página -->
     <footer id="footer">

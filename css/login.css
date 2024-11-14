@@ -6,6 +6,7 @@
     font-family: "Montserrat";
 }
 
+
 header {
     height: 130px;
 }
@@ -72,6 +73,7 @@ main h1 {
     color: #800000;
     border: none;
     font-size: 15px;
+    cursor: pointer;
 }
 
 #sign-up,
@@ -83,7 +85,9 @@ main h1 {
     color: #800000;
     border-style: none;
     font-size: 15px;
+    cursor: pointer;
 }
+
 
 #forgot-password {
     margin-top: 2px;

@@ -16,15 +16,37 @@ $msgErroCadastroRepetidade = isset($_GET['msgErroCadastro']) ? $_GET['msgErroCad
     <!-- Link para o arquivo CSS que contém as definições de estilo da página -->
     <link rel="stylesheet" href="../css/cadastro-novo.css">
     <!-- Script JavaScript para a lógica associada à página de cadastro -->
+    <link rel="stylesheet" href="../css/acessibilidade.css">
+
     <script src="../js/cadastro-novo.js"></script>
+    <script src="..//js/acessibilidade.js"></script>
+
 </head>
 
 <body>
+
+<div id="acessibilidade">
+        <div id="fonte">
+            <div>Tamanho da fonte: </div>
+            <button class="alt-acess" onclick="diminuirFonte()" >A-</button>
+            <button class="alt-acess" onclick="resetarFonte()">A</button>
+            <button class="alt-acess" onclick="aumentarFonte()">A+</button>
+        </div>
+
+        <div id="cor">
+            <div>Cor:</div>
+            <button class="alt-acess" onclick="voltarModoOriginal()"><img src="../assets/sol.png" alt=""></button>
+            <button class="alt-acess" onclick="alternarModoNoturno()"><img src="../assets/lua.png" alt=""></button>
+        </div>
+
+
+    </div>
+
     <header id="imagem-top">
         <!-- Exibe o logo no topo da página -->
         <img src="../assets/logo_ebeer.png" alt="">
     </header>
-    
+
     <main>
         <h1>CADASTRO</h1>
 
@@ -194,6 +216,10 @@ $msgErroCadastroRepetidade = isset($_GET['msgErroCadastro']) ? $_GET['msgErroCad
         <!-- Botão para cancelar o cadastro, redirecionando para a página inicial -->
         <button id="cancel"><a href="../index.php">Cancelar</a></button>
     </main>
+
+    <div id="imgAcess">
+        <img src="../assets/acess.png" alt="" onclick="alterarAcessibilidade()">
+    </div>
 
 </body>
 
