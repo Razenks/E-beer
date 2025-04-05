@@ -1,0 +1,16 @@
+{
+    "name": "joao/e-beer",
+    "autoload": {
+        "psr-4": {
+            "Joao\\EBeer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "joao"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

@@ -1,0 +1,21 @@
+# Arquivos de ambiente (nunca subir o .env real)
+.env
+
+# Dependências (podem ser restauradas via composer install)
+vendor/
+
+# Arquivos gerados pelo sistema
+*.log
+*.tmp
+
+# Ignorar arquivos de backup e caches
+*.bak
+*.cache
+
+# Arquivos específicos do VS Code (caso esteja usando)
+.vscode/
+.vs/
+
+# Arquivos temporários do sistema operacional
+.DS_Store
+Thumbs.db

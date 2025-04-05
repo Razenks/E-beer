@@ -1,0 +1,246 @@
+pg_restore: connecting to database for restore
+pg_restore: dropping FK CONSTRAINT usuario usuario_id_foto_usuario_fkey
+pg_restore: dropping FK CONSTRAINT resposta_usuario resposta_usuario_id_alternativa_fkey
+pg_restore: dropping FK CONSTRAINT resposta_usuario resposta_usuario_cpf_fkey
+pg_restore: dropping FK CONSTRAINT recomendacao recomendacao_id_resposta_fkey
+pg_restore: dropping FK CONSTRAINT recomendacao recomendacao_id_cerveja_fkey
+pg_restore: dropping FK CONSTRAINT questionario questionario_id_resposta_fkey
+pg_restore: dropping FK CONSTRAINT questionario questionario_cpf_fkey
+pg_restore: dropping FK CONSTRAINT login login_cpf_fkey
+pg_restore: dropping FK CONSTRAINT recomendacao fk_id_questionario
+pg_restore: dropping FK CONSTRAINT cerveja cerveja_id_teor_fkey
+pg_restore: dropping FK CONSTRAINT cerveja cerveja_id_sabor_fkey
+pg_restore: dropping FK CONSTRAINT cerveja cerveja_id_mouthfeel_fkey
+pg_restore: dropping FK CONSTRAINT cerveja cerveja_id_img_cerveja_fkey
+pg_restore: dropping FK CONSTRAINT cerveja cerveja_id_corpo_fkey
+pg_restore: dropping FK CONSTRAINT cerveja cerveja_id_cor_fkey
+pg_restore: dropping FK CONSTRAINT cerveja cerveja_id_carbonatacao_fkey
+pg_restore: dropping FK CONSTRAINT cerveja cerveja_id_aroma_fkey
+pg_restore: dropping FK CONSTRAINT cerveja cerveja_id_amargor_fkey
+pg_restore: dropping FK CONSTRAINT auditoria auditoria_id_login_fkey
+pg_restore: dropping FK CONSTRAINT alternativa alternativa_id_pergunta_fkey
+pg_restore: dropping CONSTRAINT usuario usuario_pkey
+pg_restore: dropping CONSTRAINT teor_alcoolico teor_alcoolico_pkey
+pg_restore: dropping CONSTRAINT sabor_principal sabor_principal_pkey
+pg_restore: dropping CONSTRAINT resposta_usuario resposta_usuario_pkey
+pg_restore: dropping CONSTRAINT recomendacao recomendacao_pkey
+pg_restore: dropping CONSTRAINT questionario questionario_pkey
+pg_restore: dropping CONSTRAINT pergunta pergunta_pkey
+pg_restore: dropping CONSTRAINT mouthfeel mouthfeel_pkey
+pg_restore: dropping CONSTRAINT login login_pkey
+pg_restore: dropping CONSTRAINT img_cerveja img_cerveja_pkey
+pg_restore: dropping CONSTRAINT foto_usuario foto_usuario_pkey
+pg_restore: dropping CONSTRAINT corpo_cerveja corpo_cerveja_pkey
+pg_restore: dropping CONSTRAINT cor cor_pkey
+pg_restore: dropping CONSTRAINT cerveja cerveja_pkey
+pg_restore: dropping CONSTRAINT carbonatacao carbonatacao_pkey
+pg_restore: dropping CONSTRAINT auditoria auditoria_pkey
+pg_restore: dropping CONSTRAINT aroma aroma_pkey
+pg_restore: dropping CONSTRAINT amargor amargor_pkey
+pg_restore: dropping CONSTRAINT alternativa alternativa_pkey
+pg_restore: dropping DEFAULT teor_alcoolico id_teor
+pg_restore: dropping DEFAULT sabor_principal id_sabor
+pg_restore: dropping DEFAULT resposta_usuario id_resposta
+pg_restore: dropping DEFAULT recomendacao id_recomendacao
+pg_restore: dropping DEFAULT questionario id_questionario
+pg_restore: dropping DEFAULT pergunta id_pergunta
+pg_restore: dropping DEFAULT mouthfeel id_mouthfeel
+pg_restore: dropping DEFAULT login id_login
+pg_restore: dropping DEFAULT img_cerveja id_img_cerveja
+pg_restore: dropping DEFAULT foto_usuario id_foto_usuario
+pg_restore: dropping DEFAULT corpo_cerveja id_corpo
+pg_restore: dropping DEFAULT cor id_cor
+pg_restore: dropping DEFAULT cerveja id_cerveja
+pg_restore: dropping DEFAULT carbonatacao id_carbonatacao
+pg_restore: dropping DEFAULT auditoria id_auditoria
+pg_restore: dropping DEFAULT aroma id_aroma
+pg_restore: dropping DEFAULT amargor id_amargor
+pg_restore: dropping DEFAULT alternativa id_alternativa
+pg_restore: dropping TABLE usuario
+pg_restore: dropping SEQUENCE teor_alcoolico_id_teor_seq
+pg_restore: dropping TABLE teor_alcoolico
+pg_restore: dropping SEQUENCE sabor_principal_id_sabor_seq
+pg_restore: dropping TABLE sabor_principal
+pg_restore: dropping SEQUENCE resposta_usuario_id_resposta_seq
+pg_restore: dropping TABLE resposta_usuario
+pg_restore: dropping SEQUENCE recomendacao_id_recomendacao_seq
+pg_restore: dropping TABLE recomendacao
+pg_restore: dropping SEQUENCE questionario_id_questionario_seq
+pg_restore: dropping TABLE questionario
+pg_restore: dropping SEQUENCE pergunta_id_pergunta_seq
+pg_restore: dropping TABLE pergunta
+pg_restore: dropping SEQUENCE mouthfeel_id_mouthfeel_seq
+pg_restore: dropping TABLE mouthfeel
+pg_restore: dropping SEQUENCE login_id_login_seq
+pg_restore: dropping TABLE login
+pg_restore: dropping SEQUENCE img_cerveja_id_img_cerveja_seq
+pg_restore: dropping TABLE img_cerveja
+pg_restore: dropping SEQUENCE foto_usuario_id_foto_usuario_seq
+pg_restore: dropping TABLE foto_usuario
+pg_restore: dropping SEQUENCE corpo_cerveja_id_corpo_seq
+pg_restore: dropping TABLE corpo_cerveja
+pg_restore: dropping SEQUENCE cor_id_cor_seq
+pg_restore: dropping TABLE cor
+pg_restore: dropping SEQUENCE cerveja_id_cerveja_seq
+pg_restore: dropping TABLE cerveja
+pg_restore: dropping SEQUENCE carbonatacao_id_carbonatacao_seq
+pg_restore: dropping TABLE carbonatacao
+pg_restore: dropping SEQUENCE auditoria_id_auditoria_seq
+pg_restore: dropping TABLE auditoria
+pg_restore: dropping SEQUENCE aroma_id_aroma_seq
+pg_restore: dropping TABLE aroma
+pg_restore: dropping SEQUENCE amargor_id_amargor_seq
+pg_restore: dropping TABLE amargor
+pg_restore: dropping SEQUENCE alternativa_id_alternativa_seq
+pg_restore: dropping TABLE alternativa
+pg_restore: dropping FUNCTION recomendar_cerveja(character varying)
+pg_restore: creating FUNCTION "public.recomendar_cerveja(character varying)"
+pg_restore: creating TABLE "public.alternativa"
+pg_restore: creating SEQUENCE "public.alternativa_id_alternativa_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.alternativa_id_alternativa_seq"
+pg_restore: creating TABLE "public.amargor"
+pg_restore: creating SEQUENCE "public.amargor_id_amargor_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.amargor_id_amargor_seq"
+pg_restore: creating TABLE "public.aroma"
+pg_restore: creating SEQUENCE "public.aroma_id_aroma_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.aroma_id_aroma_seq"
+pg_restore: creating TABLE "public.auditoria"
+pg_restore: creating SEQUENCE "public.auditoria_id_auditoria_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.auditoria_id_auditoria_seq"
+pg_restore: creating TABLE "public.carbonatacao"
+pg_restore: creating SEQUENCE "public.carbonatacao_id_carbonatacao_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.carbonatacao_id_carbonatacao_seq"
+pg_restore: creating TABLE "public.cerveja"
+pg_restore: creating SEQUENCE "public.cerveja_id_cerveja_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.cerveja_id_cerveja_seq"
+pg_restore: creating TABLE "public.cor"
+pg_restore: creating SEQUENCE "public.cor_id_cor_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.cor_id_cor_seq"
+pg_restore: creating TABLE "public.corpo_cerveja"
+pg_restore: creating SEQUENCE "public.corpo_cerveja_id_corpo_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.corpo_cerveja_id_corpo_seq"
+pg_restore: creating TABLE "public.foto_usuario"
+pg_restore: creating SEQUENCE "public.foto_usuario_id_foto_usuario_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.foto_usuario_id_foto_usuario_seq"
+pg_restore: creating TABLE "public.img_cerveja"
+pg_restore: creating SEQUENCE "public.img_cerveja_id_img_cerveja_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.img_cerveja_id_img_cerveja_seq"
+pg_restore: creating TABLE "public.login"
+pg_restore: creating SEQUENCE "public.login_id_login_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.login_id_login_seq"
+pg_restore: creating TABLE "public.mouthfeel"
+pg_restore: creating SEQUENCE "public.mouthfeel_id_mouthfeel_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.mouthfeel_id_mouthfeel_seq"
+pg_restore: creating TABLE "public.pergunta"
+pg_restore: creating SEQUENCE "public.pergunta_id_pergunta_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.pergunta_id_pergunta_seq"
+pg_restore: creating TABLE "public.questionario"
+pg_restore: creating SEQUENCE "public.questionario_id_questionario_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.questionario_id_questionario_seq"
+pg_restore: creating TABLE "public.recomendacao"
+pg_restore: creating SEQUENCE "public.recomendacao_id_recomendacao_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.recomendacao_id_recomendacao_seq"
+pg_restore: creating TABLE "public.resposta_usuario"
+pg_restore: creating SEQUENCE "public.resposta_usuario_id_resposta_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.resposta_usuario_id_resposta_seq"
+pg_restore: creating TABLE "public.sabor_principal"
+pg_restore: creating SEQUENCE "public.sabor_principal_id_sabor_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.sabor_principal_id_sabor_seq"
+pg_restore: creating TABLE "public.teor_alcoolico"
+pg_restore: creating SEQUENCE "public.teor_alcoolico_id_teor_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.teor_alcoolico_id_teor_seq"
+pg_restore: creating TABLE "public.usuario"
+pg_restore: creating DEFAULT "public.alternativa id_alternativa"
+pg_restore: creating DEFAULT "public.amargor id_amargor"
+pg_restore: creating DEFAULT "public.aroma id_aroma"
+pg_restore: creating DEFAULT "public.auditoria id_auditoria"
+pg_restore: creating DEFAULT "public.carbonatacao id_carbonatacao"
+pg_restore: creating DEFAULT "public.cerveja id_cerveja"
+pg_restore: creating DEFAULT "public.cor id_cor"
+pg_restore: creating DEFAULT "public.corpo_cerveja id_corpo"
+pg_restore: creating DEFAULT "public.foto_usuario id_foto_usuario"
+pg_restore: creating DEFAULT "public.img_cerveja id_img_cerveja"
+pg_restore: creating DEFAULT "public.login id_login"
+pg_restore: creating DEFAULT "public.mouthfeel id_mouthfeel"
+pg_restore: creating DEFAULT "public.pergunta id_pergunta"
+pg_restore: creating DEFAULT "public.questionario id_questionario"
+pg_restore: creating DEFAULT "public.recomendacao id_recomendacao"
+pg_restore: creating DEFAULT "public.resposta_usuario id_resposta"
+pg_restore: creating DEFAULT "public.sabor_principal id_sabor"
+pg_restore: creating DEFAULT "public.teor_alcoolico id_teor"
+pg_restore: processing data for table "public.alternativa"
+pg_restore: processing data for table "public.amargor"
+pg_restore: processing data for table "public.aroma"
+pg_restore: processing data for table "public.auditoria"
+pg_restore: processing data for table "public.carbonatacao"
+pg_restore: processing data for table "public.cerveja"
+pg_restore: processing data for table "public.cor"
+pg_restore: processing data for table "public.corpo_cerveja"
+pg_restore: processing data for table "public.foto_usuario"
+pg_restore: processing data for table "public.img_cerveja"
+pg_restore: processing data for table "public.login"
+pg_restore: processing data for table "public.mouthfeel"
+pg_restore: processing data for table "public.pergunta"
+pg_restore: processing data for table "public.questionario"
+pg_restore: processing data for table "public.recomendacao"
+pg_restore: processing data for table "public.resposta_usuario"
+pg_restore: processing data for table "public.sabor_principal"
+pg_restore: processing data for table "public.teor_alcoolico"
+pg_restore: processing data for table "public.usuario"
+pg_restore: executing SEQUENCE SET alternativa_id_alternativa_seq
+pg_restore: executing SEQUENCE SET amargor_id_amargor_seq
+pg_restore: executing SEQUENCE SET aroma_id_aroma_seq
+pg_restore: executing SEQUENCE SET auditoria_id_auditoria_seq
+pg_restore: executing SEQUENCE SET carbonatacao_id_carbonatacao_seq
+pg_restore: executing SEQUENCE SET cerveja_id_cerveja_seq
+pg_restore: executing SEQUENCE SET cor_id_cor_seq
+pg_restore: executing SEQUENCE SET corpo_cerveja_id_corpo_seq
+pg_restore: executing SEQUENCE SET foto_usuario_id_foto_usuario_seq
+pg_restore: executing SEQUENCE SET img_cerveja_id_img_cerveja_seq
+pg_restore: executing SEQUENCE SET login_id_login_seq
+pg_restore: executing SEQUENCE SET mouthfeel_id_mouthfeel_seq
+pg_restore: executing SEQUENCE SET pergunta_id_pergunta_seq
+pg_restore: executing SEQUENCE SET questionario_id_questionario_seq
+pg_restore: executing SEQUENCE SET recomendacao_id_recomendacao_seq
+pg_restore: executing SEQUENCE SET resposta_usuario_id_resposta_seq
+pg_restore: executing SEQUENCE SET sabor_principal_id_sabor_seq
+pg_restore: executing SEQUENCE SET teor_alcoolico_id_teor_seq
+pg_restore: creating CONSTRAINT "public.alternativa alternativa_pkey"
+pg_restore: creating CONSTRAINT "public.amargor amargor_pkey"
+pg_restore: creating CONSTRAINT "public.aroma aroma_pkey"
+pg_restore: creating CONSTRAINT "public.auditoria auditoria_pkey"
+pg_restore: creating CONSTRAINT "public.carbonatacao carbonatacao_pkey"
+pg_restore: creating CONSTRAINT "public.cerveja cerveja_pkey"
+pg_restore: creating CONSTRAINT "public.cor cor_pkey"
+pg_restore: creating CONSTRAINT "public.corpo_cerveja corpo_cerveja_pkey"
+pg_restore: creating CONSTRAINT "public.foto_usuario foto_usuario_pkey"
+pg_restore: creating CONSTRAINT "public.img_cerveja img_cerveja_pkey"
+pg_restore: creating CONSTRAINT "public.login login_pkey"
+pg_restore: creating CONSTRAINT "public.mouthfeel mouthfeel_pkey"
+pg_restore: creating CONSTRAINT "public.pergunta pergunta_pkey"
+pg_restore: creating CONSTRAINT "public.questionario questionario_pkey"
+pg_restore: creating CONSTRAINT "public.recomendacao recomendacao_pkey"
+pg_restore: creating CONSTRAINT "public.resposta_usuario resposta_usuario_pkey"
+pg_restore: creating CONSTRAINT "public.sabor_principal sabor_principal_pkey"
+pg_restore: creating CONSTRAINT "public.teor_alcoolico teor_alcoolico_pkey"
+pg_restore: creating CONSTRAINT "public.usuario usuario_pkey"
+pg_restore: creating FK CONSTRAINT "public.alternativa alternativa_id_pergunta_fkey"
+pg_restore: creating FK CONSTRAINT "public.auditoria auditoria_id_login_fkey"
+pg_restore: creating FK CONSTRAINT "public.cerveja cerveja_id_amargor_fkey"
+pg_restore: creating FK CONSTRAINT "public.cerveja cerveja_id_aroma_fkey"
+pg_restore: creating FK CONSTRAINT "public.cerveja cerveja_id_carbonatacao_fkey"
+pg_restore: creating FK CONSTRAINT "public.cerveja cerveja_id_cor_fkey"
+pg_restore: creating FK CONSTRAINT "public.cerveja cerveja_id_corpo_fkey"
+pg_restore: creating FK CONSTRAINT "public.cerveja cerveja_id_img_cerveja_fkey"
+pg_restore: creating FK CONSTRAINT "public.cerveja cerveja_id_mouthfeel_fkey"
+pg_restore: creating FK CONSTRAINT "public.cerveja cerveja_id_sabor_fkey"
+pg_restore: creating FK CONSTRAINT "public.cerveja cerveja_id_teor_fkey"
+pg_restore: creating FK CONSTRAINT "public.recomendacao fk_id_questionario"
+pg_restore: creating FK CONSTRAINT "public.login login_cpf_fkey"
+pg_restore: creating FK CONSTRAINT "public.questionario questionario_cpf_fkey"
+pg_restore: creating FK CONSTRAINT "public.questionario questionario_id_resposta_fkey"
+pg_restore: creating FK CONSTRAINT "public.recomendacao recomendacao_id_cerveja_fkey"
+pg_restore: creating FK CONSTRAINT "public.recomendacao recomendacao_id_resposta_fkey"
+pg_restore: creating FK CONSTRAINT "public.resposta_usuario resposta_usuario_cpf_fkey"
+pg_restore: creating FK CONSTRAINT "public.resposta_usuario resposta_usuario_id_alternativa_fkey"
+pg_restore: creating FK CONSTRAINT "public.usuario usuario_id_foto_usuario_fkey"

@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+    app:
+        build: .
+        container_name: e-beer
+        ports:
+            - "8000:80"
+        volumes:
+            - .:/var/www/html
+        env_file:
+            - .env
