@@ -46,7 +46,7 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
             ?>
         </div>
 
-        <form action="./config/processa_login.php" method="post" id="form-login">
+        <form action="./config/processa_login_email.php" method="post" id="form-login">
             <div id="email-box">
                 <label for="email">E-mail</label>
                 <input type="email" placeholder="" id="email" name="email" required>

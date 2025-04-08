@@ -3,7 +3,7 @@ session_start();
 
 // Verifica se o usuário está logado e tem um CPF armazenado
 if (!isset($_SESSION['cpf'])) {
-    header("Location: index.php?msgErro=Você precisa se autenticar no sistema.");
+    header("Location: ../index.php?msgErro=Você precisa se autenticar no sistema.");
     exit();
 }
 

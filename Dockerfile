@@ -1,31 +1,35 @@
 # Imagem oficial do PHP + Apache
 FROM php:8.2-apache
 
+# Atualiza pacotes e instala dependências do sistema e PHP
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    zip \
+    libzip-dev \
+    libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql zip
+
+# Instala o Composer (imagem multi-stage)
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Copia todos os arquivos do projeto
 COPY . .
 
-# Instala as extensões necessárias 
-RUN apt-get update && apt-get install -y \
-	libpq-dev \
-	&& docker-php-ext-install pdo pdo_pgsql
-
-# Instala o Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 # Instala dependências do projeto via Composer
 RUN composer install
-	
-# Dá permissões 
+
+# Dá permissões para o Apache
 RUN chown -R www-data:www-data /var/www/html
 
-# Copia o script para dentro do container
+# Copia o script de setup do PHP
 COPY /config/php-setup.sh /usr/local/bin/php-setup.sh
 
-# Dá permissão de execução ao script
+# Permite execução do script
 RUN chmod +x /usr/local/bin/php-setup.sh
 
 # Usa o script como ponto de entrada
 ENTRYPOINT ["/usr/local/bin/php-setup.sh"]
 
-# Expondo a porta padrão do Apache
+# Expõe a porta padrão do Apache
 EXPOSE 80
