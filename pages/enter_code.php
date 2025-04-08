@@ -1,10 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['email'], $_SESSION['code'], $_SESSION['tipo_usuario'])) {
-    header("Location: ../index.php?msgErro=Você precisa se autenticar no sistema.");
+    header("Location: ../index.php?msgErro=Vocï¿½ precisa se autenticar no sistema.");
    exit();
 }
-// Verifica se há mensagem de sucesso ou erro
+// Verifica se hï¿½ mensagem de sucesso ou erro
 $msgSucessoCode = isset($_GET['msgSucesso']) ? $_GET['msgSucesso'] : '';
 $msgErroCode = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
 ?>
@@ -55,10 +55,10 @@ $msgErroCode = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
       const inputCode = document.getElementById('codigo');
 
       inputCode.addEventListener('input', function () {
-        // Remove tudo que não for número
+        // Remove tudo que nï¿½o for nï¿½mero
         this.value = this.value.replace(/\D/g, '');
 
-        // Garante que não passe de 6 dígitos (extra, já que tem maxlength no HTML)
+        // Garante que nï¿½o passe de 6 dï¿½gitos (extra, jï¿½ que tem maxlength no HTML)
         if (this.value.length > 6) {
           this.value = this.value.slice(0, 6);
         }
