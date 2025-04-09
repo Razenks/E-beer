@@ -5,6 +5,18 @@ require_once 'conectaBD.php';
 if (!empty($_POST)) {
     // Iniciar SESSAO (session_start)
     session_start();
+
+    $captcha = $_POST['g-recaptcha-response'];
+    $secretKey = '6LfhFQ8rAAAAAGsv1BqWidU-cmYCCHBaMClRv48L';
+
+    $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$captcha");
+    $result = json_decode($response, true);
+
+    if (!$result['success']) {
+        header("Location: ../index.php?msgErro=Falha na verificação do CAPTCHA.");
+        exit();
+    }
+
     try {
         // Montar a SQL para buscar email e senha, e também o tipo do usuário
         $sql = "SELECT nome, email, senha, sobrenome, tipo_usuario, cpf FROM usuario WHERE email = :email";
@@ -44,7 +56,7 @@ if (!empty($_POST)) {
             // Falha na autenticaçao
             session_destroy(); // Destruir a SESSAO
             header("Location: ../index.php?msgErro=E-mail e/ou Senha inválido(s).");
-            exit();
+
         }
     } catch (PDOException $e) {
         die($e->getMessage());

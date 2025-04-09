@@ -21,8 +21,11 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
     <link rel="stylesheet" href="./css/all.css">
     <script src="./js/all.js"></script>
     <script src="./js/login.js"></script>
+    <!-- Script do reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <!---->
+
 <body>
     <header id="imagem-top">
         <img src="./assets/logo_ebeer.png" alt="">
@@ -75,6 +78,11 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
                     </button>
                 </div>
             </div>
+
+            <div id="captcha-container">
+                <div class="g-recaptcha" data-sitekey="6LfhFQ8rAAAAAEi55UaZDqBpP6rcQLMr3f3lQmT9"></div>
+            </div>
+
             <button type="submit" id="submit-btn">ENTRAR</button>
         </form>
         <button id="sign-up" type="submit"><a href="./pages/cadastro.php">Cadastrar</a></button>

@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    image: php:8.2-apache
+    container_name: php_app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Rafha@123database
+      POSTGRES_DB: e-beer
+    ports:
+      - "5433:5432"  # ⚠️ Evitando conflito com PostgreSQL local
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+
