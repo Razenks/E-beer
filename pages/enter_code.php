@@ -1,10 +1,12 @@
 <?php
 session_start();
+require_once '../src/service/SendEmail.php';
+
 if (!isset($_SESSION['email'], $_SESSION['code'], $_SESSION['tipo_usuario'])) {
     header("Location: ../index.php?msgErro=Voc� precisa se autenticar no sistema.");
    exit();
 }
-// Verifica se h� mensagem de sucesso ou erro
+// Verifica se há mensagem de sucesso ou erro
 $msgSucessoCode = isset($_GET['msgSucesso']) ? $_GET['msgSucesso'] : '';
 $msgErroCode = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
 ?>

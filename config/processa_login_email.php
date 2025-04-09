@@ -1,5 +1,4 @@
 <?php
-use App\service\Email;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once 'conectaBD.php';
@@ -43,16 +42,6 @@ if (!empty($_POST)) {
         $_SESSION['tipo_usuario'] = $result['tipo_usuario'];
         $_SESSION['cpf'] = $result['cpf']; // Adiciona o CPF na sessão
         
-        $subject = 'Código de verificação';
-        $body = 'Olá '.$_SESSION['nome'].'. 
-        <br><br> 
-        Você acaba de fazer login na nossa plataforma e precisa informar o código de verificação.
-        <br><br>
-        Seu código é: ';
-        // Enviar o e-mail com o código de verificação
-        $email = new Email();
-        $_SESSION['code'] = $email->sendEmail($_SESSION['email'], $subject, $body);
-
         header("Location: ../pages/enter_code.php");
 
     } catch (PDOException $e) {
