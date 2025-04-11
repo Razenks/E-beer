@@ -1,5 +1,5 @@
 # Arquivos de ambiente (nunca subir o .env real)
-
+.env
 
 # Dependências (podem ser restauradas via composer install)
 
