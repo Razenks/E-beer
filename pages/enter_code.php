@@ -1,6 +1,9 @@
 <?php
 session_start();
-require_once '../src/service/SendEmail.php';
+
+if (isset($_SESSION['email'], $_SESSION['tipo_usuario']) && !isset($_SESSION['code'])) {
+    require_once '../src/service/SendEmail.php';
+}
 
 if (!isset($_SESSION['email'], $_SESSION['code'], $_SESSION['tipo_usuario'])) {
     header("Location: ../index.php?msgErro=Voc� precisa se autenticar no sistema.");

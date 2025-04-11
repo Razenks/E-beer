@@ -107,3 +107,9 @@ a {
 #view-button {
     background-color: #80000000;
 }
+
+#captcha-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
