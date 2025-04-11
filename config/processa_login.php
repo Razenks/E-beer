@@ -1,12 +1,29 @@
-<?php
+﻿<?php
+use App\Service\Recaptcha;
+use Dotenv;
+
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once 'conectaBD.php';
 
-// Verificar se está chegando dados por POST
+// Verificar se est� chegando dados por POST
 if (!empty($_POST)) {
     // Iniciar SESSAO (session_start)
     session_start();
+
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->load();
+
     try {
-        // Montar a SQL para buscar email e senha, e também o tipo do usuário
+        $captcha = $_POST['g-recaptcha-response'];
+        $recaptcha = new Recaptcha($_ENV['API_KEY_RECAPTCHA']);
+        $result = $recaptcha->verify($captcha);
+        if (!$result) {
+            session_destroy(); // Destruir a SESSAO
+            header("Location: ../index.php?msgErro=Falha na verificação do reCAPTCHA.");
+            exit();
+        }
+
+        // Montar a SQL para buscar email e senha, e tamb�m o tipo do usuário
         $sql = "SELECT nome, email, senha, sobrenome, tipo_usuario, cpf FROM usuario WHERE email = :email";
 
         // Preparar a SQL (pdo)
@@ -20,36 +37,34 @@ if (!empty($_POST)) {
         $stmt->execute($dados);
         $result = $stmt->fetch();
 
-        if ($result && password_verify($_POST['senha'], $result['senha'])) { // Verifica se a senha está correta
-            // Autenticação foi realizada com sucesso
-            // Definir as variáveis de sessão
-            $_SESSION['nome'] = $result['nome'];
-            $_SESSION['email'] = $result['email'];
-            $_SESSION['sobrenome'] = $result['sobrenome'];
-            $_SESSION['tipo_usuario'] = $result['tipo_usuario'];
-            $_SESSION['cpf'] = $result['cpf']; // Adiciona o CPF na sessão
-
-            // Verificar o tipo do usuário
-            if ($_SESSION['tipo_usuario'] == 2) { // 2 para administrador
-                // Redirecionar para a página de administrador
-                header("Location: ../pages/main_admin.php");
-                exit(); // Adicione exit para garantir que o script pare aqui
-            } else {
-                // Redirecionar para a página de usuário normal
-                header("Location: ../pages/main_logado.php");
-                exit(); // Adicione exit para garantir que o script pare aqui
-            }
-
-        } else {
-            // Falha na autenticaçao
+        if (!$result) {
             session_destroy(); // Destruir a SESSAO
-            header("Location: ../index.php?msgErro=E-mail e/ou Senha inválido(s).");
+            header("Location: ../index.php?msgErro=E-mail não cadastrado.");
             exit();
         }
+
+        if (!password_verify($_POST['senha'], $result['senha'])) {
+            session_destroy(); // Destruir a SESSAO
+            header("Location: ../index.php?msgErro=Senha incorreta.");
+            exit();
+        }
+
+        // Autentica��o foi realizada com sucesso
+        // Definir as variáveis de sess�o
+        $_SESSION['nome'] = $result['nome'];
+        $_SESSION['email'] = $result['email'];
+        $_SESSION['sobrenome'] = $result['sobrenome'];
+        $_SESSION['tipo_usuario'] = $result['tipo_usuario'];
+        $_SESSION['cpf'] = $result['cpf']; // Adiciona o CPF na sess�o
+
+        header("Location: ../pages/enter_code.php");
+
     } catch (PDOException $e) {
-        die($e->getMessage());
+        error_log("Erro do Exception :" . $e->getMessage());
+        header("Location: ../index.php?msgErro=Problema no sistema, tente novamente.");
+        exit();
     }
 } else {
-    header("Location: ../index.php?msgErro=Você não tem permissão para acessar esta página.");
+    header("Location: ../index.php?msgErro=Voc� n�o tem permiss�o para acessar esta p�gina.");
     exit();
 }
