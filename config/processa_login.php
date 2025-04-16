@@ -1,6 +1,5 @@
-﻿<?php
+<?php
 use App\Service\Recaptcha;
-use Dotenv;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once 'conectaBD.php';
