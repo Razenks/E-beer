@@ -2,7 +2,7 @@
 .env
 
 # Dependências (podem ser restauradas via composer install)
-
+vendor
 
 # Arquivos gerados pelo sistema
 *.log

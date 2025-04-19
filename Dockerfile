@@ -13,11 +13,12 @@ RUN apt-get update && apt-get install -y \
 # Instala o Composer (imagem multi-stage)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copia todos os arquivos do projeto
-COPY . .
+# Copia apenas os arquivos necessários para o container
+# Usando .dockerignore para evitar copiar arquivos desnecessários
+COPY . /var/www/html
 
 # Instala dependências do projeto via Composer
-RUN composer install
+RUN composer install --optimize-autoloader
 
 # Dá permissões para o Apache
 RUN chown -R www-data:www-data /var/www/html
