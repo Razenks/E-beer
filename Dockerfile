@@ -1,7 +1,7 @@
 # Imagem oficial do PHP + Apache
 FROM php:8.2-apache
 
-# Atualiza pacotes e instala dependências do sistema e PHP
+# Atualiza pacotes e instala dependÃªncias do sistema e PHP
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -13,23 +13,24 @@ RUN apt-get update && apt-get install -y \
 # Instala o Composer (imagem multi-stage)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copia todos os arquivos do projeto
-COPY . .
+# Copia apenas os arquivos necessï¿½rios para o container
+# Usando .dockerignore para evitar copiar arquivos desnecessï¿½rios
+COPY . /var/www/html
 
-# Instala dependências do projeto via Composer
-RUN composer install
+# Instala dependï¿½ncias do projeto via Composer
+RUN composer install --optimize-autoloader
 
-# Dá permissões para o Apache
+# Dï¿½ permissï¿½es para o Apache
 RUN chown -R www-data:www-data /var/www/html
 
 # Copia o script de setup do PHP
 COPY /config/php-setup.sh /usr/local/bin/php-setup.sh
 
-# Permite execução do script
+# Permite execuï¿½ï¿½o do script
 RUN chmod +x /usr/local/bin/php-setup.sh
 
 # Usa o script como ponto de entrada
 ENTRYPOINT ["/usr/local/bin/php-setup.sh"]
 
-# Expõe a porta padrão do Apache
+# Expï¿½e a porta padrï¿½o do Apache
 EXPOSE 80
