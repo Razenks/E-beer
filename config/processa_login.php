@@ -2,8 +2,9 @@
 use App\Service\Recaptcha;
 use Dotenv;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once '../vendor/autoload.php';
 require_once 'conectaBD.php';
+require_once '../src/service/jwt.php';
 
 // Verificar se est� chegando dados por POST
 if (!empty($_POST)) {
@@ -14,6 +15,9 @@ if (!empty($_POST)) {
     $dotenv->load();
 
     try {
+
+
+        // Código Recaptcha 
         $captcha = $_POST['g-recaptcha-response'];
         $recaptcha = new Recaptcha($_ENV['API_KEY_RECAPTCHA']);
         $result = $recaptcha->verify($captcha);
@@ -57,7 +61,18 @@ if (!empty($_POST)) {
         $_SESSION['tipo_usuario'] = $result['tipo_usuario'];
         $_SESSION['cpf'] = $result['cpf']; // Adiciona o CPF na sess�o
 
-        header("Location: ../pages/enter_code.php");
+        $dadosUsuario = [
+            'nome' => $result['nome'],
+            'email' => $result['email'],
+            'sobrenome' => $result['sobrenome'],
+            'tipo_usuario' => $result['tipo_usuario'],
+            'cpf' => $result['cpf']
+        ];
+
+        $tokenJWT = gerarTokenJWT($dadosUsuario);
+        $_SESSION['jwt'] = $tokenJWT; // Ou você pode salvar em cookie se preferir
+
+        header("Location: ../pages/main_logado.php");
 
     } catch (PDOException $e) {
         error_log("Erro do Exception :" . $e->getMessage());
