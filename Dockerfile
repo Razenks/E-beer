@@ -1,7 +1,7 @@
 # Imagem oficial do PHP + Apache
 FROM php:8.2-apache
 
-# Atualiza pacotes e instala depend�ncias do sistema e PHP
+# Atualiza pacotes e instala dependências do sistema e PHP
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
