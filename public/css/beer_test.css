@@ -1,0 +1,161 @@
+h3 {
+    text-align: center;
+    color: #800000;
+    margin-bottom: 40px;
+}
+
+#main-container {
+    margin-top: 20px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 800px;
+    height: 400px;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Cria um efeito de elevação */
+    padding: 10px;
+    margin-bottom: 20px
+}
+
+#main-container:hover {
+    transform: translateY(-5px);
+}
+
+#main-container button {
+    background-color: #FFBF00;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #800000;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+#main-container button:hover {
+    background-color: #8b4513;
+    color: white;
+}
+
+.alternativa-botao {
+    width: 150px;
+    padding: 10px;
+    color: #800000;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #FFBF00;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.recomendacao {
+    background-color: #f0f8ff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.recomendacao h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.recomendacao p {
+    font-size: 18px;
+    color: #333;
+}
+
+#beer-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /* Imagem ocupa 1 parte, info 2 partes */
+    gap: 20px;
+    align-items: start;
+    /* Alinha ao topo */
+    margin: 20px auto;
+    width: 100%;
+    max-width: 800px;
+    /* Limita a largura total */
+}
+
+#cerveja-img img {
+    width: 100%;
+    /* Ajusta automaticamente ao contêiner */
+    max-width: 300px;
+    /* Limita a largura da imagem */
+    height: 400px;
+    /* Mantém proporção */
+}
+
+#descricao-text {
+    text-align: justify;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+#beer-characteristics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Adapta-se ao espaço */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#beer-characteristics div {
+    background-color: #FFBF00;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#top h1 {
+    font-size: 24px;
+    /* Tamanho ajustado para caber melhor */
+    margin-bottom: 15px;
+    /* Espaçamento inferior */
+    text-align: center;
+    /* Centraliza o texto */
+    word-wrap: break-word;
+    /* Quebra palavras grandes */
+    max-width: 100%;
+    /* Garante que não ultrapasse o contêiner pai */
+    white-space: normal;
+    /* Permite múltiplas linhas se necessário */
+    margin-top: 30px;
+}
+
+.save-answers {
+    background-color: green;
+    color: white;
+    font-size: 18px;
+    padding: 15px;
+    height: 35px;
+    width: 250px;
+    text-align: center;
+    margin: auto;
+    align-items: center;
+    display: flex;
+}
+
+.save-answers h2 {
+    background-color: green;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin: auto;
+    align-items: center;
+    display: flex;
+}

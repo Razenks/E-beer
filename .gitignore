@@ -1,7 +1,7 @@
 # Arquivos de ambiente (nunca subir o .env real)
 .env
 
-# Dependências (podem ser restauradas via composer install)
+# Dependï¿½ncias (podem ser restauradas via composer install)
 vendor
 
 # Arquivos gerados pelo sistema
@@ -12,10 +12,10 @@ vendor
 *.bak
 *.cache
 
-# Arquivos específicos do VS Code (caso esteja usando)
+# Arquivos especï¿½ficos do VS Code (caso esteja usando)
 .vscode/
 .vs/
 
-# Arquivos temporários do sistema operacional
+# Arquivos temporï¿½rios do sistema operacional
 .DS_Store
 Thumbs.db
