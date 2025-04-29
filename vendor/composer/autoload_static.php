@@ -28,6 +28,10 @@ class ComposerStaticInitf4d9abb7f15423dab78a432dd2ab0ec1
         array (
             'GrahamCampbell\\ResultType\\' => 26,
         ),
+        'F' => 
+        array (
+            'Facebook\\WebDriver\\' => 19,
+        ),
         'D' => 
         array (
             'Dotenv\\' => 7,
@@ -62,6 +66,10 @@ class ComposerStaticInitf4d9abb7f15423dab78a432dd2ab0ec1
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
+        ),
+        'Facebook\\WebDriver\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-webdriver/webdriver/lib',
         ),
         'Dotenv\\' => 
         array (
