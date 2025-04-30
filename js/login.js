@@ -18,4 +18,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+function abrirModal(tipo) {
+    document.getElementById('modal-backdrop').style.display = 'block';
+    document.getElementById('modal-' + tipo).style.display = 'block';
+}
+
+function fecharModal(tipo) {
+    document.getElementById('modal-backdrop').style.display = 'none';
+    document.getElementById('modal-' + tipo).style.display = 'none';
+}
+
 

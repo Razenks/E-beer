@@ -113,3 +113,115 @@ a {
     justify-content: center;
     margin-top: 15px;
 }
+
+#terms-box{
+    display: flex;
+    justify-content: center;
+    margin-top: 15PX;
+}
+
+
+.modal {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 20px 10px 10px 20px;
+    overflow: auto;
+    padding: 20px;
+    z-index: 1000;
+    
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+    border-radius: 20px;
+    height: 100px;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background: #F4F4F4;
+    border-radius: 20px;
+    height: 100px;
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: #858585;
+    border-radius: 20px;
+
+
+}
+
+#terms-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: sans-serif;
+    margin-top: 20px;
+}
+
+#terms-box input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #3c4763;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+}
+
+#terms-box input[type="checkbox"]:checked {
+    background-color: #3c4763;
+    border-color: #3c4763;
+}
+
+#terms-box input[type="checkbox"]:checked::after {
+    content: "✔";
+    position: absolute;
+    color: white;
+    font-size: 13px;
+    top: -1px;
+    left: 2px;
+}
+
+
+.modal button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: #ff0000;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    z-index: 1001;
+}
+
+.modal button:hover {
+    background-color: #b80505;
+}
+
+.modal-content p {
+    margin: 10px;
+}
+
+#modal-backdrop {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
