@@ -1,36 +1,47 @@
-# Imagem oficial do PHP + Apache
-FROM php:8.2-apache
+# Imagem oficial do PHP com Apache
+FROM php:8.4-apache
 
-# Atualiza pacotes e instala dependências do sistema e PHP
+# Atualiza pacotes e instala dependências de sistema e PHP
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    zip \
     libzip-dev \
     libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql zip
 
-# Instala o Composer (imagem multi-stage)
+# Ativa o mod_rewrite do Apache
+RUN a2enmod rewrite
+
+# Copia o Composer (multi-stage)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copia apenas os arquivos necess�rios para o container
-# Usando .dockerignore para evitar copiar arquivos desnecess�rios
+# Define o diretório de trabalho da aplicação
+WORKDIR /var/www/html
+
+# Copia apenas os arquivos do Composer para melhor uso de cache
+COPY composer.json composer.lock ./
+
+# Instala dependências PHP via Composer
+RUN composer install --no-dev --optimize-autoloader
+
+# Copia o restante da aplicação (evite arquivos desnecessários com .dockerignore)
 COPY . /var/www/html
 
-# Instala depend�ncias do projeto via Composer
-RUN composer install --optimize-autoloader
-
-# D� permiss�es para o Apache
+# Dá permissões adequadas para o Apache
 RUN chown -R www-data:www-data /var/www/html
 
-# Copia o script de setup do PHP
-COPY /config/php-setup.sh /usr/local/bin/php-setup.sh
+# Copia a configuração personalizada do Apache
+COPY config/apache.conf /etc/apache2/sites-available/apache.conf
 
-# Permite execu��o do script
+# Ativa o VirtualHost e desativa o default
+RUN a2ensite apache.conf && a2dissite 000-default.conf
+
+# Copia o script de setup do PHP
+COPY config/php-setup.sh /usr/local/bin/php-setup.sh
+
+# Torna o script executável
 RUN chmod +x /usr/local/bin/php-setup.sh
 
-# Usa o script como ponto de entrada
+# Define o ponto de entrada
 ENTRYPOINT ["/usr/local/bin/php-setup.sh"]
 
-# Exp�e a porta padr�o do Apache
+# Expõe a porta padrão do Apache
 EXPOSE 80
