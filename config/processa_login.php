@@ -4,7 +4,7 @@ use App\Service\Recaptcha;
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once 'conectaBD.php';
 
-// Verificar se est� chegando dados por POST
+// Verificar se está chegando dados por POST
 if (!empty($_POST)) {
     // Iniciar SESSAO (session_start)
     session_start();

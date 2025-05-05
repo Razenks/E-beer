@@ -1,7 +1,7 @@
 <?php
 namespace App\Core;
 
-use App\Services\ActivityLogger;
+use App\Services\ActivityLoggerService;
 
 class App
 {
@@ -11,7 +11,7 @@ class App
 
     public function run ()
     {
-        $logger = new ActivityLogger();
+        $logger = new ActivityLoggerService();
         $logger->log('Nova Requisição');
         // Obtém a URL e o método da requisição
         $this->router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

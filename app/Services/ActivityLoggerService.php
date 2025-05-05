@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
 
-class ActivityLogger 
+class ActivityLoggerService
 {
     protected string $logPath;
 

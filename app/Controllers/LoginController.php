@@ -7,7 +7,6 @@ class LoginController
 {
     public function index(): void
     {
-        $usuario = 'Joao';
-        View::render('login.index', ['usuario' => $usuario]);
+        View::render('login.index');
     }
 }

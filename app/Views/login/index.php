@@ -27,10 +27,10 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
 <!---->
 <body>
     <header id="imagem-top">
-        <img src="./assets/logo_ebeer.png" alt="">
+        <img src="/assets/logo_ebeer.png" alt="">
     </header>
     <main>
-        <h1>LOGIN - <?= htmlspecialchars($usuario)?></h1>
+        <h1>LOGIN</h1>
 
         <div class="success-container">
             <?php
