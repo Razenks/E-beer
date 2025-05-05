@@ -1,14 +1,16 @@
 <?php
+require '../src/service/jwt.php';
 
 try {
     session_start();
     if (!isset($_SESSION['email'], $_SESSION['code'], $_SESSION['tipo_usuario'])) {
-        header("Location: ../index.php?msgErro=Você precisa se autenticar no sistema.");
+        header("Location: ../index.php?msgErro=Vocï¿½ precisa se autenticar no sistema.");
         exit();
     }
     if (empty($_POST)) {
         throw new Exception("Erro no envio do post");
     }
+
     $code= $_POST['codigo'];
     if ($code != $_SESSION['code']) {
         header("Location: ../pages/enter_code.php?msgErro=Codigo incorreto.");
@@ -16,14 +18,14 @@ try {
     }
 
     $_SESSION['code'] = '';
-    // Autenticação foi realizada com sucesso
-    // Verificar o tipo do usuário
+    // Autenticaï¿½ï¿½o foi realizada com sucesso
+    // Verificar o tipo do usuï¿½rio
     if ($_SESSION['tipo_usuario'] == 2) { // 2 para administrador
-        // Redirecionar para a página de administrador
+        // Redirecionar para a pï¿½gina de administrador
         header("Location: ../pages/main_admin.php");
         exit(); // exit para garantir que o script pare aqui
     } else {
-        // Redirecionar para a página de usuário normal
+        // Redirecionar para a pï¿½gina de usuï¿½rio normal
         header("Location: ../pages/main_logado.php");
         exit(); // exit para garantir que o script pare aqui
     }

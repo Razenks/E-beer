@@ -2,6 +2,7 @@
 use App\Service\Recaptcha;
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once '../src/service/jwt.php';
 require_once 'conectaBD.php';
 
 // Verificar se est� chegando dados por POST
@@ -55,6 +56,13 @@ if (!empty($_POST)) {
         $_SESSION['sobrenome'] = $result['sobrenome'];
         $_SESSION['tipo_usuario'] = $result['tipo_usuario'];
         $_SESSION['cpf'] = $result['cpf']; // Adiciona o CPF na sess�o
+
+
+        $_SESSION['jwt'] = gerarTokenJWT([
+            'cpf' => $result['cpf'],
+            'nome' => $result['nome'],
+            'email' => $result['email']
+        ]);
 
         header("Location: ../pages/enter_code.php");
 

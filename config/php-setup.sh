@@ -3,7 +3,7 @@
 # Cria a pasta de log (no container, mapeada para o host)
 mkdir -p /var/www/html/config/logs
 
-# Define permissões
+# Define permissï¿½es
 chown -R www-data:www-data /var/www/html/config/logs
 
 # Copia o php.ini-development para ser o ativo

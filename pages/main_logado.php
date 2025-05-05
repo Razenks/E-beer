@@ -1,13 +1,31 @@
 <?php
 session_start();
+require_once '../config/conectaBD.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../src/service/jwt.php';
 
-// Verifica se o usuário está logado e tem um CPF armazenado
-if (!isset($_SESSION['cpf'])) {
-    header("Location: ../index.php?msgErro=Você precisa se autenticar no sistema.");
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+// Verifica o JWT
+if (!isset($_SESSION['jwt'])) {
+    header("Location: ../index.php?msgErro=Você precisa estar logado.");
     exit();
 }
 
-require_once '../config/conectaBD.php';
+$dadosJWT = validarTokenJWT($_SESSION['jwt']);
+
+if (!$dadosJWT) {
+    session_destroy();
+    header("Location: ../index.php?msgErro=Sessão expirada. Faça login novamente.");
+    exit();
+}
+
+// Agora você pode acessar os dados do usuário com sucesso
+$dadosUsuario = $dadosJWT; // Aqui você já tem os dados do usuário decodificados do JWT
+
+// Agora você pode acessar o CPF do usuário, por exemplo
+$cpf = $dadosUsuario['cpf'];
 
 // Consulta para obter informações do usuário com base no CPF
 $sql_usuario = "SELECT u.nome, u.email, u.senha, u.sobrenome, u.cpf, u.telefone, ft.img_foto_usuario
@@ -27,7 +45,7 @@ try {
 
     // Prepara e executa a consulta para buscar os dados do usuário com base no CPF
     $stmt_usuario = $conexao->prepare($sql_usuario);
-    $stmt_usuario->bindParam(':cpf', $_SESSION['cpf']);
+    $stmt_usuario->bindParam(':cpf', $cpf);
     $stmt_usuario->execute();
     $usuario = $stmt_usuario->fetch(PDO::FETCH_ASSOC);
 

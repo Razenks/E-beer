@@ -2,6 +2,28 @@
 session_start();
 
 require_once '../config/conectaBD.php'; // Certifique-se de que o caminho está correto
+require_once '../vendor/autoload.php';
+require_once '../src/service/jwt.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+if (!isset($_SESSION['jwt']) || empty($_SESSION['jwt'])) {
+    session_destroy();
+    header("Location: ../index.php?msgErro=Token inválido ou expirado. Faça login novamente.");
+    exit();
+}
+
+$dadosJWT = validarTokenJWT($_SESSION['jwt']);
+
+if (!$dadosJWT) {
+    session_destroy();
+    header("Location: ../index.php?msgErro=Sessão expirada. Faça login novamente.");
+    exit();
+}
+
+// Agora você pode acessar os dados do usuário com sucesso
+$dadosUsuario = $dadosJWT; // Aqui você já tem os dados do usuário decodificados do JWT
 
 if (!isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] != 2) {
     // Redireciona para a página inicial com uma mensagem de erro

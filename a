@@ -1,0 +1,50 @@
+[33m8068d25[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/JWT[m[33m, [m[1;32mJWT[m[33m)[m Merge branch 'JWT' of https://github.com/Razenks/E-beer into JWT
+[33mdb7336d[m Foi feito o JWT, para que o usuario armazene o Token de acesso
+[33m22b633c[m Foi feito o JWT, para que o usuario armazene o Token de acesso
+[33m0ca7673[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mjwtMergeEmail[m[33m)[m remoção do .env
+[33mc557c34[m criação do arquivo .htaccess para bloquear acessos ao arquivo .env
+[33ma382d44[m criação do .dockerignore, alteração na porta do container para a padrão do localhost:80, mudanças no dockerfile.
+[33m9855cd7[m remoção do using Dotenv
+[33m7e46073[m[33m ([m[1;32mdev-test[m[33m)[m delete .env
+[33m10a474e[m atualizando main
+[33mff841e9[m[33m ([m[1;31morigin/implementacao-recaptcha[m[33m)[m implementação do recaptcha no código
+[33ma316ddf[m Remover vendor do versionamento
+[33m5273a20[m WIP
+[33m10e6830[m criação do arquivo SendEmail.php responsável por apenas enviar o email. Modificações na ordem executada no envio do e-mail.
+[33m9afd14b[m n sei
+[33m45a440a[m Algumas alterações no Dockerfile. Novo serviço de verificação de e-mail, apenas no login ainda.
+[33mfb675b6[m Projeto agora contém docker, composer, dotenv, tendo um controle de dependências e usando containers para desenvolvimento.
+[33m19da490[m Add files via upload
+[33m27cf766[m Add files via upload
+[33mc85fca6[m Delete index.php
+[33mb94a467[m Delete pages directory
+[33mf0490e8[m Delete includes directory
+[33mfabdcdd[m Delete js directory
+[33m427a674[m Delete data directory
+[33m1b745de[m Delete css directory
+[33m3b58488[m Delete config directory
+[33m4b07b75[m Delete assets directory
+[33m0c93012[m Atualização acessbilidade
+[33md76dff9[m Add files via upload
+[33md6de049[m Delete new-index.php
+[33m52d20e6[m Delete js directory
+[33m3b17302[m Delete img directory
+[33md566a9d[m Delete PHP directory
+[33mfc81a5c[m Delete CSS directory
+[33m64d0e80[m Add files via upload
+[33m3fe3167[m Delete index.html
+[33m0627051[m Delete js directory
+[33mb6c5d80[m Delete img directory
+[33mbcbe45b[m Delete HTML directory
+[33mfd532eb[m Delete CSS directory
+[33m192af6e[m Add files via upload
+[33mba046d4[m Delete index.html
+[33m759df63[m Add files via upload
+[33m9f77856[m Delete js directory
+[33m942cad9[m Add files via upload
+[33m8e20b0d[m Delete img directory
+[33m06a3545[m Add files via upload
+[33m6ee8168[m Delete HTML directory
+[33mbd2305b[m Add files via upload
+[33m4f45b3d[m Delete CSS directory
+[33m4ed770a[m Add files via upload
