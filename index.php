@@ -97,7 +97,7 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
         </form>
         <button id="sign-up" type="submit"><a href="./pages/cadastro.php">Cadastrar</a></button>
         <br>
-        <button id="forgot-password">Esqueceu a senha?</button>
+        <button id="forgot-password"> <a href="./pages/forgot_password.php">Esqueceu a senha?</a></button>
 
 
         <!-- TEXTO MODAL TERMOS E CONDIÇÕES -->
