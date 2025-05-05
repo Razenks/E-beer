@@ -1,0 +1,29 @@
+FROM python:3.13-alpine
+
+RUN apk update && apk add --no-cache \
+    git \
+    unzip \
+    zip \
+    chromium \
+    chromium-chromedriver \
+    libzip \
+    libpq \
+    libffi-dev \
+    build-base \
+    postgresql-dev \
+    py3-pip \
+    python3-dev \
+    musl-dev \
+    libgcc
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 80
+
+CMD ["python", "test_selennium.py"]
