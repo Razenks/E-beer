@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd4c6e27d790476ea39a33aa9b58b5c1",
+    "content-hash": "f4d9abb7f15423dab78a432dd2ab0ec1",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -67,54 +67,6 @@
                 }
             ],
             "time": "2024-07-20T21:45:45+00:00"
-        },
-        {
-            "name": "php-webdriver/webdriver",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-webdriver/php-webdriver.git",
-                "reference": "1c98108ba3eb435b681655764de11502a0653705"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-webdriver/php-webdriver/zipball/1c98108ba3eb435b681655764de11502a0653705",
-                "reference": "1c98108ba3eb435b681655764de11502a0653705",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.19"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.6.*"
-            },
-            "suggest": {
-                "phpdocumentor/phpdocumentor": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Facebook\\WebDriver\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "description": "A PHP client for WebDriver",
-            "homepage": "https://github.com/facebook/php-webdriver",
-            "keywords": [
-                "facebook",
-                "php",
-                "selenium",
-                "webdriver"
-            ],
-            "support": {
-                "forum": "https://www.facebook.com/groups/phpwebdriver/",
-                "issues": "https://github.com/facebook/php-webdriver/issues",
-                "source": "https://github.com/facebook/php-webdriver"
-            },
-            "time": "2015-12-31T15:58:49+00:00"
         },
         {
             "name": "phpmailer/phpmailer",

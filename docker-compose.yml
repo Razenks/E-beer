@@ -1,10 +1,31 @@
-services:
-    app:
-        build: .
-        container_name: e-beer
-        ports:
-            - "80:80"
-        volumes:
-            - .:/var/www/html
-        env_file:
-            - .env
+
+services:  # Todos os serviços precisam estar dentro deste bloco
+
+  app:
+    build: .
+    container_name: e-beer
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+    env_file:
+      - .env
+    networks:
+      - ebeer-network
+
+  selenium-test:
+    build:
+      context: ./test
+      dockerfile: Dockerfile
+    volumes:
+      - ./test:/app
+    depends_on:
+      - app
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - ebeer-network
+
+networks:
+  ebeer-network:
+    driver: bridge

@@ -1,5 +1,5 @@
 # Imagem oficial do PHP + Apache
-FROM php:8.2-apache
+FROM php:8.4-apache
 
 # Atualiza pacotes e instala dependências do sistema e PHP
 RUN apt-get update && apt-get install -y \
@@ -24,7 +24,7 @@ RUN composer install --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/html
 
 # Copia o script de setup do PHP
-COPY config/php-setup.sh /usr/local/bin/php-setup.sh
+COPY /config/php-setup.sh /usr/local/bin/php-setup.sh
 
 # Permite execu��o do script
 RUN chmod +x /usr/local/bin/php-setup.sh
