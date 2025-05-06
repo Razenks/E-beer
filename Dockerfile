@@ -5,7 +5,9 @@ FROM php:8.4-apache
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql zip
+    libxml2-dev \
+    libonig-dev \
+    && docker-php-ext-install pdo pdo_pgsql zip mbstring dom xml xmlwriter
 
 # Ativa o mod_rewrite do Apache
 RUN a2enmod rewrite

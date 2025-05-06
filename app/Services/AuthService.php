@@ -8,24 +8,24 @@ class AuthService
 {
     private $userModel;
 
-    public function __construct()
+    public function __construct(?UserModel $userModel = null)
     {
-        $this->userModel = (new UserModel());
+        $this->userModel = $userModel ?? new UserModel();
     }
 
-    public function validateUser(string $email, string $pass): array|string
+    public function validateUser(string $email, string $pass): bool|array
     {
         try {
             $user = $this->userModel->findByEmail($email);
 
             if(!$user)
             {
-                return "E-mail não encontrado";
+                return false;
             }
             
-            if(!password_hash($pass, $user['senha']))
+            if(!password_verify($pass, $user['senha']))
             {
-                return "Senha incorreta";
+                return false;
             }
 
             return $user;

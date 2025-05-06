@@ -16,7 +16,7 @@ class UserModel
         $this->db = (new Database())->connect();
     }
 
-    public function findByEmail(string $email): array
+    public function findByEmail(string $email): array|bool
     {
         try {
             $stmt = $this->db->prepare("SELECT * FROM usuario WHERE email = ?");
@@ -29,7 +29,7 @@ class UserModel
             return $result;
         } catch (Exception $e) {
             error_log("Erro na consulta por e-mail:" . $e->getMessage());
-            die("Não conseguimos conectar ao Banco de Dados do sistema, tente novamente em alguns minutos.");
+            return false;
         }
     }
 }
