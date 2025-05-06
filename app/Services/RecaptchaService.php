@@ -1,17 +1,17 @@
 <?php
 namespace App\Services;
 
-class Recaptcha
+class RecaptchaService
 {
     private $secretKey;
     private $url = "https://www.google.com/recaptcha/api/siteverify?";
 
-    public function __construct(string $secretkey)
+    public function __construct()
     {
-        $this->secretKey = $secretkey;
+        $this->secretKey = $_ENV['API_KEY_RECAPTCHA'];
     }
 
-    public function verify($captcha)
+    public function validateCaptcha($captcha): bool
     {
         try {
             $url = $this->url . "secret=" . $this->secretKey . "&response=" . $captcha;

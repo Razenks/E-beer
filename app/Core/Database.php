@@ -1,7 +1,6 @@
 <?php
 namespace App\Core;
 
-use Dotenv;
 use Exception;
 use PDO;
 
@@ -15,9 +14,6 @@ class Database
 
     public function __construct()
     {
-        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
-        $dotenv->load();
-
         $this->host = $_ENV['PGHOST'];
         $this->db = $_ENV['PGDATABASE'];
         $this->user = $_ENV['PGUSER'];

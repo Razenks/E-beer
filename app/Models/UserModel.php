@@ -8,12 +8,43 @@ use PDO;
 class UserModel
 {
     private PDO $db;
-    public string $name;
-    public string $email;
+    private string $name;
+    private string $email;
+    private int $tipo_usuario;
 
     public function __construct()
     {
         $this->db = (new Database())->connect();
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getTipoUsuario(): ?int
+    {
+        return $this->tipo_usuario;
+    }
+
+    public function setTipoUsuario(int $tipo_usuario): void
+    {
+        $this->tipo_usuario = $tipo_usuario;
     }
 
     public function findByEmail(string $email): array|bool
@@ -23,8 +54,12 @@ class UserModel
             $stmt->execute([$email]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $this->name = $result['nome'];
-            $this->email = $result['email'];
+            if($result) 
+            {
+                $this->setName($result['nome']);
+                $this->setEmail($result['email']);
+                $this->setTipoUsuario($result['tipo_usuario']);
+            }
 
             return $result;
         } catch (Exception $e) {

@@ -2,21 +2,17 @@
 namespace App\Services;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use Dotenv;
-require '../vendor/autoload.php';
 
-class Email {
+class EmailService {
 	// Vari�veis de inst�ncia
-	private $mail;
-	private $dotenv;
-	private $email;
-	private $password;
+	private PHPMailer $mail;
+	private string $email;
+	private string $password;
+    public string $code;
 	
 	// Construtor que ir� iniciar com o PHPMailer e carregar as vari�veis de ambiente
 	public function __construct() {
 		$this->mail = new PHPMailer(true);
-        $this->dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
-        $this->dotenv->load();
 		$this->email = $_ENV['APPGOOGLEEMAIL'];
 		$this->password = $_ENV['APPGOOGLEPASSWORD'];
 	}
@@ -43,9 +39,9 @@ class Email {
                 throw new Exception("E-mail inv�lido.");
             }
             // gerar c�digo aleat�rio
-            $codigo = $this->generateCod(100000, 999999);
+            $this->code = $this->generateCod(100000, 999999);
             // atualiza o conte�do do body com o c�digo
-            $body = $body . "<h4>".$codigo."</h4>";
+            $body = $body .="<h4>{$this->code}</h4>";
             // estrutura do e-mail
             $this->mail->isHTML(true);
             $this->mail->CharSet = 'UTF-8';
@@ -55,7 +51,7 @@ class Email {
             // enviar e-mail
             $this->mail->send();
 
-            return $codigo;
+            return $this->code;
         } catch (Exception $e) {
             error_log("Erro do e-mail :" . $this->mail->ErrorInfo);
             error_log("Erro do Exception :" . $e->getMessage());
@@ -74,6 +70,6 @@ class Email {
 
     // M�todo para criar um c�digo aleat�rio
     private function generateCod(int $min, int $max) {
-        return rand($min, $max);
+        return random_int($min, $max);
     }
 }

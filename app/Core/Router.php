@@ -27,8 +27,9 @@ class Router
     public function dispatch(string $uri, string $method)
     {
         try {
+            $request = new Request();
 
-            $uri = trim(parse_url($uri, PHP_URL_PATH), '/');
+            $uri = $request->uri() ?? '/';
             foreach($this->routes[$method] ?? [] as $route)
             {
                 $pattern = "#^" . preg_replace('#\{[\w]+\}#', '([\w-]+)', trim($route['uri'], '/')) . "$#";
@@ -49,7 +50,28 @@ class Router
                             $controller = new $controllerName();
                             if(method_exists($controller, $methodName)) 
                             {
-                                return call_user_func_array([$controller, $methodName], $matches);
+                                $reflection = new \ReflectionMethod($controller, $methodName);
+                                $params = $reflection->getParameters();
+
+                                $args = $matches; // Argumentos vindos da rota
+
+                                foreach($params as $index => $param)
+                                {
+                                    $type = $param->getType()?->getName();
+
+                                    // Se for Request, insere na posição correta
+                                    if($type === \App\Core\Request::class)
+                                    {
+                                        array_splice($args, $index, 0, [$request]);
+                                    }
+                                    // Se for obrigatório e não fornecido, lança erro
+                                    elseif(!$param->isOptional() && !isset($args[$index]))
+                                    {   
+                                        throw new Exception("Parâmetro obrigatório faltando no método {$methodName}.");
+                                    }
+                                }
+
+                                return call_user_func_array([$controller, $methodName], $args);
                             }
                             else
                             {

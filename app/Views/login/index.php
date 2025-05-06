@@ -42,13 +42,13 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
 
         <div class="error-container">
             <?php
-            if (isset($_GET['msgErro'])) {
-                echo '<p class="error-msg">' . $_GET['msgErro'] . '</p>';
+            if (isset($error)) {
+                echo '<p class="error-msg">' . $error . '</p>';
             }
             ?>
         </div>
 
-        <form action="./config/processa_login.php" method="post" id="form-login">
+        <form action="/login" method="post" id="form-login">
             <div id="email-box">
                 <label for="email">E-mail</label>
                 <input type="email" placeholder="" id="email" name="email" required>

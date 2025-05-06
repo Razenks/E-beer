@@ -1,23 +1,13 @@
 <?php
 namespace App\Services;
 
-use App\Models\UserModel;
 use Exception;
 
 class AuthService
 {
-    private $userModel;
-
-    public function __construct(?UserModel $userModel = null)
-    {
-        $this->userModel = $userModel ?? new UserModel();
-    }
-
-    public function validateUser(string $email, string $pass): bool|array
+    public function validateUser(array|bool $user, string $pass): bool
     {
         try {
-            $user = $this->userModel->findByEmail($email);
-
             if(!$user)
             {
                 return false;
@@ -28,7 +18,7 @@ class AuthService
                 return false;
             }
 
-            return $user;
+            return true;
         } catch (Exception $e) {
             error_log("Erro na função validateUser: " . $e->getMessage());
             return false;

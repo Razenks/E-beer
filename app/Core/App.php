@@ -13,7 +13,9 @@ class App
     {
         $logger = new ActivityLoggerService();
         $logger->log('Nova Requisição');
+
+        $request = new Request();
         // Obtém a URL e o método da requisição
-        $this->router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+        $this->router->dispatch($request->uri(), $request->method());
     }
 }

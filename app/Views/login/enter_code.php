@@ -1,17 +1,12 @@
 <?php
-session_start();
 
-if (isset($_SESSION['email'], $_SESSION['tipo_usuario']) && !isset($_SESSION['code'])) {
-    require_once '../src/service/SendEmail.php';
-}
-
-if (!isset($_SESSION['email'], $_SESSION['code'], $_SESSION['tipo_usuario'])) {
-    header("Location: ../index.php?msgErro=Voc� precisa se autenticar no sistema.");
-   exit();
+if (!isset($_SESSION['email'], $_SESSION['code'], $_SESSION['user_type'])) {
+    header("Location: /login?auth=off");
+    exit();
 }
 // Verifica se há mensagem de sucesso ou erro
-$msgSucessoCode = isset($_GET['msgSucesso']) ? $_GET['msgSucesso'] : '';
-$msgErroCode = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
+// $msgSucessoCode = isset($_GET['msgSucesso']) ? $_GET['msgSucesso'] : '';
+// $msgErroCode = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -21,14 +16,14 @@ $msgErroCode = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Codigo</title>
-    <link rel="stylesheet" href="../css/enter_code.css">
-    <link rel="stylesheet" href="../css/all.css">
-    <script src="../js/enter_code.js"></script>
+    <link rel="stylesheet" href="/assets/css/enter_code.css">
+    <link rel="stylesheet" href="/assets/css/all.css">
+    <script src="/assets/js/enter_code.js"></script>
 </head>
 <!---->
 <body>
     <header id="imagem-top">
-        <img src="../assets/logo_ebeer.png" alt="">
+        <img src="/assets/img/logo_ebeer.png" alt="">
     </header>
     <main>
         <h1>CODIGO</h1>
@@ -49,7 +44,7 @@ $msgErroCode = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
             ?>
         </div>
 
-        <form action="../config/verify_code.php" method="post" id="form-enter-code">
+        <form action="/login" method="post" id="form-enter-code">
             <div id="code-box">
                 <input type="text" maxlength="6" placeholder="" id="codigo" name="codigo" required>
             </div>
