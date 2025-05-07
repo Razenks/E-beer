@@ -13,19 +13,11 @@ if (!isset($_SESSION['jwt'])) {
     exit();
 }
 
-$dadosJWT = validarTokenJWT($_SESSION['jwt']);
-
-if (!$dadosJWT) {
+if (!(validarTokenJWT($_SESSION['jwt']))['success']) {
     session_destroy();
-    header("Location: ../index.php?msgErro=Sessão expirada. Faça login novamente.");
+    header("Location: ../index.php?msgErro=Token expirado");
     exit();
 }
-
-// Agora você pode acessar os dados do usuário com sucesso
-$dadosUsuario = $dadosJWT; // Aqui você já tem os dados do usuário decodificados do JWT
-
-// Agora você pode acessar o CPF do usuário, por exemplo
-$cpf = $dadosUsuario['cpf'];
 
 // Consulta para obter informações do usuário com base no CPF
 $sql_usuario = "SELECT u.nome, u.email, u.senha, u.sobrenome, u.cpf, u.telefone, ft.img_foto_usuario
@@ -53,7 +45,16 @@ try {
     echo "Erro ao buscar dados: " . $e->getMessage();
 }
 
+$tempoRestante = 10;
 ?>
+
+<script>
+    // Aguarda o tempo restante do token e redireciona automaticamente
+    setTimeout(() => {
+        alert("Sua sessão expirou. Você será redirecionado.");
+        window.location.href = "../index.php?msgErro=Token expirado";
+    }, <?= $tempoRestante * 1000 ?>); // converte segundos para milissegundos
+</script>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -168,7 +169,13 @@ try {
     </section>
 
     <section id="first-section">
-        <h1 id="titulo-beer-test">Encontrar sua cerveja perfeita <br> nunca foi tao fácil</h1>
+        <h4 id="titulo-beer-test">
+            <?php
+            echo "<script>
+            console.log('Token:". json_encode($_SESSION['jwt']) . "');
+            </script>";
+            ?>
+        </h4>
         <a href="beer_test.php" id="beer-test"><button>BeerFeed</button></a>
     </section>
 

@@ -31,6 +31,9 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
     </header>
     <main>
         <h1>LOGIN</h1>
+        <div id="loading-msg" style="display: none; text-align: center; margin-top: 10px;">
+            Carregando...
+        </div>
 
         <div class="success-container">
             <?php
@@ -88,6 +91,14 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
         <br>
         <button id="forgot-password">Esqueceu a senha?</button>
     </main>
+    <script>
+        const form = document.getElementById('form-login');
+        const loadingMsg = document.getElementById('loading-msg');
+
+            form.addEventListener('submit', () => {
+                loadingMsg.style.display = 'block';
+            });
+    </script>
 </body>
 
 </html>

@@ -8,12 +8,12 @@ if (!isset($_SESSION['nome'], $_SESSION['email'])) {
     exit();
 }
 
-$subject = 'Código de verificação';
-$body = 'Olá ' . $_SESSION['nome'] . '. 
+$subject = 'CÃ³digo de verificaÃ§Ã£o';
+$body = 'OlÃ¡ ' . $_SESSION['nome'] . '. 
         <br><br> 
-        Você acaba de fazer login na nossa plataforma e precisa informar o código de verificação.
+        VocÃª acaba de fazer login na nossa plataforma e precisa informar o cÃ³digo de verificaÃ§Ã£o.
         <br><br>
-        Seu código é: ';
-// Enviar o e-mail com o código de verificação
+        Seu cÃ³digo Ã©: ';
+// Enviar o e-mail com o cï¿½digo de verificaï¿½ï¿½o
 $email = new Email();
 $_SESSION['code'] = $email->sendEmail($_SESSION['email'], $subject, $body);

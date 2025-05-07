@@ -64,6 +64,7 @@ if (!empty($_POST)) {
             'email' => $result['email']
         ]);
 
+        require_once '../src/service/SendEmail.php';
         header("Location: ../pages/enter_code.php");
 
     } catch (PDOException $e) {

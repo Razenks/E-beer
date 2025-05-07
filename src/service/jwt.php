@@ -12,7 +12,7 @@ function gerarTokenJWT($dadosUsuario) {
         'iss' => 'http://localhost',
         'aud' => 'http://localhost',
         'iat' => time(),
-        'exp' => time() + 3600,
+        'exp' => time() + 60,
         'dados' => $dadosUsuario
     ];
 
