@@ -44,7 +44,7 @@ if (!isset($_SESSION['email'], $_SESSION['code'], $_SESSION['user_type'])) {
             ?>
         </div>
 
-        <form action="/login" method="post" id="form-enter-code">
+        <form action="/enter-code" method="post" id="form-enter-code">
             <div id="code-box">
                 <input type="text" maxlength="6" placeholder="" id="codigo" name="codigo" required>
             </div>

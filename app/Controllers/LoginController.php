@@ -1,16 +1,15 @@
 <?php
 namespace App\Controllers;
 
-use App\Core\View;
+use App\Core\Controller;
 use App\Core\Request;
 use App\Services\AuthService;
 use App\Services\EmailService;
-use App\Services\Recaptcha;
 use App\Models\UserModel;
 use App\Services\RecaptchaService;
 use Exception;
 
-class LoginController
+class LoginController extends Controller
 {
     public function index(?Request $request = null, array $data = []): void
     {
@@ -18,19 +17,21 @@ class LoginController
 
         if($auth === 'off')
         {
-            $data['error'] = 'Você precisa estar autenticado.';
+            $data['error'] = 'Usuário não logado';
         }
-        View::render('login.index', $data);
+        $this->render('login.index', $data);
     }
 
     public function enterCode(array $data = []): void
     {
-        View::render('login.enter_code', $data ?? null);
+        $this->render('login.enter_code', $data);
     }
 
     public function login(Request $request): void
     {
         try {
+            $captcha = $request->post('g-recaptcha-response') ?? null;
+
             $email = $request->post('email');
             $pass = $request->post('senha');
 
@@ -43,7 +44,7 @@ class LoginController
                 return;
             }
 
-            if(!(new RecaptchaService())->validateCaptcha($request->post('g-recaptcha-response')))
+            if(!(new RecaptchaService())->validateCaptcha($captcha))
             {
                 $this->index(null, ['error' => 'Necessário a validação do reCAPTCHA.']);
                 return;
@@ -69,12 +70,18 @@ class LoginController
                 throw new Exception("Erro ao salvar code na session. ");
             }
 
-            header("Location: /enter-code");
+            self::redirect('/enter-code');
         } catch (Exception $e) {
             error_log("Erro na função login no LoginController: " . $e->getMessage());
             $this->index(null, ['error' => 'Erro interno. Tente novamente.']);
         }
         
+    }
+
+    public function logout(): void
+    {
+        session_destroy();
+        self::redirect('/login');
     }
 
     public function validateEmailCode(Request $request): void
@@ -86,10 +93,37 @@ class LoginController
                 $this->enterCode(['error' => 'Código inválido, verifique o e-mail digitado.']);
             }
 
-            header("Location: /home/{_SESSION['user_type']}/{$_SESSION['name']}");
+            unset($_SESSION['code']);
+            self::redirect("/home/{$_SESSION['user_type']}");
         } catch (Exception $e) {
             error_log("Erro na função validateEmailCode no LoginController: " . $e->getMessage());
             $this->enterCode(['error' => 'Erro interno. Tente novamente.']);
+        }
+    }
+
+    public function redirectHome(int $user_type): void
+    {
+        if(!$user_type)
+        {
+            self::redirect('/login');
+        }
+
+        if(!((new AuthService())->validateLogged(['name', 'email', 'user_type'])))
+        {
+            $this->index(null, ['error' => 'Usuário não logado']);
+        }
+
+        switch ($user_type) {
+            case 1:
+                self::redirect('/home');
+                break;
+            case 2:
+                self::redirect('/admin');
+                break;
+                
+            default:
+                self::redirect('/login');
+                break;
         }
     }
 }

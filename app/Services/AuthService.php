@@ -25,4 +25,22 @@ class AuthService
         }
         
     }
+
+    public function validateLogged(array $data): bool
+    {
+        try {
+            foreach($data as $key)
+            {
+                if(!isset($_SESSION[$key]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        } catch (Exception $e) {
+            error_log("Erro na função validateLogged: " . $e->getMessage());
+            return false;
+        }
+    }
 }

@@ -14,6 +14,11 @@ class RecaptchaService
     public function validateCaptcha($captcha): bool
     {
         try {
+            if(!$captcha)
+            {
+                return false;
+            }
+            
             $url = $this->url . "secret=" . $this->secretKey . "&response=" . $captcha;
             $response = file_get_contents($url);
             $result = json_decode($response, true);
@@ -23,7 +28,7 @@ class RecaptchaService
 
             return true;
         } catch (\Exception $e) {
-            error_log("Erro do Exception :" . $e->getMessage());
+            error_log("Erro na função validateCaptcha :" . $e->getMessage());
             return false;
         }
     }
