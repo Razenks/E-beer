@@ -9,8 +9,7 @@ services:
     volumes:
       # Em um cenário de produção, você poderia montar volumes apenas para dados persistentes
       # como uploads ou logs, se não quiser que fiquem apenas no sistema de arquivos do container.
-      - ./storage:/var/www/html/storage # Para persistir logs e dados de storage no host
-      # Nenhum volume de código fonte aqui. Tudo vem da imagem.
+      - .:/var/www/html
     env_file:
       - .env
     restart: unless-stopped
