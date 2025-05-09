@@ -1,10 +1,16 @@
 services:
-    app:
-        build: .
-        container_name: e-beer
-        ports:
-            - "80:80"
-        volumes:
-            - .:/var/www/html
-        env_file:
-            - .env
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: e-beer
+    ports:
+      - "80:80" # Host:Container
+    volumes:
+      # Em um cenário de produção, você poderia montar volumes apenas para dados persistentes
+      # como uploads ou logs, se não quiser que fiquem apenas no sistema de arquivos do container.
+      - ./storage:/var/www/html/storage # Para persistir logs e dados de storage no host
+      # Nenhum volume de código fonte aqui. Tudo vem da imagem.
+    env_file:
+      - .env
+    restart: unless-stopped

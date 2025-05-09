@@ -1,20 +1,20 @@
 <?php
 namespace App\Models;
 
-use App\Core\Database;
+use App\Core\Model;
 use Exception;
 use PDO;
 
-class UserModel
+class UserModel extends Model
 {
-    private PDO $db;
+    protected static string $table = 'usuario';
     private string $name;
     private string $email;
     private int $tipo_usuario;
 
     public function __construct()
     {
-        $this->db = (new Database())->connect();
+        parent::__construct();
     }
 
     public function getName(): ?string

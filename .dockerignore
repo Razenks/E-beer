@@ -1,4 +1,13 @@
+# .dockerignore
 .git
-*.log
-*.env
 .vscode
+.idea
+node_modules
+npm-debug.log
+*.log
+storage/logs/*.log
+vendor/
+
+# Arquivos específicos do seu SO ou IDE
+.DS_Store
+Thumbs.db
