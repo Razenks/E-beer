@@ -7,18 +7,19 @@ use App\Services\AuthService;
 use App\Services\EmailService;
 use App\Models\UserModel;
 use App\Services\RecaptchaService;
+use App\Services\JwtService;
 use Exception;
 
 class LoginController extends Controller
 {
     public function index(?Request $request = null, array $data = []): void
     {
-        $auth = $request?->get('auth');
-
-        if($auth === 'off')
+        if ($request?->get('error')) 
         {
-            $data['error'] = 'Usuário não logado';
+            $data['error'] = $request->get('error');
         }
+
+        $this->logout();
         $this->render('login.index', $data);
     }
 
@@ -35,18 +36,18 @@ class LoginController extends Controller
             $email = $request->post('email');
             $pass = $request->post('senha');
 
+            if(!(new RecaptchaService())->validateCaptcha($captcha))
+            {
+                $this->index(null, ['error' => 'Necessário a validação do reCAPTCHA.']);
+                return;
+            }
+
             $userModel = new UserModel();
             $user = $userModel->findByEmail($email);
 
             if(!(new AuthService())->validateUser($user, $pass))
             {
                 $this->index(null, ['error' => 'Usuário ou Senha incorretos.']);
-                return;
-            }
-
-            if(!(new RecaptchaService())->validateCaptcha($captcha))
-            {
-                $this->index(null, ['error' => 'Necessário a validação do reCAPTCHA.']);
                 return;
             }
 
@@ -78,37 +79,42 @@ class LoginController extends Controller
         
     }
 
-    public function logout(): void
+    private function logout(): void
     {
+        unset($_SESSION['jwt']);
         session_destroy();
-        self::redirect('/login');
     }
 
     public function validateEmailCode(Request $request): void
     {
         try {
-            $code = $request->post('codigo') ?? '';
-            if($code != $_SESSION['code'])
+            if(!isset($_SESSION['email'], $_SESSION['code'], $_SESSION['user_type']))
+            {
+                $this->index();
+            }
+            if($request->post('codigo') ?? '' != $_SESSION['code'])
             {
                 $this->enterCode(['error' => 'Código inválido, verifique o e-mail digitado.']);
             }
 
             unset($_SESSION['code']);
+            $_SESSION['jwt'] = (new JwtService())->generateToken(
+                [
+                    "name" => $_SESSION['name'],
+                    "email" => $_SESSION['email'],
+                    "user_type" => $_SESSION['user_type']
+                ]
+            );
             self::redirect("/home/{$_SESSION['user_type']}");
         } catch (Exception $e) {
             error_log("Erro na função validateEmailCode no LoginController: " . $e->getMessage());
-            $this->enterCode(['error' => 'Erro interno. Tente novamente.']);
+            $this->index(null, ['error' => 'Erro interno. Tente novamente.']);
         }
     }
 
     public function redirectHome(int $user_type): void
     {
         if(!$user_type)
-        {
-            self::redirect('/login');
-        }
-
-        if(!((new AuthService())->validateLogged(['name', 'email', 'user_type'])))
         {
             $this->index(null, ['error' => 'Usuário não logado']);
         }
@@ -122,7 +128,7 @@ class LoginController extends Controller
                 break;
                 
             default:
-                self::redirect('/login');
+                $this->index(null, ['error' => 'Usuário não logado']);
                 break;
         }
     }

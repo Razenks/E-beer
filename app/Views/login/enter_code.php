@@ -1,14 +1,3 @@
-<?php
-
-if (!isset($_SESSION['email'], $_SESSION['code'], $_SESSION['user_type'])) {
-    header("Location: /login?auth=off");
-    exit();
-}
-// Verifica se há mensagem de sucesso ou erro
-// $msgSucessoCode = isset($_GET['msgSucesso']) ? $_GET['msgSucesso'] : '';
-// $msgErroCode = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -55,10 +44,10 @@ if (!isset($_SESSION['email'], $_SESSION['code'], $_SESSION['user_type'])) {
       const inputCode = document.getElementById('codigo');
 
       inputCode.addEventListener('input', function () {
-        // Remove tudo que n�o for n�mero
+        // Remove tudo que no for nmero
         this.value = this.value.replace(/\D/g, '');
 
-        // Garante que n�o passe de 6 d�gitos (extra, j� que tem maxlength no HTML)
+        // Garante que no passe de 6 ditos (extra, j que tem maxlength no HTML)
         if (this.value.length > 6) {
           this.value = this.value.slice(0, 6);
         }

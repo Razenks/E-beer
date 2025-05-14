@@ -9,7 +9,13 @@ services:
     volumes:
       # Em um cenário de produção, você poderia montar volumes apenas para dados persistentes
       # como uploads ou logs, se não quiser que fiquem apenas no sistema de arquivos do container.
-      - .:/var/www/html
+      - ./app:/var/www/html/app
+      - ./public:/var/www/html/public
+      - ./config:/var/www/html/config
+      - ./storage:/var/www/html/storage
+      - ./routes:/var/www/html/routes
+      - ./composer.json:/var/www/html/composer.json
+      - ./composer.lock:/var/www/html/composer.lock
     env_file:
       - .env
     restart: unless-stopped

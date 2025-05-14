@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
-    <link rel="stylesheet" href="../css/main_admin.css">
-    <link rel="stylesheet" href="../css/all.css">
-    <link rel="stylesheet" href="../css/acessibilidade.css">
-    <script src="../js/all.js"></script>
-    <script src="../js/acessibilidade.js"></script>
+    <link rel="stylesheet" href="/assets/css/main_admin.css">
+    <link rel="stylesheet" href="/assets/css/all.css">
+    <link rel="stylesheet" href="/assets/css/acessibilidade.css">
+    <script src="/assets/js/all.js"></script>
+    <script src="/assets/js/acessibilidade.js"></script>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
 </head>
@@ -49,7 +49,7 @@
                 <img src="../assets/icons8-male-user-96.png" alt="" style="width: 50px; height: 50px;">
                 <div id="name-account">
                     <!-- Exibe o nome do usuário logado obtido da sessão -->
-                    <p>Olá, <?php echo $_SESSION['nome']; ?></p>
+                    <p>Olá, <?php echo $_SESSION['name']; ?></p>
                     <!-- Botão para acessar a conta do usuário -->
                     <button id="account">Conta</button>
                 </div>

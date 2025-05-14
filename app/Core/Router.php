@@ -8,19 +8,23 @@ class Router
     protected array $routes = [];
 
     // Função para criar uma rota get
-    public function get(string $uri, callable|array $action): void
+    public function get(string $uri, callable|array $action, ?array $middleware = null): void
     {
-        $this->addRoute('GET', $uri, $action);
+        $this->addRoute('GET', $uri, $action, $middleware);
     }
 
-    public function post(string $uri, callable|array $action): void
+    public function post(string $uri, callable|array $action, ?array $middleware = null): void
     {
-        $this->addRoute('POST', $uri, $action);
+        $this->addRoute('POST', $uri, $action, $middleware);
     }
 
-    private function addRoute(string $method, string $uri, callable|array $action): void
+    private function addRoute(string $method, string $uri, callable|array $action, ?array $middleware = null): void
     {
-        $this->routes[$method][] = ['uri' => $uri, 'action' => $action];
+        $this->routes[$method][] = [
+            'uri' => $uri,
+            'action' => $action,
+            'middleware' => $middleware
+        ];
     }
 
     // Função para processar a requisição e chamar a rota correta (Separar responsabilidades futuramente)
@@ -35,6 +39,27 @@ class Router
                 $pattern = "#^" . preg_replace('#\{[\w]+\}#', '([\w-]+)', trim($route['uri'], '/')) . "$#";
                 if(preg_match($pattern, $uri, $matches))
                 {
+                    $middleware = $route['middleware'] ?? null;
+                    if($middleware)
+                    {
+                        if(is_array($middleware) && count($middleware) === 2)
+                        {
+                            $middlewareClass = "App\\Middleware\\{$middleware[0]}";
+                            $middlewareMethod = $middleware[1];
+                            if(class_exists($middlewareClass))
+                            {
+                                $middlewareInstance = new $middlewareClass();
+                                if(method_exists($middlewareInstance, $middlewareMethod))
+                                {
+                                    $middlewareInstance->$middlewareMethod();
+                                } else 
+                                {
+                                    throw new Exception("Método do middleware '{$middlewareMethod}' não encontrado");
+                                }
+                            }
+                        }
+                    }
+
                     array_shift($matches);
                     $action = $route['action'];
                     if(is_callable($action)) 

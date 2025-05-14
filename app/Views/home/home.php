@@ -69,8 +69,8 @@
         <button id="change-data" class="change-data">Alterar meus dados</button>
 
         <button id="button-quit">
-            <a href="/logout">
-                <div id="img-quit"><img src="../assets/icons8-desligar-52 (1).png" alt=""></div>
+            <a href="/login">
+                <div id="img-quit"><img src="/assets/img/icons8-desligar-52 (1).png" alt=""></div>
                 <div>Sair</div>
             </a>
         </button>
