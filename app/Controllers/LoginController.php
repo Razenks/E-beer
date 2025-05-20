@@ -62,7 +62,7 @@ class LoginController extends Controller
 
             $_SESSION['name'] = $userModel->getName();
             $_SESSION['email'] = $userModel->getEmail() ?? $email;
-            $_SESSION['user_type'] = $userModel->getTipoUsuario();
+            $_SESSION['user_type'] = $userModel->getUserType();
             $_SESSION['code'] = (new EmailService())->sendEmail($email, $subject, $body);
 
             if(empty($_SESSION['code']))

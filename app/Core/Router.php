@@ -1,6 +1,7 @@
 <?php
 namespace App\Core;
 
+use App\Controllers\ErrorController;
 use Exception;
 
 class Router 
@@ -33,7 +34,12 @@ class Router
         try {
             $request = new Request();
 
-            $uri = $request->uri() ?? '/';
+            // Bloqueio de rotas
+            if($this->validateBlockedRoutes($uri)) 
+            {
+                (new ErrorController())->index(['route' => $uri]);
+                return;
+            }
             foreach($this->routes[$method] ?? [] as $route)
             {
                 $pattern = "#^" . preg_replace('#\{[\w]+\}#', '([\w-]+)', trim($route['uri'], '/')) . "$#";
@@ -112,8 +118,8 @@ class Router
                     throw new Exception("Tipo de action inválido.");
                 }
             }
-            http_response_code(404);
-            echo "404 - Not Found";
+
+            (new ErrorController())->index(['route' => $uri]);
         } catch (Exception $e) {
             http_response_code(500);
             // echo "Erro interno, tente novamente mais tarde.";
@@ -121,6 +127,17 @@ class Router
             error_log('Erro na função dispatch: '.$e->getMessage());
         }
         
+    }
+
+    private function getBlockedRoutes(): array
+    {
+        return ['assets'];
+    }
+
+    private function validateBlockedRoutes(string $url) : bool
+    {
+        $first = explode('/', $url)[0];
+        return in_array($first, $this->getBlockedRoutes());
     }
 }
 

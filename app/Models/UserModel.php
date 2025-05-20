@@ -10,7 +10,7 @@ class UserModel extends Model
     protected static string $table = 'usuario';
     private string $name;
     private string $email;
-    private int $tipo_usuario;
+    private int $user_type;
 
     public function __construct()
     {
@@ -37,14 +37,14 @@ class UserModel extends Model
         $this->email = $email;
     }
 
-    public function getTipoUsuario(): ?int
+    public function getUserType(): ?int
     {
-        return $this->tipo_usuario;
+        return $this->user_type;
     }
 
-    public function setTipoUsuario(int $tipo_usuario): void
+    public function setUserType(int $user_type): void
     {
-        $this->tipo_usuario = $tipo_usuario;
+        $this->user_type = $user_type;
     }
 
     public function findByEmail(string $email): array|bool
@@ -58,7 +58,7 @@ class UserModel extends Model
             {
                 $this->setName($result['nome']);
                 $this->setEmail($result['email']);
-                $this->setTipoUsuario($result['tipo_usuario']);
+                $this->setUserType($result['tipo_usuario']);
             }
 
             return $result;

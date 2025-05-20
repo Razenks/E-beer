@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# Rota todas as requisições para index.php, exceto as de arquivos existentes
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]

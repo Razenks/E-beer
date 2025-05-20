@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-beer</title>
-    <link rel="stylesheet" href="/assets/css/main_logado.css">
-    <link rel="stylesheet" href="/assets/css/all.css">
-    <link rel="stylesheet" href="/assets/css/acessibilidade.css">
+    <link rel="stylesheet" href="assets/css/main_logado.css">
+    <link rel="stylesheet" href="assets/css/all.css">
+    <link rel="stylesheet" href="assets/css/acessibilidade.css">
     <script src="/assets/js/acessibilidade.js"></script>
     <script src="/assets/js/main-novo.js"></script>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
