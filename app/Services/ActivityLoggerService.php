@@ -7,7 +7,8 @@ class ActivityLoggerService
 
     public function __construct()
     {
-        $this->logPath = __DIR__ . "/../../storage/logs/activiry.log";
+        $this->logPath = __DIR__ . "/../../storage/logs/activity.log";
+
 
         if(!file_exists(dirname($this->logPath)))
         {

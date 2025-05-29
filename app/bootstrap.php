@@ -5,6 +5,7 @@ session_start();
 // Carrega o autoloader do Composer
 require_once __DIR__ . '/../vendor/autoload.php';
 
+
 // Carrega variáveis de ambiente
 $dotenvPath = __DIR__ . '/../';
 if (file_exists($dotenvPath . '.env')) {
