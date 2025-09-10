@@ -15,7 +15,7 @@
         <img src="/assets/img/logo_ebeer.png" alt="">
     </header>
     <main>
-        <h1>CODIGO</h1>
+        <h1>CÓDIGO</h1>
 
         <div class="success-container">
             <?php
@@ -33,7 +33,7 @@
             ?>
         </div>
 
-        <form action="/enter-code" method="post" id="form-enter-code">
+        <form action="/api/validate-code" method="post" id="form-enter-code">
             <div id="code-box">
                 <input type="text" maxlength="6" placeholder="" id="codigo" name="codigo" required>
             </div>

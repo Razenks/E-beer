@@ -1,46 +1,36 @@
 <?php
 namespace App\Services;
 
+use App\Models\User;
+use App\Repository\UserRepository;
 use Exception;
 
-class AuthService
-{
-    public function validateUser(array|bool $user, string $pass): bool
-    {
-        try {
-            if(!$user)
-            {
-                return false;
-            }
-            
-            if(!password_verify($pass, $user['senha']))
-            {
-                return false;
-            }
-
-            return true;
-        } catch (Exception $e) {
-            error_log("Erro na função validateUser: " . $e->getMessage());
-            return false;
-        }
-        
+class AuthService {
+    private readonly UserRepository $user_repository;
+    
+    public function __construct() {
+        $this->user_repository = new UserRepository();
     }
 
-    public function validateLogged(array $data): bool
-    {
+    public function validateUser(string $email, string $pass): ?User {
         try {
-            foreach($data as $key)
-            {
-                if(!isset($_SESSION[$key]))
-                {
-                    return false;
-                }
+            if(!$email || !$pass) {
+                return null;
             }
 
-            return true;
+            $user = $this->user_repository->getUserByEmail($email);
+            if (!$user) {
+                return null;
+            }
+            
+            if(!password_verify($pass, $user->getPass())) {
+                return null;
+            }
+
+            return $user;
         } catch (Exception $e) {
-            error_log("Erro na função validateLogged: " . $e->getMessage());
-            return false;
-        }
+            error_log("Erro na função validateUser: " . $e->getMessage());
+            return null;
+        }   
     }
 }

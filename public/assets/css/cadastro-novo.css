@@ -227,3 +227,9 @@ input:focus {
     display: block; 
     color: red;
 }
+
+#captcha-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}

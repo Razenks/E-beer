@@ -3,57 +3,53 @@ namespace App\Middleware;
 
 use App\Services\JwtService;
 
-class AuthMiddleware
-{
+class AuthMiddleware {
 
-    private string $jwt;
+    private string $email;
+    private string $name;
     private int $user_type;
+    private string $jwt;
 
-    public function __construct()
-    {
-        $this->jwt = $_SESSION['jwt'] ?? false;
+    public function __construct() {
+        $this->email = $_SESSION['email'] ?? false;
+        $this->name = $_SESSION['name'] ?? false;
         $this->user_type = $_SESSION['user_type'] ?? false;
+        $this->jwt = $_SESSION['jwt'] ?? false;
     }
     
-    public function validateLoggedAdmin(): void
-    {
-        $this->validateLogged();
-        if($this->user_type != 2)
-        {
-            $this->redirectToLogin("Usuário não permitido");
+    public function isValidatedLoggedAdmin(): array {
+        [$isValidatedLogged, $errorMessage] = $this->isValidatedLogged();
+        if (!$isValidatedLogged && $errorMessage !== null) {
+            return [false, $errorMessage ?? "Usuário não logado."];
         }
+        if($this->user_type != 2) {
+            return [false, "Usuário não permitido"];
+        }
+        return [true, null];
     }
 
-    public function validateLogged(): void
-    {
-        if(!$this->user_type && !$this->jwt)
-        {
-            $this->redirectToLogin("Usuário não logado");
+    public function isValidatedLogged(): array {
+        $isValidatedSession = $this->isValidatedSession();
+        if(!$isValidatedSession[0] || !$this->jwt) {
+            return [false, "Usuário não logado."];
         }
-        
+
         $validation = $this->validateToken();
         if(!$validation['success'])
         {
-            $this->redirectToLogin($validation['message'] ?? "Sessão expirada");
+            return [false, $validation['message'] ?? "Sessão expirada"];
         }
+        return [true, null];
     }
 
-    private function validateToken(): array
-    {
+    private function validateToken(): array {
         return (new JwtService())->validateToken($this->jwt);
     }
 
-    public function validateSession(): void
-    {
-        if(!isset($_SESSION['email'], $_SESSION['name'], $_SESSION['user_type']))
-        {
-            $this->redirectToLogin();
+    public function isValidatedSession(): array {
+        if(!$this->email || !$this->name || !$this->user_type) {
+            return [false, "Usuário sem sessão ou expirada."];
         }
-    }
-
-    private function redirectToLogin(?string $message = null): void
-    {
-        $message ? header("Location: /login?error={$message}") : header("Location: /login");
-        exit;
+        return [true, null];
     }
 }

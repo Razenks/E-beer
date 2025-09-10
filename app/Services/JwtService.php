@@ -17,13 +17,13 @@ class JwtService
         static::$key = $_ENV['JWT_SECRET'];
     }
 
-    public function generateToken(array $data): string
+    public function generateToken(array $data, ?int $exp = 600): string
     {
         $payload = [
             'iss' => 'http://localhost',
             'aud' => 'http://localhost',
             'iat' => time(),
-            'exp' => time() + 60,
+            'exp' => time() + $exp,
             'dados' => $data
         ];
 

@@ -11,7 +11,7 @@ class RecaptchaService
         $this->secretKey = $_ENV['API_KEY_RECAPTCHA'];
     }
 
-    public function validateCaptcha($captcha): bool
+    public function isCaptchaValid($captcha): bool
     {
         try {
             if(!$captcha)

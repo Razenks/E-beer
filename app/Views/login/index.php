@@ -1,15 +1,3 @@
-<?php
-// login.php
-
-// Inicie a sessão se necessário
-// session_start();
-
-// Verifica se há mensagem de sucesso ou erro
-$msgSucessoCadastro = isset($_GET['msgSucesso']) ? $_GET['msgSucesso'] : '';
-$msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -34,8 +22,8 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
 
         <div class="success-container">
             <?php
-            if (!empty($msgSucessoCadastro)) {
-                echo '<p class="success-msg">' . htmlspecialchars($msgSucessoCadastro) . '</p>';
+            if (isset($success)) {
+                echo '<p class="sucesso-msg">' . $success . '</p>';
             }
             ?>
         </div>
@@ -48,7 +36,7 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
             ?>
         </div>
 
-        <form action="/login" method="post" id="form-login">
+        <form action="/api/login" method="post" id="form-login">
             <div id="email-box">
                 <label for="email">E-mail</label>
                 <input type="email" placeholder="" id="email" name="email" required>
@@ -84,7 +72,7 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
 
             <button type="submit" id="submit-btn">ENTRAR</button>
         </form>
-        <button id="sign-up" type="submit"><a href="./pages/cadastro.php">Cadastrar</a></button>
+        <button id="sign-up" type="submit"><a href="/register">Cadastrar</a></button>
         <br>
         <button id="forgot-password">Esqueceu a senha?</button>
     </main>

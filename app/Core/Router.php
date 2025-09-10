@@ -2,6 +2,7 @@
 namespace App\Core;
 
 use App\Controllers\ErrorController;
+use App\Controllers\UserController;
 use Exception;
 
 class Router 
@@ -35,14 +36,14 @@ class Router
             $request = new Request();
 
             // Bloqueio de rotas
-            if($this->validateBlockedRoutes($uri)) 
+            if($this->isValidatedBlockedRoutes($uri)) 
             {
                 (new ErrorController())->index(['route' => $uri]);
                 return;
             }
             foreach($this->routes[$method] ?? [] as $route)
             {
-                $pattern = "#^" . preg_replace('#\{[\w]+\}#', '([\w-]+)', trim($route['uri'], '/')) . "$#";
+                $pattern = "#^" . preg_replace('#\{[\w]+\}#', '([^/]+)', trim($route['uri'], '/')) . "$#";
                 if(preg_match($pattern, $uri, $matches))
                 {
                     $middleware = $route['middleware'] ?? null;
@@ -57,7 +58,11 @@ class Router
                                 $middlewareInstance = new $middlewareClass();
                                 if(method_exists($middlewareInstance, $middlewareMethod))
                                 {
-                                    $middlewareInstance->$middlewareMethod();
+                                    [$isValidatedUser, $errorMessage] = $middlewareInstance->$middlewareMethod();
+                                    if (!$isValidatedUser && $errorMessage !== null) {
+                                        (new UserController())->index(null, ['error' => $errorMessage ?? "Usuário não logado."]);
+                                        return;
+                                    }
                                 } else 
                                 {
                                     throw new Exception("Método do middleware '{$middlewareMethod}' não encontrado");
@@ -134,7 +139,7 @@ class Router
         return ['assets'];
     }
 
-    private function validateBlockedRoutes(string $url) : bool
+    private function isValidatedBlockedRoutes(string $url) : bool
     {
         $first = explode('/', $url)[0];
         return in_array($first, $this->getBlockedRoutes());

@@ -67,32 +67,32 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 })
 
-document.getElementById('save-data-changes').addEventListener('click', () => {
-    const fileInput = document.getElementById('upload-photo');
-    const file = fileInput.files[0];
+// document.getElementById('save-data-changes').addEventListener('click', () => {
+//     const fileInput = document.getElementById('upload-photo');
+//     const file = fileInput.files[0];
 
-    if (!file) {
-        alert('Por favor, selecione uma imagem.');
-        return;
-    }
+//     if (!file) {
+//         alert('Por favor, selecione uma imagem.');
+//         return;
+//     }
 
-    const formData = new FormData();
-    formData.append('foto', file);
+//     const formData = new FormData();
+//     formData.append('foto', file);
 
-    fetch('../config/alterar_dados.php', {
-        method: 'POST',
-        body: formData,
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Atualiza a imagem de perfil
-                document.getElementById('profile-photo').src = data.foto;
-                alert('Foto alterada com sucesso!');
-            } else {
-                alert('Erro: ' + data.message);
-            }
-        })
-        .catch(error => console.error('Erro ao alterar a foto:', error));
-});
+//     fetch('../config/alterar_dados.php', {
+//         method: 'POST',
+//         body: formData,
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.success) {
+//                 // Atualiza a imagem de perfil
+//                 document.getElementById('profile-photo').src = data.foto;
+//                 alert('Foto alterada com sucesso!');
+//             } else {
+//                 alert('Erro: ' + data.message);
+//             }
+//         })
+//         .catch(error => console.error('Erro ao alterar a foto:', error));
+// });
 
