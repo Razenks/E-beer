@@ -4,6 +4,8 @@
 $msgSucessoCadastro = isset($_GET['msgSucesso']) ? $_GET['msgSucesso'] : '';
 $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
 $msgErroCadastroRepetidade = isset($_GET['msgErroCadastro']) ? $_GET['msgErroCadastro'] : '';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -32,8 +34,8 @@ $msgErroCadastroRepetidade = isset($_GET['msgErroCadastro']) ? $_GET['msgErroCad
         <div class="error-container">
             <?php
             // Verifica se uma mensagem de erro foi passada via GET e exibe na tela.
-            if (isset($_GET['msgErro'])) {
-                echo '<p class="error-msg">' . $_GET['msgErro'] . '</p>';
+            if (!empty($msgFailed)) {
+                echo '<p class="error-msg">' . htmlspecialchars($msgFailed) . '</p>';
             }
             ?>
         </div>
@@ -87,7 +89,7 @@ $msgErroCadastroRepetidade = isset($_GET['msgErroCadastro']) ? $_GET['msgErroCad
 
 
         <!-- Formulário de cadastro que envia os dados para "processa_usuario.php" via POST -->
-        <form action="../config/processa_usuario.php" method="post" id="form">
+        <form action="/index" method="post" id="form">
             <!-- Seção de entrada para nome e sobrenome -->
             <div id="nomes-box">
                 <div id="nome-box">

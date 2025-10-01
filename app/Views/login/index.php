@@ -34,8 +34,8 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
 
         <div class="success-container">
             <?php
-            if (!empty($msgSucessoCadastro)) {
-                echo '<p class="success-msg">' . htmlspecialchars($msgSucessoCadastro) . '</p>';
+            if (!empty($msgSuccess)) {
+                echo '<p class="success-msg">' . htmlspecialchars($msgSuccess) . '</p>';
             }
             ?>
         </div>
@@ -43,7 +43,7 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
         <div class="error-container">
             <?php
             if (isset($error)) {
-                echo '<p class="error-msg">' . $error . '</p>';
+                echo '<p class="error-msg">' . htmlspecialchars($error) . '</p>';
             }
             ?>
         </div>
@@ -84,7 +84,7 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
 
             <button type="submit" id="submit-btn">ENTRAR</button>
         </form>
-        <button id="sign-up" type="submit"><a href="./pages/cadastro.php">Cadastrar</a></button>
+        <button id="sign-up" type="submit"><a href="/cadastro">Cadastrar</a></button>
         <br>
         <button id="forgot-password">Esqueceu a senha?</button>
     </main>

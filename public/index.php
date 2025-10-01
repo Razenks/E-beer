@@ -7,3 +7,4 @@ $router = require_once __DIR__ . '/../routes/web.php';
 
 $app = new App($router);
 $app->run();
+

@@ -67,4 +67,23 @@ class UserModel extends Model
             return false;
         }
     }
+
+        
+    public function criar($dados): bool {
+        $sql = "INSERT INTO usuarios (nome, email, senha,cpf) VALUES (:nome, :email, :senha, :cpf)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':nome', $dados['nome']);
+        $stmt->bindValue(':email', $dados['email']);
+        $stmt->bindValue('cpf',$dados['cpf']);
+        $stmt->bindValue(':senha', password_hash($dados['senha'], PASSWORD_DEFAULT));
+        
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+        
+    }
 }

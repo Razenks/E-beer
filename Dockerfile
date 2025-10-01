@@ -1,5 +1,5 @@
     # Imagem oficial do PHP com Apache
-    FROM php:8.2-apache
+    FROM php:8.3-apache
 
     # Variáveis de ambiente para evitar prompts interativos
     ENV DEBIAN_FRONTEND=noninteractive

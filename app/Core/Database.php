@@ -18,7 +18,7 @@ class Database
         $this->db = $_ENV['PGDATABASE'];
         $this->user = $_ENV['PGUSER'];
         $this->pass = $_ENV['PGPASSWORD'];
-        $this->port = $_ENV['PGPORT'];
+        $this->port = $_ENV['PGPORT'] ?? '5432';
     }
 
     public function connect(): PDO

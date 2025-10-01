@@ -2,7 +2,7 @@
 // login.php
 
 // Inicie a sessão se necessário
-// session_start();
+session_start();
 
 // Verifica se há mensagem de sucesso ou erro
 $msgSucessoCadastro = isset($_GET['msgSucesso']) ? $_GET['msgSucesso'] : '';
