@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: e-beer-app
     container_name: e-beer
     ports:
       - "80:80" # Host:Container

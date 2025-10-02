@@ -1,0 +1,108 @@
+/* gerenciar_usuarios.css */
+
+/* Container principal */
+.usuarios-container {
+  max-width: 1000px;
+  margin: 100px auto 40px; /* espaço para header fixo */
+  padding: 20px;
+}
+
+.usuarios-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.usuarios-container .descricao {
+  text-align: center;
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 1rem;
+}
+
+/* Card */
+.usuarios-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
+/* Tabela */
+.usuarios-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.usuarios-tabela th,
+.usuarios-tabela td {
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.usuarios-tabela th {
+  background: #fafafa;
+  font-weight: 600;
+  color: #444;
+}
+
+.usuarios-tabela tr:hover td {
+  background: #fdf6e3;
+}
+
+/* Botões de ação */
+.btn-edit,
+.btn-delete {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-edit {
+  background: #1976d2;
+  color: #fff;
+  margin-right: 6px;
+}
+
+.btn-edit:hover {
+  background: #1565c0;
+  transform: scale(1.05);
+}
+
+.btn-delete {
+  background: #d32f2f;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background: #b71c1c;
+  transform: scale(1.05);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .usuarios-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .usuarios-tabela th,
+  .usuarios-tabela td {
+    padding: 10px 8px;
+    font-size: 0.85rem;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+}

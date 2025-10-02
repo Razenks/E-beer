@@ -1,0 +1,95 @@
+/* cadastrar_cerveja.css */
+
+/* Container centralizado */
+.cadastrar-cerveja-container {
+  max-width: 700px;
+  margin: 100px auto 40px; /* espaço para o header fixo */
+  padding: 30px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* Título e descrição */
+.cadastrar-cerveja-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.cadastrar-cerveja-container p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 1rem;
+}
+
+/* Formulário */
+.cadastrar-cerveja-form .form-group {
+  margin-bottom: 20px;
+}
+
+.cadastrar-cerveja-form label {
+  display: block;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+.cadastrar-cerveja-form input,
+.cadastrar-cerveja-form select,
+.cadastrar-cerveja-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #fafafa;
+  transition: all 0.3s ease;
+}
+
+.cadastrar-cerveja-form input:focus,
+.cadastrar-cerveja-form select:focus,
+.cadastrar-cerveja-form textarea:focus {
+  border-color: #ff9800;
+  background: #fff;
+  outline: none;
+}
+
+/* Textarea ajustado */
+.cadastrar-cerveja-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Botão */
+.cadastrar-cerveja-form .btn-submit {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: #fff;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.cadastrar-cerveja-form .btn-submit:hover {
+  background: linear-gradient(135deg, #f57c00, #e65100);
+  transform: scale(1.02);
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .cadastrar-cerveja-container {
+    padding: 20px;
+  }
+
+  .cadastrar-cerveja-container h2 {
+    font-size: 1.6rem;
+  }
+}

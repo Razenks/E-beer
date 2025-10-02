@@ -1,0 +1,81 @@
+.beerfeed-container {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.beerfeed-container h2 {
+  font-size: 2rem;
+  color: var(--brown);
+  margin-bottom: 10px;
+}
+
+.beerfeed-container .subtitle {
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  font-size: 1rem;
+}
+
+.question-card {
+  display: none; /* Esconde todos */
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30px 20px;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.question-card.active {
+  display: block; /* Mostra só o card atual */
+}
+
+.question-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: var(--brown);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.option-btn {
+  flex: 1;
+  background: var(--gold);
+  color: var(--brown);
+  border: none;
+  padding: 12px 18px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.option-btn:hover {
+  background: #e0a900;
+  transform: scale(1.05);
+}
+
+.navigation {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-prev, .btn-next, .btn-finish {
+  background: var(--brown);
+  color: var(--gold);
+  border: none;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-prev:hover, .btn-next:hover, .btn-finish:hover {
+  background: #1e1412;
+}

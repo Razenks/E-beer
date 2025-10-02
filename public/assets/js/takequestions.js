@@ -43,7 +43,6 @@ function mostrarPergunta(indice) {
 
 
 // Função para enviar respostas ao PHP
-// Função para enviar respostas ao PHP
 document.getElementById('submit-button').onclick = async function () {
     const save_answer = document.querySelector('.save-answer');
     const response = await fetch('../config/salvarRespostas.php', {

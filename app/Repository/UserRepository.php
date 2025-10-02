@@ -14,7 +14,7 @@ class UserRepository extends BaseRepository {
     }
 
     public function getUserByEmail(string $email): ?User {
-        if ($email) {
+        if (!$email) {
             return null;
         }
         try {

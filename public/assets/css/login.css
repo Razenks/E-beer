@@ -1,115 +1,94 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
-* {
-    margin: 0;
-    border: 0;
-    font-family: "Montserrat";
+/* ---------- Container principal ---------- */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;  /* tela inteira */
+  background: linear-gradient(135deg, #fff, var(--beige));
 }
 
-header {
-    height: 130px;
+/* ---------- Card de login ---------- */
+.login-card {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
 }
 
-header img {
-    display: flex;
-    height: 100px;
-    margin: auto;
-    padding-top: 15px;
+/* ---------- Logo ---------- */
+.logo-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.logo-login img {
+  width: 100px;
+  margin-bottom: 5px;
+}
+.logo-login span {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--gold);
 }
 
-main h1 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 40px;
-    color: #800000;
+/* ---------- Título ---------- */
+.login-card h2 {
+  font-size: 1.6rem;
+  color: var(--brown);
+  margin-bottom: 20px;
 }
 
-#email-box,
-#password-box {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    margin: auto;
-    flex-direction: column;
-    border: 1px solid #FFBF00;
-    padding: 10px;
-    width: 280px;
-    border-radius: 5px;
-    height: 25px;
+/* ---------- Formulário ---------- */
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+.form-group input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 6px rgba(255, 193, 7, 0.4);
+  outline: none;
 }
 
-#email-box input,
-#password-box input {
-    display: flex;
-    margin: auto;
-    width: 280px;
-    border: none;
-    font-size: 16px;
+/* ---------- Botão ---------- */
+.btn-primary {
+  background: var(--gold);
+  color: var(--brown);
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.3s;
+}
+.btn-primary:hover {
+  background: #e0a900;
 }
 
-#email-box input:hover {
-    border: none;
-
+/* ---------- Links ---------- */
+.login-links {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
 }
-
-#email-box label,
-#password-box label {
-    display: flex;
-    justify-content: first baseline;
-    font-size: 14px;
+.login-links a {
+  color: var(--brown);
+  text-decoration: none;
+  font-weight: 600;
 }
-
-#submit-btn {
-    display: flex;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    margin-top: 30px;
-    width: 280px;
-    height: 40px;
-    background-color: #FFBF00;
-    color: #800000;
-    border: none;
-    font-size: 15px;
-}
-
-#sign-up,
-#forgot-password {
-    display: flex;
-    margin: auto;
-    margin-top: 30px;
-    background-color: rgba(240, 248, 255, 0);
-    color: #800000;
-    border-style: none;
-    font-size: 15px;
-}
-
-#forgot-password {
-    margin-top: 2px;
-}
-
-a {
-    font-style: none;
-    list-style: none;
-    text-decoration: none;
-    color: #800000;
-}
-
-#view-password {
-    display: flex;
-}
-
-#n-view-button {
-    background-color: #80000000;
-}
-
-#view-button {
-    background-color: #80000000;
-}
-
-#captcha-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
+.login-links a:hover {
+  color: var(--gold);
 }

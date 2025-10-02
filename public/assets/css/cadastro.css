@@ -1,0 +1,108 @@
+/* ---------- Container principal ---------- */
+.cadastro-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* tela cheia */
+  background: linear-gradient(135deg, #fff, var(--beige));
+  padding: 20px;
+}
+
+/* ---------- Card de cadastro ---------- */
+.cadastro-card {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ---------- Logo ---------- */
+.logo-cadastro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.logo-cadastro img {
+  width: 100px;
+  margin-bottom: 5px;
+}
+.logo-cadastro span {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--gold);
+}
+
+/* ---------- Título ---------- */
+.cadastro-card h2 {
+  font-size: 1.6rem;
+  color: var(--brown);
+  margin-bottom: 20px;
+}
+
+/* ---------- Formulário ---------- */
+.form-row {
+  display: flex;
+  gap: 15px;            /* mais espaço entre nome e sobrenome */
+  margin-bottom: 18px;  /* mais espaço abaixo */
+}
+
+.form-group {
+  flex: 1;
+  margin-bottom: 18px;  /* adiciona espaçamento entre campos */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 6px rgba(255, 193, 7, 0.4);
+  outline: none;
+}
+
+/* ---------- Botão ---------- */
+.btn-primary {
+  background: var(--gold);
+  color: var(--brown);
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.3s;
+  margin-top: 15px;   /* dá espaço do último input */
+}
+
+.btn-primary:hover {
+  background: #e0a900;
+}
+
+/* ---------- Links ---------- */
+.cadastro-links {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.cadastro-links a {
+  color: var(--brown);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.cadastro-links a:hover {
+  color: var(--gold);
+}

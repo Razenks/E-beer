@@ -3,7 +3,7 @@
         'name' => 'joao/e-beer',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'f1d1fd61c84156cfe26503245ea83687f68643c8',
+        'reference' => '83b2daf4106fca44df42fdeed8d4a208c34bd08b',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'joao/e-beer' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'f1d1fd61c84156cfe26503245ea83687f68643c8',
+            'reference' => '83b2daf4106fca44df42fdeed8d4a208c34bd08b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

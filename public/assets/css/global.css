@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  --gold: #F5B700;
+  --brown: #2E1F1C;
+  --beige: #F7F3F0;
+  --text-dark: #333;
+  --text-muted: #666;
+  --radius: 12px;
+  --shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* ---------- Header ---------- */
+.header {
+  background: var(--brown);
+  color: var(--gold);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;   /* reduzido */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand img {
+  width: 100px;
+}
+.brand h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.nav a {
+  color: var(--gold);
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.nav a:hover {
+  color: #fff;
+}
+
+/* ---------- Hero Section ---------- */
+.hero {
+  background: linear-gradient(135deg, var(--gold), #FFD84D);
+  text-align: center;
+  padding: 35px 20px;   /* menor altura */
+  border-radius: var(--radius);
+  margin: 15px auto;
+  max-width: 1100px;
+}
+.hero h2 {
+  font-size: 1.6rem;   /* menor */
+  margin-bottom: 10px;
+  color: var(--brown);
+}
+.hero p {
+  color: var(--brown);
+  font-size: 0.95rem;
+  margin-bottom: 18px;
+}
+.btn {
+  display: inline-block;
+  background: var(--brown);
+  color: var(--gold);
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background: #1e1412;
+  transform: translateY(-2px);
+}
+
+/* ---------- Containers Globais ---------- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* ---------- Produtos em destaque (carrossel) ---------- */
+.produtos {
+  padding: 50px 20px;
+  margin: 30px auto;
+}
+
+.produtos h3 {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--brown);
+}
+
+.carousel-wrapper {
+  position: relative;
+}
+
+.carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+}
+.carousel::-webkit-scrollbar {
+  display: none; /* escondemos a barra */
+}
+
+.prod-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  min-width: 200px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+.prod-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+.prod-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+.prod-card h4 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.prod-card .btn-small {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--brown);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.prod-card .btn-small:hover {
+  background: #e0a900;
+}
+
+/* Botões laterais */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--gold);
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--brown);
+  box-shadow: var(--shadow);
+  transition: 0.3s;
+}
+.carousel-btn:hover {
+  background: #e0a900;
+}
+.carousel-btn.left {
+  left: -20px;
+}
+.carousel-btn.right {
+  right: -20px;
+}
+
+
+/* ---------- Como funciona ---------- */
+.como-funciona {
+  background: var(--beige);
+  border-radius: var(--radius);
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.como-funciona h3 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+.como-funciona p {
+  color: var(--text-muted);
+  max-width: 650px;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  background: var(--brown);
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 768px) {
+  .hero h2 {
+    font-size: 1.6rem;
+  }
+  .nav {
+    display: none; /* depois podemos criar menu hamburguer */
+  }
+  .carousel {
+    gap: 12px;
+  }
+}
+
+/* Header Admin - user info */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-info .user-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fbc02d; /* amarelo do e-Beer */
+}
+
+.user-info .logout {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  background: #d32f2f;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.user-info .logout:hover {
+  background: #b71c1c;
+}
