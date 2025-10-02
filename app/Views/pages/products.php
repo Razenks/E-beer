@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Produtos - e-Beer</title>
-  <link rel="stylesheet" href="/css/global.css">
-  <link rel="stylesheet" href="/css/produtos.css">
+  <link rel="stylesheet" href="../../../public/assets/css/global.css">
+  <link rel="stylesheet" href="../../../public/assets/css/produtos.css">
 </head>
 <body>
   <!-- Header -->
   <header class="header">
     <div class="brand">
-      <img src="/assets/logo_ebeer_2.png" alt="e-Beer Logo">
+      <img src="../../../public/assets/img/logo_ebeer_2.png" alt="e-Beer Logo">
     </div>
     <nav class="nav">
-      <a href="index.html" class="active">Home</a>
-      <a href="produtos.html">Produtos</a>
-      <a href="beerfeed.html">BeerFeed</a>
-      <a href="perfil.html">Perfil</a>
-      <a href="login.html">Sair</a>
+      <a href="../home/home.php" class="active">Home</a>
+      <a href="products.php">Produtos</a>
+      <a href="beerfeed.php">BeerFeed</a>
+      <a href="perfil.php">Perfil</a>
+      <a href="/login">Sair</a>
     </nav>
   </header>
 

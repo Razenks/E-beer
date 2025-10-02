@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Codigo</title>
-    <link rel="stylesheet" href="/assets/css/enter_code.css">
-    <link rel="stylesheet" href="/assets/css/all.css">
+    <link rel="stylesheet" href="../../../public/assets/css/enter_code.css">
+    <link rel="stylesheet" href="../../../public/assets/css/all.css">
     <script src="/assets/js/enter_code.js"></script>
 </head>
 <!---->
 <body>
     <header id="imagem-top">
-        <img src="/assets/img/logo_ebeer.png" alt="">
+        <img src="../../../public/assets/img/logo_ebeer.png" alt="">
     </header>
     <main>
         <h1>CÓDIGO</h1>

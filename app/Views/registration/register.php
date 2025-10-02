@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro - e-Beer</title>
-  <link rel="stylesheet" href="assets/css/global.css">
-  <link rel="stylesheet" href="assets/css/cadastro.css">
+  <link rel="stylesheet" href="../../../public/assets/css/global.css">
+  <link rel="stylesheet" href="../../../public/assets/css/cadastro.css">
   <script src="/assets/js/cadastro-novo.js"></script>
   <script src="/assets/js/all.js"></script>
   <!-- Script do reCAPTCHA -->
@@ -17,7 +17,7 @@
   <main class="cadastro-container">
     <div class="cadastro-card">
       <div class="logo-cadastro">
-        <img src="/assets/logo_ebeer_2.png" alt="Logo e-Beer">
+        <img src="../../../public/assets/img/logo_ebeer_2.png" alt="Logo e-Beer">
       </div>
 
       <h2>Cadastro</h2>

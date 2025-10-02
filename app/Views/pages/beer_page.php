@@ -70,17 +70,17 @@ if (!$cerveja) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalhes da Cerveja - e-Beer</title>
-  <link rel="stylesheet" href="assets/css/global.css">
-  <link rel="stylesheet" href="assets/css/cerveja.css">
+  <link rel="stylesheet" href="../../../public/assets/css/global.css">
+  <link rel="stylesheet" href="../../../public/assets/css/cerveja.css">
 </head>
 <body>
   <!-- Header -->
   <header class="header">
     <div class="brand">
-      <img src="/assets/logo_ebeer_2.png" alt="e-Beer Logo">
+      <img src="../../../public/assets/img/logo_ebeer_2.png" alt="e-Beer Logo">
     </div>
     <nav class="nav">
-      <a href="home.php">Home</a>
+      <a href="../home/home.php">Home</a>
       <a href="products.php">Produtos</a>
       <a href="beer_test.php">BeerFeed</a>
       <a href="perfil.php">Perfil</a>

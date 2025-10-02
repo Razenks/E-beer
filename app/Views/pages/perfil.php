@@ -4,20 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil - e-Beer</title>
-  <link rel="stylesheet" href="/css/global.css">
-  <link rel="stylesheet" href="/css/perfil.css">
+  <link rel="stylesheet" href="../../../public/assets/css/global.css">
+  <link rel="stylesheet" href="../../../public/assets/css/perfil.css">
 </head>
 <body>
   <!-- Header fixo -->
   <header class="header">
     <div class="brand">
-      <img src="/assets/logo_ebeer_2.png" alt="e-Beer Logo">
+      <img src="../../../public/assets/img/logo_ebeer_2.png" alt="e-Beer Logo">
     </div>
     <nav class="nav">
       <a href="../home/home.php" class="active">Home</a>
-      <a href="../pages/products.php">Produtos</a>
-      <a href="../pages/beer_test.php">BeerFeed</a>
-      <a href="./perfil.php">Perfil</a>
+      <a href="products.php">Produtos</a>
+      <a href="beer_test.php">BeerFeed</a>
+      <a href="perfil.php">Perfil</a>
       <a href="/login">Sair</a>
     </nav>
   </header>

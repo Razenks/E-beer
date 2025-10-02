@@ -47,8 +47,8 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerenciar Usuários - e-Beer</title>
-  <link rel="stylesheet" href="assets/css/global.css">
-  <link rel="stylesheet" href="assets/css/gerenciar_usuarios.css">
+  <link rel="stylesheet" href="../../../public/assets/css/global.css">
+  <link rel="stylesheet" href="../../../public/assets/css/gerenciar_usuarios.css">
   <script src="../js/all.js"></script>
   <script src="../js/acessibilidade.js"></script>
   <script src="../js/main-adm.js"></script>
@@ -62,7 +62,7 @@ $msgErroCadastro = isset($_GET['msgErro']) ? $_GET['msgErro'] : '';
   <!-- Header Admin -->
   <header class="header">
     <div class="brand">
-      <img src="/assets/logo_ebeer_2.png" alt="e-Beer Logo">
+      <img src="../../../public/assets/img/logo_ebeer_2.png" alt="e-Beer Logo">
     </div>
     <nav class="nav">
       <a href="../home/home.php" class="active">Home</a>

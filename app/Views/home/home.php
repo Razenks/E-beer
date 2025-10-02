@@ -5,14 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>e-Beer — Página Inicial</title>
-  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="../../../public/assets/css/global.css">
 </head>
 
 <body>
   <!-- Header -->
   <header class="header">
     <div class="brand">
-      <img src="/assets/logo_ebeer_2.png" alt="e-Beer Logo">
+      <img src="../../../public/assets/img/logo_ebeer_2.png" alt="e-Beer Logo">
     </div>
     <nav class="nav">
       <a href="home.php" class="active">Home</a>

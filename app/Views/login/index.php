@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - e-Beer</title>
-  <link rel="stylesheet" href="assets/css/global.css">
-  <link rel="stylesheet" href="asets/css/login.css">
-  <script src="/assets/js/all.js"></script>
-  <script src="/assets/js/login.js"></script>
+  <link rel="stylesheet" href="../../../public/assets/css/global.css">
+  <link rel="stylesheet" href="../../../public/assets/css/login.css">
+  <script src="../../../public/assets/js/all.js"></script>
+  <script src="../../../public/assets/js/login.js"></script>
   <!-- Script do reCAPTCHA -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
@@ -18,7 +18,7 @@
     <div class="login-card">
 
       <div class="logo-login">
-        <img src="/assets/logo_ebeer_2.png" alt="Logo e-Beer">
+        <img src="../../../public/assets/img/logo_ebeer_2.png" alt="Logo e-Beer">
       </div>
 
       <h2>Login</h2>
@@ -78,7 +78,7 @@
       </form>
 
       <div class="login-links">
-        <a href="/register">Cadastrar</a>
+        <a href="../registration/register.php">Cadastrar</a>
         <a href="#">Esqueceu a senha?</a>
       </div>
     </div>
