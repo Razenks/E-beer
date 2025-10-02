@@ -67,4 +67,18 @@ class UserService {
         unset($_SESSION['user_type']);
         session_destroy();
     }
+
+    public function activateUser(string $email): bool {
+        if (!$email) {
+            return false;
+        }
+        try {
+            $isActiveUser = $this->user_repository->activateUser($email);
+
+            return $isActiveUser;
+        } catch (Exception $e) {
+            error_log("Erro para ativar usuário: " . $e->getMessage());
+            return false;
+        }
+    }
 }

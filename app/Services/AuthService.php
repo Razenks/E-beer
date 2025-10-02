@@ -12,25 +12,20 @@ class AuthService {
         $this->user_repository = new UserRepository();
     }
 
-    public function validateUser(string $email, string $pass): ?User {
+    public function validateUserPassword(string $pass, string $passwordHash): bool {
         try {
-            if(!$email || !$pass) {
-                return null;
-            }
-
-            $user = $this->user_repository->getUserByEmail($email);
-            if (!$user) {
-                return null;
+            if (!$pass || !$passwordHash) {
+                return false;
             }
             
-            if(!password_verify($pass, $user->getPass())) {
-                return null;
+            if(!password_verify($pass, $passwordHash)) {
+                return false;
             }
 
-            return $user;
+            return true;
         } catch (Exception $e) {
-            error_log("Erro na função validateUser: " . $e->getMessage());
-            return null;
+            error_log("Erro ao validar senha do usuário: " . $e->getMessage());
+            return false;
         }   
     }
 }

@@ -14,7 +14,7 @@ class UserRepository extends BaseRepository {
     }
 
     public function getUserByEmail(string $email): ?User {
-        if ($email) {
+        if (!$email) {
             return null;
         }
         try {
@@ -67,6 +67,30 @@ class UserRepository extends BaseRepository {
 
         } catch (Exception $e) {
             error_log("Erro para criar usuário no banco: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function activateUser(string $email): bool {
+        if (!$email) {
+            return false;
+        }
+        try {
+            $stmt = $this->db->prepare("
+                UPDATE {$this->table}
+                SET validacao_email = :validacao
+                WHERE email = :email
+            ");
+
+            $stmt->bindValue(':validacao', true, PDO::PARAM_BOOL);
+            $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return true;
+
+        } catch (Exception $e) {
+            error_log("Erro para ativar usuário: " . $e->getMessage());
             return false;
         }
     }

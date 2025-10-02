@@ -9,7 +9,9 @@ use App\Services\EmailService;
 use App\Services\RecaptchaService;
 use App\Services\JwtService;
 use App\Services\UserService;
+use App\Core\View;
 use Exception;
+use PhpParser\Node\Expr\Throw_;
 
 class UserController extends Controller {
     private AuthService $auth_service;
@@ -30,35 +32,31 @@ class UserController extends Controller {
         $error = $request?->get('error');
         $success = $request?->get('success');
 
-        $data['error'] = $error ? $error : null;
-        $data['success'] = $success ? $success : null;
+        $data['error'] = $error;
+        $data['success'] = $success;
+        $data['title'] = 'E-beer - Login';
 
+        View::setLayout('auth');
         $this->logout();
-        $this->render('login.index', $data);
+        $this->render('pages.auth.login', $data);
     }
 
     public function getRegisterPage(?Request $request = null, array $data = []): void {
         $error = $request?->get('error');
         $success = $request?->get('success');
         
-        $data['error'] = $error ? $error : null;
-        $data['success'] = $success ? $success : null;
+        $data['error'] = $error;
+        $data['success'] = $success;
+        $data['title'] = 'E-beer - Cadastro';
 
-        $this->render('registration.register', $data);
+        View::setLayout('auth');
+        $this->render('pages.auth.register', $data);
     }
 
     public function getCodePage(array $data = []): void {
-        $this->render('login.enter_code', $data);
-    }
-
-    public function getFinalizeRegistrationPage(?Request $request = null, array $data = []): void {
-        $error = $request?->get('error');
-        $success = $request?->get('success');
-        
-        $data['error'] = $error ? $error : null;
-        $data['success'] = $success ? $success : null;
-
-        $this->render('registration.finalize-registration', $data);
+        View::setLayout('auth');
+        $data['title'] = 'E-beer - Código Email';
+        $this->render('pages.auth.enter_code', $data);
     }
 
     public function processLogin(Request $request): void {
@@ -68,16 +66,20 @@ class UserController extends Controller {
             $email = $request->post('email');
             $pass = $request->post('senha');
 
-            if(!$this->recaptcha_service->isCaptchaValid($captcha))
-            {
+            if(!$this->recaptcha_service->isCaptchaValid($captcha)) {
                 self::redirect('/login?error=Necessário a validação do reCAPTCHA.');
                 return;
             }
 
-            $user = $this->auth_service->validateUser($email, $pass);
-            if (!$user)
-            {
-                self::redirect('/login?error=Usuário ou senha incorretos.');
+            $user = $this->user_service->getUserByEmail($email);
+            if (!$user) {
+                self::redirect('/login?error=Usuário não cadastrado.');
+                return;
+            }
+
+            $isValidatedUser = $this->auth_service->validateUserPassword($pass, $user->getPass());
+            if (!$isValidatedUser) {
+                self::redirect('/login?error=Senha incorreta.');
                 return;
             }
 
@@ -97,14 +99,14 @@ class UserController extends Controller {
                 throw new Exception("Erro ao salvar code na session. ");
             }
 
-            // $_SESSION['code'] = $this->email_service->code;
+            $_SESSION['email-code'] = $this->email_service->code;
 
             $this->user_service->createUserSession([
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
                 'user_type' => $user->getUserType()
             ]);
-            self::redirect('/enter-code');
+            self::redirect('/login/digitar-codigo');
         } catch (Exception $e) {
             error_log("Erro na função login no UserController: " . $e->getMessage());
             self::redirect('/login?error=Erro interno. Tente novamente.');
@@ -119,11 +121,11 @@ class UserController extends Controller {
 
     public function validateEmailCode(Request $request): void {
         try {
-            if($this->email_service->isValidatedCode($request->post('codigo'))) {
-                self::redirect('/enter-code?error=Código inválido');
+            if($request->post('codigo') !== $_SESSION['email-code']) {
+                self::redirect('/login/digitar-codigo?error=Código inválido');
             }
 
-            // unset($_SESSION['code']);
+            unset($_SESSION['email-code']);
             $_SESSION['jwt'] = $this->jwt_service->generateToken(
                 [
                     "name" => $_SESSION['name'],
@@ -158,16 +160,23 @@ class UserController extends Controller {
         }
     }
 
-    public function startRegistration(Request $request): void {
+    public function processRegistration(Request $request): void {
         try {
             $captcha = $request->post('g-recaptcha-response') ?? null;
             $name = $request->post('nome');
             $last_name = $request->post('sobrenome');
             $email = $request->post('email');
             $cpf = preg_replace('/[^0-9]/', '', $request->post('cpf'));
+            $password = $request->post('senha');
+            $confirmPassword = $request->post('confirm-senha');
             $user_type = 1; // Tipo 1 para usuário comum
             $registration_date = date('Y-m-d H:i:s');
             
+            if ($password !== $confirmPassword) {
+                self::redirect('/register?error=Senhas não conferem.');
+                return;
+            }
+
             if(!$this->recaptcha_service->isCaptchaValid($captcha))
             {
                 self::redirect('/register?error=Necessário a validação do reCAPTCHA.');
@@ -183,34 +192,44 @@ class UserController extends Controller {
                 return;
             }
 
-            $data = [
-                'name' => $name,
-                'last_name' => $last_name,
-                'email' => $email,
-                'cpf' => $cpf,
-                'user_type' => $user_type,
-                'registration_date' => $registration_date
+            $user = [
+                ':name' => $name,
+                ':last_name' => $last_name,
+                ':email' => $email,
+                ':cpf' => $cpf,
+                ':pass' => password_hash($password, PASSWORD_DEFAULT),
+                ':user_type' => $user_type,
+                ':registration_date' => $registration_date
             ];
+
+            $is_created = $this->user_service->createUser($user);
+            if (!$is_created) {
+                self::redirect('/register?error=Erro ao criar usuário, tente novamente.');
+                return;
+            }
+
+            $data = [ 'email' => $email ];
+
             $token = $this->jwt_service->generateToken($data, 3600);
             $_SESSION['jwt'] = $token;
-            $link = "http://localhost/confirm-email/{$token}";
-            $subject = "Validar Conta";
+            $link = "http://localhost/api/ativar-email/{$token}";
+            $subject = "Ativar Conta";
             $body = '
                 Olá ' . $name . '. 
                 <br><br> 
-                Você acaba de se cadastrar na nossa plataforma e precisa validar sua conta clicando no link abaixo.
+                Você acaba de se cadastrar na nossa plataforma e precisa ativar sua conta clicando no link abaixo.
                 <br><br>
-                '.$link.'
+                link: '.$link.'
             ';
 
             $isSentEmail = $this->email_service->sendEmail($email, $subject, $body);
             if(!$isSentEmail)
             {
-                self::redirect('/login?error=Erro interno. Tente novamente.');
+                self::redirect('/register?error=Erro interno. Tente novamente.');
                 throw new Exception("Erro ao enviar link para o e-mail: {$email}.");
             }
 
-            self::redirect('/register?success=Para finalizar seu cadastro, acesse o link que enviamos no seu e-mail.');
+            self::redirect('/login/?success=Cadastro finalizado com sucesso! Ative sua conta acessando o link que enviamos no seu e-mail.');
         } catch (Exception $e) {
             error_log("Erro na função register no UserController: " . $e->getMessage());
             self::redirect('/register?error=Erro interno. Tente novamente.');
@@ -219,77 +238,37 @@ class UserController extends Controller {
         
     }
 
-    public function confirmEmail(string $token): void {
+    public function activateAccount(string $token): void {
         if (!$token) {
-            self::redirect('/register?error=Não foi possível finalizar o cadastro, tente novamente.');
+            self::redirect('/login?error=Não foi possível finalizar o cadastro, tente novamente.');
             return;
         }
 
         try {
             $decoded = $this->jwt_service->validateToken($token);
             if (!$decoded['success']) {
-                self::redirect('/register?error=Confirmação de e-mail expirou ou falhou, tente novamente.');
-                return;
-            }
-
-            $_SESSION['jwt'] = $token;
-
-            self::redirect('/finalize-registration');
-        } catch (Exception $e) {
-            error_log("Erro na função finalizeRegistration no UserController: " . $e->getMessage());
-            self::redirect('/register?error=Erro interno. Tente novamente.');
-            return;
-        }
-    }
-
-    public function finalizeRegistration(Request $request): void {
-        try {
-            $token = $_SESSION['jwt'] ?? null;
-            if (!$token) {
-                self::redirect('/register?error=Confirmação de e-mail inválido ou sessão expirada.');
-                return;
-            }
-
-            $decoded = $this->jwt_service->validateToken($token);
-            if (!$decoded['success']) {
-                self::redirect('/register?error=Confirmação de e-mail expirou ou falhou, tente novamente.');
-                return;
-            }
-
-            $password = $request->post('senha');
-            $confirmPassword = $request->post('confirm-senha');
-
-            if ($password !== $confirmPassword) {
-                self::redirect('/finalize-registration?error=Senhas não conferem.');
+                self::redirect('/login?error=Confirmação de e-mail expirou ou falhou, tente novamente.');
                 return;
             }
 
             $data = $decoded['data'];
-
-            $user = [
-                ':name' => $data['name'],
-                ':last_name' => $data['last_name'],
-                ':email' => $data['email'],
-                ':cpf' => $data['cpf'],
-                ':pass' => password_hash($password, PASSWORD_BCRYPT),
-                ':user_type' => $data['user_type'],
-                ':registration_date' => $data['registration_date']
-            ];
-
-            $is_created = $this->user_service->createUser($user);
-
-            if (!$is_created) {
-                self::redirect('/register?error=Erro ao criar usuário, tente novamente.');
+            $email = $data['email'];
+            $user = $this->user_service->getUserByEmail($email);
+            if (!$user) {
+                self::redirect('/login?error=E-mail não cadastrado.');
                 return;
             }
 
-            // Depois de criar, remove o token da sessão
-            unset($_SESSION['jwt']);
+            $isActiveUser = $this->user_service->activateUser($email);
+            if (!$isActiveUser) {
+                throw new Exception("Erro ao ativar usuário.");
+                return;
+            }
 
-            self::redirect('/login?success=Cadastro finalizado com sucesso, faça login!');
+            self::redirect('/login?success="Sua conta foi ativada. Faça login e aproveite!"');
         } catch (Exception $e) {
-            error_log("Erro na função finalizeRegistration no UserController: " . $e->getMessage());
-            self::redirect('/register?error=Erro interno. Tente novamente.');
+            error_log("Erro na função activateAccount no UserController: " . $e->getMessage());
+            self::redirect('/login?error=Erro interno. Tente novamente.');
             return;
         }
     }

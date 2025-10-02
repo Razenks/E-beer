@@ -1,0 +1,44 @@
+/* ---------- Header ---------- */
+.header {
+  background: var(--brown);
+  color: var(--gold);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;   /* reduzido */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand img {
+  width: 100px;
+}
+.brand h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.nav a {
+  color: var(--gold);
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.nav a:hover {
+  color: #fff;
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 768px) {
+  .nav {
+    display: none; /* depois podemos criar menu hamburguer */
+  }
+}
