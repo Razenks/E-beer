@@ -2,7 +2,7 @@
 namespace App\Repository;
 
 use App\Core\BaseRepository;
-use App\Models\User;
+use App\Models\UserModel;
 use PDO;
 use Exception;
 
@@ -13,7 +13,7 @@ class UserRepository extends BaseRepository {
         parent::__construct();
     }
 
-    public function getUserByEmail(string $email): ?User {
+    public function getUserByEmail(string $email): ?UserModel {
         if (!$email) {
             return null;
         }
@@ -25,7 +25,7 @@ class UserRepository extends BaseRepository {
             if (!$result) {
                 return null;
             }
-            $user = new User();
+            $user = new UserModel();
             $user->setName($result['nome']);
             $user->setEmail($email);
             $user->setPass($result['senha']);
@@ -38,10 +38,10 @@ class UserRepository extends BaseRepository {
         }
     }
 
-    public function isCreatedUser(string $email): ?bool {
+    public function isCreatedUser(string $email, string $cpf): ?bool {
         try {
-            $stmt = $this->db->prepare("SELECT COUNT(*) as total FROM {$this->table} WHERE email = ?");
-            $stmt->execute([$email]);
+            $stmt = $this->db->prepare("SELECT COUNT(*) as total FROM {$this->table} WHERE email = ? OR cpf = ?");
+            $stmt->execute([$email, $cpf]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return isset($result['total']) && $result['total'] > 0;

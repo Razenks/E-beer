@@ -5,7 +5,7 @@
   padding: 35px 20px;   /* menor altura */
   border-radius: var(--radius);
   margin: 15px auto;
-  max-width: 1100px;
+  width: 100%;
 }
 .hero h2 {
   font-size: 1.6rem;   /* menor */
@@ -32,13 +32,14 @@
   transform: translateY(-2px);
 }
 
-/* ---------- Produtos em destaque (carrossel) ---------- */
-.produtos {
+/* ---------- cervejas em destaque (carrossel) ---------- */
+.cervejas {
   padding: 50px 20px;
   margin: 30px auto;
+  width: 80%;
 }
 
-.produtos h3 {
+.cervejas h3 {
   font-size: 1.6rem;
   text-align: center;
   margin-bottom: 24px;
@@ -60,7 +61,7 @@
   display: none; /* escondemos a barra */
 }
 
-.prod-card {
+.cerv-card {
   background: #fff;
   border-radius: var(--radius);
   padding: 20px;
@@ -70,22 +71,22 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   flex-shrink: 0;
 }
-.prod-card:hover {
+.cerv-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
-.prod-card img {
+.cerv-card img {
   width: 100px;
   height: 100px;
   object-fit: contain;
   margin-bottom: 12px;
 }
-.prod-card h4 {
+.cerv-card h4 {
   margin-bottom: 10px;
   font-size: 1rem;
   font-weight: 600;
 }
-.prod-card .btn-small {
+.cerv-card .btn-small {
   display: inline-block;
   background: var(--gold);
   color: var(--brown);
@@ -96,8 +97,11 @@
   text-decoration: none;
   transition: 0.3s;
 }
-.prod-card .btn-small:hover {
+.cerv-card .btn-small:hover {
   background: #e0a900;
+}
+#empty-beers {
+  text-align: center;
 }
 
 /* Botões laterais */

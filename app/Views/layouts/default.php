@@ -8,16 +8,18 @@
     <link rel="stylesheet" href="/assets/css/layout_default.css">
     <link rel="stylesheet" href="/assets/css/header.css">
     <link rel="stylesheet" href="/assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/acessibilidade.css">
+    <link rel="stylesheet" href="/assets/css/all.css">
+    <script src="/assets/js/all.js"></script>
+    <script src="/assets/js/acessibilidade.js"></script>
 
     <?php Assets::renderStyles(); Assets::renderScripts(); ?>
 </head>
 <body>
-    
+    <?php require_once __DIR__ . '/../components/accessibility.php'; ?>
     <?php require_once __DIR__ . '/../components/header.php'; ?>
 
-    <main class="container">
-        <?php echo $content; ?>
-    </main>
+    <?php echo $content; ?>
 
     <?php require_once __DIR__ . '/../components/footer.php'; ?>
 

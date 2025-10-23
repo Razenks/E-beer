@@ -1,7 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  --gold: #F5B700;
+  --brown: #2E1F1C;
+  --beige: #F7F3F0;
+  --text-dark: #333;
+  --text-muted: #666;
+  --radius: 12px;
+  --shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 
 * {
-    margin: 0;
-    border: 0;
-    font-family: "Montserrat";
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  color: var(--text-dark);
+  line-height: 1.6;
 }

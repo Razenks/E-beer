@@ -15,21 +15,21 @@ Assets::addScript('/assets/js/enter_code.js');
 
     <div class="success-container">
         <?php
-        if (!empty($msgSucessoCode)) {
-            echo '<p class="success-msg">' . htmlspecialchars($msgSucessoCode) . '</p>';
+        if (!empty($success)) {
+            echo '<p class="success-msg">' . htmlspecialchars($success) . '</p>';
         }
         ?>
     </div>
 
     <div class="error-container">
         <?php
-        if (isset($_GET['msgErro'])) {
-            echo '<p class="error-msg">' . $_GET['msgErro'] . '</p>';
+        if (!empty($error)) {
+            echo '<p class="error-msg">' . htmlspecialchars($error) . '</p>';
         }
         ?>
     </div>
 
-    <form action="/api/validate-code" method="post" id="form-enter-code">
+    <form action="/login/validar-codigo" method="post" id="form-enter-code">
         <div id="code-box">
             <input type="text" maxlength="6" placeholder="" id="codigo" name="codigo" required>
         </div>

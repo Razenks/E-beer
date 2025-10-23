@@ -4,5 +4,8 @@
   text-align: center;
   padding: 16px;
   font-size: 0.9rem;
-  margin-top: 40px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-top: 50px;
 }

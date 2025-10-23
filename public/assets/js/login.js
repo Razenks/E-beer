@@ -15,7 +15,3 @@ document.addEventListener('DOMContentLoaded', function () {
         passwordView.type = 'password';
     })
 });
-
-
-
-

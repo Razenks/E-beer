@@ -19,3 +19,16 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+  
+  api:
+    build:
+      context: ../APIEbeer
+      dockerfile: ../APIEbeer/Dockerfile
+    container_name: api
+    ports:
+      - "5041:5041"
+      - "7041:7041"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:5041
+    restart: unless-stopped

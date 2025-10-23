@@ -2,8 +2,6 @@
 use App\Core\Assets;
 
 Assets::addStyle('/assets/css/home.css');
-Assets::addStyle('/assets/css/acessibilidade.css');
-Assets::addScript('/assets/js/acessibilidade.js');
 ?>
 <!-- <head>
     <meta charset="UTF-8">
@@ -21,28 +19,37 @@ Assets::addScript('/assets/js/acessibilidade.js');
 </head> -->
 
 <!-- Hero -->
-<section class="hero">
+<section class="hero container">
   <h2>Encontrar sua cerveja perfeita nunca foi tão fácil</h2>
   <p>Responda ao BeerFeed e receba recomendações personalizadas de cervejas artesanais.</p>
-  <a href="beerfeed.html" class="btn">Começar BeerFeed</a>
+  <a href="/beerFeed" class="btn">Começar BeerFeed</a>
 </section>
 
-<!-- Produtos -->
-<section class="produtos container">
-  <h3>Produtos em destaque</h3>
-  <div class="carousel-wrapper">
-    <button class="carousel-btn left" onclick="scrollCarousel(-1)">&#10094;</button>
-    <div class="carousel" id="carousel">
-      <div class="prod-card"><img src="/assets/apa.png" alt="APA"><h4>APA</h4><a href="cerveja.html" class="btn-small">Ver Detalhes</a></div>
-      <div class="prod-card"><img src="/assets/american_premium.png" alt="American Premium"><h4>American Premium</h4><a href="cerveja.html" class="btn-small">Ver Detalhes</a></div>
-      <div class="prod-card"><img src="/assets/weiss.png" alt="Weiss"><h4>Weiss</h4><a href="cerveja.html" class="btn-small">Ver Detalhes</a></div>
-      <div class="prod-card"><img src="/assets/blond_ale.png" alt="Blond Ale"><h4>Blond Ale</h4><a href="cerveja.html" class="btn-small">Ver Detalhes</a></div>
-      <div class="prod-card"><img src="/assets/witbier.png" alt="IPA"><h4>IPA</h4><a href="cerveja.html" class="btn-small">Ver Detalhes</a></div>
-      <div class="prod-card"><img src="/assets/stout.png" alt="Stout"><h4>Stout</h4><a href="cerveja.html" class="btn-small">Ver Detalhes</a></div>
-      <div class="prod-card"><img src="/assets/red_ale.png" alt="Red Ale"><h4>Red Ale</h4><a href="cerveja.html" class="btn-small">Ver Detalhes</a></div>
-    </div>
-    <button class="carousel-btn right" onclick="scrollCarousel(1)">&#10095;</button>
-  </div>
+<!-- Cervejas -->
+<section class="cervejas container">
+  <h3>Cervejas em destaque</h3>
+  <?php 
+    if (empty($featuredBeers)) { 
+        echo '<h4 id="empty-beers">Nenhuma cerveja encontrada.</h4>';
+        return;
+    } else {
+      echo '  <div class="carousel-wrapper">';
+      echo '    <button class="carousel-btn left" onclick="scrollCarousel(-1)">&#10094;</button>';
+      echo '    <div class="carousel" id="carousel">';
+
+      foreach ($featuredBeers as $featuredBeer) {
+          echo '      <div class="cerv-card">';
+          echo '        <img src="' . $featuredBeer->imgPath . '" alt="' . htmlspecialchars($featuredBeer->name) . '">';
+          echo '        <h4>' . htmlspecialchars($featuredBeer->name) . '</h4>';
+          echo '        <a href="/cerveja/' . urlencode($featuredBeer->id) . '" class="btn-small">Ver Detalhes</a>';
+          echo '      </div>';
+      }
+
+      echo '    </div>';
+      echo '    <button class="carousel-btn right" onclick="scrollCarousel(1)">&#10095;</button>';
+      echo '  </div>';
+    }
+  ?>
 </section>
 
 <!-- Como funciona -->

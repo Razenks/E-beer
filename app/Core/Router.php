@@ -30,8 +30,7 @@ class Router
     }
 
     // Função para processar a requisição e chamar a rota correta (Separar responsabilidades futuramente)
-    public function dispatch(string $uri, string $method)
-    {
+    public function dispatch(string $uri, string $method) {
         try {
             $request = new Request();
 
@@ -60,7 +59,8 @@ class Router
                                 {
                                     [$isValidatedUser, $errorMessage] = $middlewareInstance->$middlewareMethod();
                                     if (!$isValidatedUser && $errorMessage !== null) {
-                                        (new UserController())->index(null, ['error' => $errorMessage ?? "Usuário não logado."]);
+                                        // (new UserController())->index(null, ['error' => $errorMessage ?? "Usuário não logado."]);
+                                        header("Location: /login?error={$errorMessage}");
                                         return;
                                     }
                                 } else 
@@ -134,13 +134,11 @@ class Router
         
     }
 
-    private function getBlockedRoutes(): array
-    {
+    private function getBlockedRoutes(): array {
         return ['assets'];
     }
 
-    private function isValidatedBlockedRoutes(string $url) : bool
-    {
+    private function isValidatedBlockedRoutes(string $url) : bool {
         $first = explode('/', $url)[0];
         return in_array($first, $this->getBlockedRoutes());
     }

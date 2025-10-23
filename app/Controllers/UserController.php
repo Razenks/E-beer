@@ -11,14 +11,13 @@ use App\Services\JwtService;
 use App\Services\UserService;
 use App\Core\View;
 use Exception;
-use PhpParser\Node\Expr\Throw_;
 
 class UserController extends Controller {
-    private AuthService $auth_service;
-    private RecaptchaService $recaptcha_service;
-    private EmailService $email_service;
-    private JwtService $jwt_service;
-    private UserService $user_service;
+    private readonly AuthService $auth_service;
+    private readonly RecaptchaService $recaptcha_service;
+    private readonly EmailService $email_service;
+    private readonly JwtService $jwt_service;
+    private readonly UserService $user_service;
 
     public function __construct() {
         $this->auth_service = new AuthService();
@@ -53,8 +52,13 @@ class UserController extends Controller {
         $this->render('pages.auth.register', $data);
     }
 
-    public function getCodePage(array $data = []): void {
+    public function getCodePage(?Request $request = null, array $data = []): void {
+        $error = $request?->get('error');
+        $success = $request?->get('success');
+
         View::setLayout('auth');
+        $data['error'] = $error;
+        $data['success'] = $success;
         $data['title'] = 'E-beer - Código Email';
         $this->render('pages.auth.enter_code', $data);
     }
@@ -131,9 +135,10 @@ class UserController extends Controller {
                     "name" => $_SESSION['name'],
                     "email" => $_SESSION['email'],
                     "user_type" => $_SESSION['user_type']
-                ]
+                ],
+                7200
             );
-            self::redirect("/api/get-home/{$_SESSION['user_type']}");
+            self::redirect("/login/obter-home/{$_SESSION['user_type']}");
         } catch (Exception $e) {
             error_log("Erro na função validateEmailCode no LoginController: " . $e->getMessage());
             $this->index(null, ['error' => 'Erro interno. Tente novamente.']);
@@ -173,22 +178,22 @@ class UserController extends Controller {
             $registration_date = date('Y-m-d H:i:s');
             
             if ($password !== $confirmPassword) {
-                self::redirect('/register?error=Senhas não conferem.');
+                self::redirect('/cadastro?error=Senhas não conferem.');
                 return;
             }
 
             if(!$this->recaptcha_service->isCaptchaValid($captcha))
             {
-                self::redirect('/register?error=Necessário a validação do reCAPTCHA.');
+                self::redirect('/cadastro?error=Necessário a validação do reCAPTCHA.');
                 return;
             }
 
-            $is_created_user = $this->user_service->isCreatedUser($email);
+            $is_created_user = $this->user_service->isCreatedUser($email, $cpf);
             if ($is_created_user) {
-                self::redirect('/register?error=E-mail já foi cadastro no sistema.');
+                self::redirect('/cadastro?error=Usuário já cadastrado no sistema.');
                 return;
             } else if ($is_created_user === null) {
-                self::redirect('/register?error=Erro interno. Tente novamente.');
+                self::redirect('/cadastro?error=Erro interno. Tente novamente.');
                 return;
             }
 
@@ -204,7 +209,7 @@ class UserController extends Controller {
 
             $is_created = $this->user_service->createUser($user);
             if (!$is_created) {
-                self::redirect('/register?error=Erro ao criar usuário, tente novamente.');
+                self::redirect('/cadastro?error=Não foi possível criar o usuário, tente novamente.');
                 return;
             }
 
@@ -212,7 +217,7 @@ class UserController extends Controller {
 
             $token = $this->jwt_service->generateToken($data, 3600);
             $_SESSION['jwt'] = $token;
-            $link = "http://localhost/api/ativar-email/{$token}";
+            $link = "http://localhost/cadastrar/ativar-conta/{$token}";
             $subject = "Ativar Conta";
             $body = '
                 Olá ' . $name . '. 
@@ -225,14 +230,14 @@ class UserController extends Controller {
             $isSentEmail = $this->email_service->sendEmail($email, $subject, $body);
             if(!$isSentEmail)
             {
-                self::redirect('/register?error=Erro interno. Tente novamente.');
+                self::redirect('/cadastro?error=Erro interno. Tente novamente.');
                 throw new Exception("Erro ao enviar link para o e-mail: {$email}.");
             }
 
             self::redirect('/login/?success=Cadastro finalizado com sucesso! Ative sua conta acessando o link que enviamos no seu e-mail.');
         } catch (Exception $e) {
             error_log("Erro na função register no UserController: " . $e->getMessage());
-            self::redirect('/register?error=Erro interno. Tente novamente.');
+            self::redirect('/cadastro?error=Erro interno. Tente novamente.');
             return;
         }
         

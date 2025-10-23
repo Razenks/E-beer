@@ -2,7 +2,7 @@
 namespace App\Services;
 
 use App\Repository\UserRepository;
-use App\Models\User;
+use App\Models\UserModel;
 use Exception;
 
 class UserService {
@@ -13,7 +13,7 @@ class UserService {
         $this->user_repository = $user_repository;
     }
 
-    public function getUserByEmail(string $email): ?User {
+    public function getUserByEmail(string $email): ?UserModel {
         if (!$email) {
             return null;
         }
@@ -25,9 +25,9 @@ class UserService {
         return $user;
     }
 
-    public function isCreatedUser(string $email): ?bool {
+    public function isCreatedUser(string $email, string $cpf): ?bool {
         try {
-            $is_created = $this->user_repository->isCreatedUser($email);
+            $is_created = $this->user_repository->isCreatedUser($email, $cpf);
             
             return $is_created;
         } catch (Exception $e) {
