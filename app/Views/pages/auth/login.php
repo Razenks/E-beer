@@ -5,6 +5,7 @@ use App\Core\Assets;
 Assets::addStyle('/assets/css/login.css');
 Assets::addScript('/assets/js/login.js');
 Assets::addScript('https://www.google.com/recaptcha/api.js', ['async', 'defer']);
+Assets::addScript('/assets/js/page-loader.js');
 ?>
 
 <main class="login-container">
@@ -16,23 +17,7 @@ Assets::addScript('https://www.google.com/recaptcha/api.js', ['async', 'defer'])
 
         <h2>Login</h2>
 
-        <div class="success-container">
-            <?php
-            if (isset($success)) {
-                echo '<p class="sucesso-msg">' . $success . '</p>';
-            }
-            ?>
-        </div>
-
-        <div class="error-container">
-            <?php
-            if (isset($error)) {
-                echo '<p class="error-msg">' . $error . '</p>';
-            }
-            ?>
-        </div>
-
-        <form action="/login" method="post" id="form-login">
+        <form action="/login" method="post" id="form-login" data-show-loader>
 
             <div class="form-group">
                 <input type="email" placeholder="E-mail" id="email" name="email" required>

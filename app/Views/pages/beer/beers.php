@@ -3,6 +3,7 @@
 use App\Core\Assets;
 
 Assets::addStyle('/assets/css/beers.css');
+Assets::addScript('/assets/js/page-loader.js');
 ?>
 
 <!-- Conteúdo principal -->

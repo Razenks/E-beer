@@ -16,10 +16,12 @@ $router->get('/cervejas', ['BeerController', 'index'], ['AuthMiddleware', 'isVal
 $router->get('/cerveja/{id}', ['BeerController', 'getDetailedBeerPage'], ['AuthMiddleware', 'isValidatedLogged']);
 $router->post('/login', ['UserController', 'processLogin']);
 $router->post('/login/validar-codigo', ['UserController', 'validateEmailCode']);
-$router->get('/login/obter-home/{user_type}', ['UserController', 'redirectHome']);
+$router->get('/login/obter-home/{user_type}', ['UserController', 'redirectHome'], ['AuthMiddleware', 'isValidatedLogged']);
 $router->post('/cadastrar', ['UserController', 'processRegistration']);
 $router->get('/cadastrar/ativar-conta/{token}', ['UserController', 'activateAccount']);
 $router->get('/beerFeed', ['RecommendationController', 'index'], ['AuthMiddleware', 'isValidatedLogged']);
 $router->get('/beerFeed/formulario', ['RecommendationController', 'getForm'], ['AuthMiddleware', 'isValidatedLogged']);
+$router->post('/beerFeed/recomendacao', ['RecommendationController', 'getRecommendation'], ['AuthMiddleware', 'isValidatedLogged']);
+$router->get('/logout', ['UserController', 'logout']);
 
 return $router;

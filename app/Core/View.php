@@ -23,6 +23,17 @@ class View
             // Unifica os dados da view com os dados compartilhados
             $data = array_merge(self::$sharedData, $data);
 
+            // Lista de tipos de mensagens
+            $flashTypes = ['error', 'success', 'info', 'warning'];
+
+            foreach ($flashTypes as $type) {
+                // Se a URL contém (ex: ?error=...) E a $data ainda não tem essa chave
+                if (isset($_GET[$type]) && !isset($data[$type])) {
+                    // Adiciona automaticamente aos dados da view
+                    $data[$type] = htmlspecialchars($_GET[$type]);
+                }
+            }
+
             // Encontra o caminho do arquivo da view da página
             $viewPath = __DIR__ . '/../Views/' . str_replace('.', '/', $view) . '.php';
             if(!file_exists($viewPath)) {   

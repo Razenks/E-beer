@@ -132,4 +132,27 @@ class BeerRepository extends BaseRepository {
             return null;
         }
     }
+
+    public function getBeerByName(string $name): ?BeerModel {
+        try {
+            $sql = "
+                SELECT * FROM {$this->table} WHERE nome = :nome LIMIT 1
+            ";
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':nome', $name, PDO::PARAM_STR);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (empty($result)) {
+                return null;
+            }
+
+            return BeerModel::fromArray($result);
+
+        } catch (Exception $e) {
+            error_log("Erro ao obter cerveja pelo nome '{$name}': ({$e->getFile()}:{$e->getLine()}): " . $e->getMessage());
+            return null;
+        }
+    }
 }

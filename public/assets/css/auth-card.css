@@ -1,0 +1,101 @@
+/* Remove o header/footer padrão da página de autenticação */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+header.header, footer.footer {
+    display: none;
+}
+
+.auth-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--beige, #f7f3f0);
+    padding: 20px;
+}
+
+.auth-card {
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius, 12px);
+    box-shadow: var(--shadow, 0 4px 12px rgba(0,0,0,0.08));
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.auth-card .logo-container {
+    margin-bottom: 1.5rem;
+}
+
+.auth-card img {
+    max-width: 150px;
+    height: auto;
+}
+
+.auth-card h1 {
+    font-size: 1.8rem;
+    color: var(--brown, #2E1F1C);
+    margin-bottom: 0.5rem;
+}
+
+.auth-card .subtitle {
+    color: var(--text-muted, #666);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+#code-box input {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.5rem; /* Espaça os dígitos */
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+#code-box input:focus {
+    border-color: var(--gold, #F5B700);
+    outline: none;
+}
+
+/* Botão (reutilize do seu all.css se já tiver) */
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: var(--gold, #F5B700);
+    color: var(--brown, #2E1F1C);
+}
+
+.btn-primary:hover {
+    background: #e0a600; /* Um tom mais escuro de --gold */
+}
+
+/* Acessibilidade: para labels de leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}

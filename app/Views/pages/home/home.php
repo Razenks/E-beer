@@ -2,6 +2,7 @@
 use App\Core\Assets;
 
 Assets::addStyle('/assets/css/home.css');
+Assets::addScript('/assets/js/page-loader.js');
 ?>
 <!-- <head>
     <meta charset="UTF-8">
@@ -41,7 +42,7 @@ Assets::addStyle('/assets/css/home.css');
           echo '      <div class="cerv-card">';
           echo '        <img src="' . $featuredBeer->imgPath . '" alt="' . htmlspecialchars($featuredBeer->name) . '">';
           echo '        <h4>' . htmlspecialchars($featuredBeer->name) . '</h4>';
-          echo '        <a href="/cerveja/' . urlencode($featuredBeer->id) . '" class="btn-small">Ver Detalhes</a>';
+          echo '        <a href="/cerveja/' . urlencode($featuredBeer->id) . '" class="btn-small" data-show-loader>Ver Detalhes</a>';
           echo '      </div>';
       }
 

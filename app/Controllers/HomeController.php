@@ -14,7 +14,6 @@ class HomeController extends Controller {
     }
 
     public function index(array $data = []): void {
-
         $data['featuredBeers'] = $this->beer_service->getFeaturedBeers();
         $data['title'] = 'E-BEER - Home';
         $data['user_type'] = $_SESSION['user_type'];

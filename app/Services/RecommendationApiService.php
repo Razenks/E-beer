@@ -10,7 +10,8 @@ use App\ViewModels\{
     MenuViewModel,
     CategoryViewModel,
     ItemViewModel,
-    CharacteristicViewModel
+    CharacteristicViewModel,
+    AnswersViewModel
 };
 
 class RecommendationApiService {
@@ -54,7 +55,7 @@ class RecommendationApiService {
         $jsonViewModel = new JsonViewModel();
         $jsonViewModel->restaurant = 'E-Beer';
         $jsonViewModel->menu = $menu;
-
+        
         return $this->sendToApi($jsonViewModel);
     }
 
@@ -70,6 +71,7 @@ class RecommendationApiService {
         try {
             $payload = json_encode($json, JSON_UNESCAPED_UNICODE);
             $url = 'http://api:5041/api/form/create';
+            error_log("JSON cardápio: $payload");
 
             $ch = curl_init($url);
             curl_setopt_array($ch, [
@@ -104,6 +106,7 @@ class RecommendationApiService {
                 return null;
             }
 
+            error_log("Form: $response");
             // Decodifica a resposta
             $decoded = json_decode($response, true);
             if (json_last_error() !== JSON_ERROR_NONE) {
@@ -118,4 +121,65 @@ class RecommendationApiService {
             return null;
         }
     }
+
+    public function getRecommendation(AnswersViewModel $answersViewModel): ?array {
+        return $this->sendRecommendationtoApi($answersViewModel);
+    }
+
+    private function sendRecommendationtoApi(AnswersViewModel $answersViewModel): ?array {
+        try {
+            $payload = json_encode($answersViewModel, JSON_UNESCAPED_UNICODE);
+            $url = 'http://api:5041/api/recommendation/create';
+
+            error_log("JSON respostas: $payload");
+
+            $ch = curl_init($url);
+            curl_setopt_array($ch, [
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST => true,
+                CURLOPT_HTTPHEADER => [
+                    'Content-Type: application/json',
+                    'Accept: application/json'
+                ],
+                CURLOPT_POSTFIELDS => $payload,
+                CURLOPT_TIMEOUT => 15,
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_SSL_VERIFYHOST => false,
+            ]);
+
+            $response = curl_exec($ch);
+            
+            // Verifica erros do CURL
+            if (curl_errno($ch)) {
+                $err = curl_error($ch);
+                curl_close($ch);
+                error_log("Erro CURL (sendRecommendationToApi): $err");
+                return null;
+            }
+
+            // Verifica código HTTP
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+
+            if ($httpCode < 200 || $httpCode >= 300) {
+                error_log("Erro HTTP ao chamar API ($httpCode) (sendRecommendationToApi): $response");
+                return null;
+            }
+
+            error_log("Recomendação: $response");
+
+            // Decodifica a resposta
+            $decoded = json_decode($response, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                error_log("Erro ao decodificar JSON da API (sendRecommendationToApi): " . json_last_error_msg());
+                return null;
+            }
+
+            return $decoded;
+        } catch (\Exception $ex) {
+            error_log("Exceção ao chamar API (sendRecommendationToApi): " . $ex->getMessage());
+            return null;
+        }
+    }
+
 }

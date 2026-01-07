@@ -86,4 +86,56 @@ class BeerService {
             return null;
         }
     }
+
+    public function getBeerSummaryByName(string $name): ?BeerSummaryViewModel {
+        if (empty($name)) return null;
+        try {
+            $beer = $this->beer_repository->getBeerByName($name);
+            if (!$beer) return null;
+
+            // Mapeia BeerModel → BeerSummaryViewModel
+            return new BeerSummaryViewModel([
+                'id' => $beer->id,
+                'name' => $beer->name,
+                'description' => $beer->description, // A descrição pode ser útil
+                'img_path' => $beer->imgId ? "/assets/img/{$beer->imgId}.png" : null
+            ]);
+            
+        } catch (Exception $e) {
+            error_log("Erro no service ao obter cerveja '{$name}' ({$e->getFile()}:{$e->getLine()}): " . $e->getMessage());
+            return null;
+        }
+    }
+
+    public function enrichRecommendationData(array $recommendation): array {
+        if (empty($recommendation['categories'])) {
+            return $recommendation;
+        }
+
+        // Itera sobre o array de recomendação
+        foreach ($recommendation['categories'] as $catIndex => $category) {
+            if (empty($category['items'])) {
+                continue;
+            }
+
+            foreach ($category['items'] as $itemIndex => $item) {
+                // $item['recommendation'] é o NOME da cerveja (ex: "IPA")
+                $beerName = $item['recommendation'];
+                
+                // Busca no banco local os dados da cerveja pelo nome
+                $beerData = $this->getBeerSummaryByName($beerName);
+
+                if ($beerData) {
+                    // Substitui o item (que era só um array com nome)
+                    // pelo objeto BeerSummaryViewModel completo
+                    $recommendation['categories'][$catIndex]['items'][$itemIndex] = $beerData;
+                } else {
+                    // Se não encontrar no banco local (raro), remove da lista
+                    // para não quebrar a view.
+                    unset($recommendation['categories'][$catIndex]['items'][$itemIndex]);
+                }
+            }
+        }
+        return $recommendation;
+    }
 }

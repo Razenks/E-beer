@@ -28,24 +28,13 @@ class UserController extends Controller {
     }
 
     public function index(?Request $request = null, array $data = []): void {
-        $error = $request?->get('error');
-        $success = $request?->get('success');
-
-        $data['error'] = $error;
-        $data['success'] = $success;
         $data['title'] = 'E-beer - Login';
 
         View::setLayout('auth');
-        $this->logout();
         $this->render('pages.auth.login', $data);
     }
 
     public function getRegisterPage(?Request $request = null, array $data = []): void {
-        $error = $request?->get('error');
-        $success = $request?->get('success');
-        
-        $data['error'] = $error;
-        $data['success'] = $success;
         $data['title'] = 'E-beer - Cadastro';
 
         View::setLayout('auth');
@@ -53,12 +42,7 @@ class UserController extends Controller {
     }
 
     public function getCodePage(?Request $request = null, array $data = []): void {
-        $error = $request?->get('error');
-        $success = $request?->get('success');
-
         View::setLayout('auth');
-        $data['error'] = $error;
-        $data['success'] = $success;
         $data['title'] = 'E-beer - Código Email';
         $this->render('pages.auth.enter_code', $data);
     }
@@ -97,8 +81,7 @@ class UserController extends Controller {
             ';
 
             $isSentEmail = $this->email_service->sendCodeEmail($email, $subject, $body);
-            if(!$isSentEmail)
-            {
+            if(!$isSentEmail) {
                 self::redirect('/login?error=Erro interno. Tente novamente.');
                 throw new Exception("Erro ao salvar code na session. ");
             }
@@ -114,13 +97,12 @@ class UserController extends Controller {
         } catch (Exception $e) {
             error_log("Erro na função login no UserController: " . $e->getMessage());
             self::redirect('/login?error=Erro interno. Tente novamente.');
-
         }
-        
     }
 
-    private function logout(): void {
+    public function logout(): void {
         $this->user_service->logout();
+        self::redirect('/login?success=Sessão encerrada com sucesso.');
     }
 
     public function validateEmailCode(Request $request): void {
@@ -141,14 +123,13 @@ class UserController extends Controller {
             self::redirect("/login/obter-home/{$_SESSION['user_type']}");
         } catch (Exception $e) {
             error_log("Erro na função validateEmailCode no LoginController: " . $e->getMessage());
-            $this->index(null, ['error' => 'Erro interno. Tente novamente.']);
+            self::redirect('/login?error=Erro interno. Tente novamente.');
         }
     }
 
     public function redirectHome(int $user_type): void {
-        if(!$user_type)
-        {
-            $this->index(null, ['error' => 'Usuário não logado']);
+        if(!$user_type) {
+            self::redirect('/login?error=Usuário não logado.');
         }
 
         switch ($user_type) {
@@ -160,7 +141,7 @@ class UserController extends Controller {
                 break;
                 
             default:
-                $this->index(null, ['error' => 'Usuário não logado']);
+                self::redirect('/login?error=Usuário não logado.');
                 break;
         }
     }
@@ -182,8 +163,7 @@ class UserController extends Controller {
                 return;
             }
 
-            if(!$this->recaptcha_service->isCaptchaValid($captcha))
-            {
+            if(!$this->recaptcha_service->isCaptchaValid($captcha)) {
                 self::redirect('/cadastro?error=Necessário a validação do reCAPTCHA.');
                 return;
             }
@@ -228,8 +208,7 @@ class UserController extends Controller {
             ';
 
             $isSentEmail = $this->email_service->sendEmail($email, $subject, $body);
-            if(!$isSentEmail)
-            {
+            if(!$isSentEmail) {
                 self::redirect('/cadastro?error=Erro interno. Tente novamente.');
                 throw new Exception("Erro ao enviar link para o e-mail: {$email}.");
             }
@@ -240,7 +219,6 @@ class UserController extends Controller {
             self::redirect('/cadastro?error=Erro interno. Tente novamente.');
             return;
         }
-        
     }
 
     public function activateAccount(string $token): void {

@@ -7,6 +7,6 @@
     <a href="/cervejas">Cervejas</a>
     <a href="/beerFeed">BeerFeed</a>
     <a href="/perfil/<?= $jwt ?>">Perfil</a>
-    <a href="/login">Sair</a>
+    <a href="/logout">Sair</a>
   </nav>
 </header>

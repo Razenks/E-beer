@@ -1,38 +1,28 @@
 <?php
-// Registra os assets que esta página necessita
 use App\Core\Assets;
 
-Assets::addStyle('/assets/css/enter_code.css');
-Assets::addStyle('/assets/css/all.css');
+// Usaremos um CSS de "cartão de autenticação" reutilizável
+Assets::addStyle('/assets/css/auth-card.css');
 Assets::addScript('/assets/js/enter_code.js');
+Assets::addScript('/assets/js/page-loader.js');
 ?>
 
-<header>
-    <img src="/assets/img/logo_ebeer_2.png" alt="">
-</header>
-<main>
-    <h1>CÓDIGO</h1>
-
-    <div class="success-container">
-        <?php
-        if (!empty($success)) {
-            echo '<p class="success-msg">' . htmlspecialchars($success) . '</p>';
-        }
-        ?>
-    </div>
-
-    <div class="error-container">
-        <?php
-        if (!empty($error)) {
-            echo '<p class="error-msg">' . htmlspecialchars($error) . '</p>';
-        }
-        ?>
-    </div>
-
-    <form action="/login/validar-codigo" method="post" id="form-enter-code">
-        <div id="code-box">
-            <input type="text" maxlength="6" placeholder="" id="codigo" name="codigo" required>
+<main class="auth-container">
+    <div class="auth-card">
+        
+        <div class="logo-container">
+            <img src="/assets/img/logo_ebeer_2.png" alt="Logo e-Beer">
         </div>
-        <button type="submit" id="submit-btn">Enviar</button>
-    </form>
+
+        <h1>Verifique seu E-mail</h1>
+        <p class="subtitle">Enviamos um código de 6 dígitos para o seu e-mail. Digite-o abaixo para continuar.</p>
+
+        <form action="/login/validar-codigo" method="post" id="form-enter-code" data-show-loader>
+            <div id="code-box">
+                <label for="codigo" class="sr-only">Código de 6 dígitos</label>
+                <input type="text" maxlength="6" placeholder="______" id="codigo" name="codigo" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit-btn">Validar Código</button>
+        </form>
+    </div>
 </main>

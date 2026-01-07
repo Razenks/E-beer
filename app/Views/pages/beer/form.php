@@ -1,78 +1,90 @@
 <?php
+use App\Core\Assets;
 
+Assets::addScript('/assets/js/page-loader.js');
+// Novos arquivos para o wizard
+Assets::addStyle('/assets/css/form-wizard.css');
+Assets::addScript('/assets/js/form-wizard.js', ['defer']);
 ?>
 
-<section class="form-section" style="max-width:800px;margin:auto;padding:2rem;">
-    <h1 style="text-align:center;margin-bottom:1.5rem;">Recomendações de Cervejas 🍺</h1>
-
-    <?php if (!empty($error)): ?>
-        <div style="background:#ffe5e5;color:#900;padding:1rem;border-radius:8px;margin-bottom:1rem;">
-            <?= htmlspecialchars($error) ?>
-        </div>
-    <?php endif; ?>
-
+<main class="form-section container">
+    
     <?php if (empty($form) || empty($form['categories'])): ?>
-        <p style="text-align:center;color:#666;">Nenhum formulário disponível no momento.</p>
+        
+        <div class="wizard-container empty-state">
+            <h2>Ops!</h2>
+            <p>Nenhum formulário de recomendação disponível no momento.</p>
+            <a href="/beerFeed" class="btn btn-secondary">Voltar</a>
+        </div>
+        
     <?php else: ?>
-        <form method="POST" action="/recommendation/submit" style="display:flex;flex-direction:column;gap:2rem;">
-            <input type="hidden" name="form_id" value="<?= htmlspecialchars($form['formId']) ?>">
+        
+        <div class="wizard-container">
+            
+            <div class="wizard-header">
+                <h1 id="wizard-title">Encontre sua Cerveja</h1>
+                <p>Responda as perguntas para a categoria: <strong id="category-title"></strong></p>
+                <div class="progress-bar">
+                    <div id="progress-bar-inner" class="progress-bar-inner"></div>
+                </div>
+            </div>
 
-            <?php foreach ($form['categories'] as $category): ?>
-                <div class="category-block" style="border:1px solid #ddd;border-radius:12px;padding:1.5rem;">
-                    <h2 style="margin-top:0;margin-bottom:1rem;color:#333;">
-                        <?= htmlspecialchars($category['name']) ?>
-                    </h2>
+            <form method="POST" action="/beerFeed/recomendacao" id="wizard-form" data-show-loader>
+                <input type="hidden" name="form_id" value="<?= htmlspecialchars($form['formId']) ?>">
 
-                    <?php foreach ($category['questions'] as $question): ?>
-                        <div class="question-block" style="margin-bottom:1.5rem;">
-                            <label style="font-weight:600;display:block;margin-bottom:0.5rem;">
+                <div class="wizard-steps-container">
+                    <?php
+                    // Vamos "achatar" todas as perguntas em uma lista de passos
+                    foreach ($form['categories'] as $category):
+                        foreach ($category['questions'] as $question):
+                    ?>
+                        <div class="wizard-step" data-category="<?= htmlspecialchars($category['name']) ?>">
+                            
+                            <label class="wizard-question-label">
                                 <?= htmlspecialchars($question['question']) ?>
                             </label>
 
                             <?php if (!empty($question['options'])): ?>
-                                <div class="options-group" style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+                                <div class="options-group">
                                     <?php foreach ($question['options'] as $option): ?>
                                         <?php 
-                                            $inputName = 'answers[' . htmlspecialchars($question['characteristic']) . ']';
-                                            $inputId = htmlspecialchars($question['characteristic'] . '_' . $option);
+                                            $categoryName = htmlspecialchars($category['name']);
+                                            $characteristicName = htmlspecialchars($question['characteristic']);
+                                            $inputName = "answers[$categoryName][$characteristicName]";
+                                            $inputId = htmlspecialchars($category['name'] . '_' . $question['characteristic'] . '_' . $option);
                                         ?>
-                                        <label for="<?= $inputId ?>" style="cursor:pointer;display:flex;align-items:center;gap:0.4rem;">
-                                            <input 
-                                                type="radio"
-                                                id="<?= $inputId ?>"
-                                                name="<?= $inputName ?>"
-                                                value="<?= htmlspecialchars($option) ?>"
-                                                required
-                                            >
+                                        
+                                        <input 
+                                            type="radio"
+                                            id="<?= $inputId ?>"
+                                            class="option-radio"
+                                            name="<?= $inputName ?>"
+                                            value="<?= htmlspecialchars($option) ?>"
+                                            required
+                                        >
+                                        <label for="<?= $inputId ?>" class="option-label">
                                             <?= htmlspecialchars($option) ?>
                                         </label>
                                     <?php endforeach; ?>
                                 </div>
                             <?php endif; ?>
                         </div>
-                    <?php endforeach; ?>
+                    <?php 
+                        endforeach; 
+                    endforeach; 
+                    ?>
                 </div>
-            <?php endforeach; ?>
 
-            <div style="text-align:center;margin-top:1rem;">
-                <button 
-                    type="submit"
-                    style="
-                        background:#f5b700;
-                        color:#2e1f1c;
-                        border:none;
-                        padding:0.75rem 1.5rem;
-                        font-weight:600;
-                        border-radius:8px;
-                        cursor:pointer;
-                        transition:background 0.2s;
-                    "
-                    onmouseover="this.style.background='#e0a600'"
-                    onmouseout="this.style.background='#f5b700'"
-                >
-                    Enviar Respostas
-                </button>
-            </div>
-        </form>
+                <div class="wizard-navigation">
+                    <button type="button" id="prev-btn" class="btn btn-secondary">Voltar</button>
+                    
+                    <div class="nav-right">
+                        <button type="button" id="next-btn" class="btn btn-primary">Avançar</button>
+                        <button type="submit" id="submit-btn" class="btn btn-primary" style="display:none;">Enviar Respostas</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
     <?php endif; ?>
-</section>
+</main>

@@ -1,0 +1,84 @@
+/* Container principal dos toasts */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px; /* Largura máxima */
+}
+
+/* Estilo base de cada toast */
+.toast {
+    padding: 15px 20px;
+    border-radius: 8px;
+    background: #333;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-size: 0.95rem;
+    opacity: 0;
+    transform: translateX(100%); /* Começa fora da tela */
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Animação de entrada */
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Animação de saída */
+.toast.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+/* --- Tipos de Toast --- */
+
+.toast.error {
+    background-color: #e74c3c; /* Vermelho */
+    color: white;
+}
+
+.toast.success {
+    background-color: #2ecc71; /* Verde */
+    color: white;
+}
+
+.toast.info {
+    background-color: #3498db; /* Azul */
+    color: white;
+}
+
+.toast.warning {
+    background-color: #f39c12; /* Laranja */
+    color: white;
+}
+
+.toast.loading {
+    background-color: #333; /* Um cinza escuro */
+    color: white;
+}
+
+/* 10. NOVO: Adiciona um spinner de CSS para a classe loading */
+.toast.loading::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Borda cinza */
+    border-top-color: #fff; /* Borda branca (a parte que gira) */
+    border-radius: 50%;
+    animation: toast-spinner 0.8s linear infinite;
+    margin-right: 10px;
+    vertical-align: bottom; /* Alinha o spinner com o texto */
+}
+
+/* 11. NOVO: Animação do spinner */
+@keyframes toast-spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
